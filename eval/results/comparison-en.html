@@ -371,36 +371,46 @@
     </div>
 
     <div class="learn-side hybrid">
-      <h4><span class="pill hyb">B · Hybrid</span> BM25 + embedding combined</h4>
-      <p class="how">Two retrieval lanes per query: a lexical lane (BM25, keyword-weighted) and a semantic lane (embedding cosine). Salesforce returns three score columns — <code>hybrid_score__c</code>, <code>vector_score__c</code>, <code>keyword_score__c</code> — and ranks by the fused hybrid score.</p>
+      <h4><span class="pill hyb">B · Hybrid</span> BM25 + embedding, fusion-ranked</h4>
+      <p class="how">Two retrieval lanes per query — lexical (keyword/BM25) and semantic (embedding cosine) — merged by a fusion ranker. Salesforce exposes three score columns: <code>hybrid_score__c</code>, <code>vector_score__c</code>, <code>keyword_score__c</code>.</p>
 
       <h5>Strong at</h5>
       <ul>
         <li>ID disambiguation — exact tokens like <code>-S</code> vs. <code>-SX</code> separate cleanly</li>
-        <li>Mix of paraphrased intent and exact-match constraints in one query</li>
-        <li>Filterable metadata fields (<code>productIds__c</code>, <code>atexZone__c</code>, …)</li>
-        <li>Auditable: each result carries a hybrid + lexical + vector score</li>
+        <li>Domain vocabulary (raise <code>keyword_weight</code> for SKU-heavy text)</li>
+        <li>Pre-filter fields (up to 10) — e.g. <code>productIds__c</code>, <code>atexZone__c</code></li>
+        <li>Recency &amp; popularity ranking factors built into the fusion</li>
+        <li>Auditable: each result ships hybrid + lexical + vector score</li>
       </ul>
 
-      <h5>Weak at / constraints</h5>
+      <h5>Tuning knobs (Salesforce)</h5>
+      <ul style="font-size: 12px;">
+        <li><strong>Linear Fusion Ranker</strong> — weighted sum of vector + keyword scores</li>
+        <li><strong>Deep Fusion Ranker</strong> — DL model fusing similarity + keyword + recency + popularity</li>
+        <li><strong>Reciprocal Rank Fusion</strong> (default) — tunable: <code>keyword_weight</code> α (default 0.5), <code>recency_weight</code> δ, <code>popularity_weight</code> γ</li>
+      </ul>
+
+      <h5>Constraints we hit</h5>
       <ul>
-        <li class="weak">Filter grammar in <code>hybrid_search()</code> only supports <code>=</code> and prefix-<code>LIKE 'X;%'</code> — no leading wildcards, no <code>CONTAINS</code></li>
-        <li class="weak">Build time and indexing cost roughly double vs. vector-only</li>
-        <li class="weak">Requires explicit setup: DLO → DMO → Search Index with <em>Mode: Hybrid</em></li>
+        <li class="weak">Pre-filter grammar: only <code>=</code> and prefix-<code>LIKE 'X;%'</code> — no leading wildcards, no <code>CONTAINS</code></li>
+        <li class="weak">Build / indexing cost is higher than vector-only</li>
+        <li class="weak">Setup cost: DLO → DMO → Search Index with <em>Mode: Hybrid</em>; pre-filter fields must be declared at index creation</li>
       </ul>
     </div>
   </div>
 
   <div class="learn-takeaway">
-    <strong>What makes this demo win for B:</strong> Variant B does not just enable Hybrid mode — it adds an Apex layer
-    that detects model IDs in the query (regex on <code>AL-\d{4}(?:-[A-Z]+)*</code>) and translates them into a
-    <code>productIds__c = 'AL-3000-SX' OR productIds__c LIKE 'AL-3000-SX;%'</code> filter that is passed into the
-    <code>hybrid_search()</code> call. The hybrid index supplies the relevance ranking, the lexical filter supplies
-    deterministic ID matching. Vector-only retrieval cannot replicate this — there is no exact-match lane to filter on.
+    <strong>What makes this demo win for B:</strong> we use Hybrid mode out-of-the-box (Reciprocal Rank Fusion, default
+    weights) and add an Apex layer that detects model IDs in the query (regex on <code>AL-\d{4}(?:-[A-Z]+)*</code>)
+    and translates them into a pre-filter <code>productIds__c = 'AL-3000-SX' OR productIds__c LIKE 'AL-3000-SX;%'</code>
+    passed into the <code>hybrid_search()</code> call. The fusion ranker supplies the relevance ranking, the pre-filter
+    supplies deterministic ID matching. Vector-only retrieval cannot replicate this — there is no exact-match lane to
+    filter on, and no fusion knob to bias toward keyword evidence.
   </div>
 
   <p class="learn-ref">
-    Reference: <a href="https://help.salesforce.com/s/articleView?id=data.c360_a_hybridsearch_index.htm&type=5" target="_blank" rel="noopener">Salesforce Help — Create a Hybrid Search Index in Data Cloud</a>.
+    References: <a href="https://help.salesforce.com/s/articleView?id=data.c360_a_hybridsearch_index.htm&type=5" target="_blank" rel="noopener">Salesforce Help — Create a Hybrid Search Index</a>
+    · <a href="https://trailhead.salesforce.com/de/content/learn/modules/hybrid-search-for-rag-quick-look/optimize-hybrid-search-results-for-rag" target="_blank" rel="noopener">Trailhead — Optimize Hybrid Search Results for RAG</a>
   </p>
 </div>
 
