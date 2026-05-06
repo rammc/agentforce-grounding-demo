@@ -54,7 +54,7 @@ private class ProductIndexRetrieverTest {
         String filter = ProductIndexRetriever.buildProductIdFilter(new List<String>{ 'AL-3000-S' });
         // Innere Quotes sind verdoppelt, weil der Filter selbst in einem Single-
         // Quote-String-Literal in der SQL-Funktion landet.
-        System.assertEquals('productIds LIKE \'\'%AL-3000-S%\'\'', filter);
+        System.assertEquals('productIds__c LIKE \'\'%AL-3000-S%\'\'', filter);
     }
 
     @IsTest
@@ -78,7 +78,7 @@ private class ProductIndexRetrieverTest {
         System.assert(sql.contains('TABLE("AeroLift_Document_Chunk_index__dlm")'), 'Index-DLM korrekt referenziert');
         System.assert(sql.contains('"AeroLift_Document_Chunk__dlm"'), 'Source-DMO im JOIN');
         System.assert(sql.contains('AL-3000-SX'), 'Filter-ID landet im SQL');
-        System.assert(sql.contains('productIds LIKE \'\'%AL-3000-SX%\'\''), 'Filter-Expression korrekt eingebettet');
+        System.assert(sql.contains('productIds__c LIKE \'\'%AL-3000-SX%\'\''), 'Filter-Expression korrekt eingebettet');
         System.assert(sql.contains('ORDER BY "score" DESC'), 'Score-Sortierung');
         System.assert(sql.endsWith('ORDER BY "score" DESC'), 'SQL endet sauber');
     }
@@ -90,7 +90,7 @@ private class ProductIndexRetrieverTest {
         // Naive-Pfad: dritter Argument-Slot ist ein leerer String, daher zwei
         // konsekutive Single Quotes für die Filter-Position.
         System.assert(sql.contains(', \'\','), 'leere Filter-Position im SQL');
-        System.assert(!sql.contains('productIds LIKE'), 'Kein Filter ohne Boost');
+        System.assert(!sql.contains('productIds__c LIKE'), 'Kein Filter ohne Boost');
     }
 
     @IsTest
