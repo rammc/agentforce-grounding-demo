@@ -1,0 +1,26 @@
+{
+    "schemas": [
+        {
+            "label": "AeroLift Document Chunk",
+            "name": "AeroLift_Document_Chunk",
+            "schemaType": "IngestApi",
+            "fields": [
+                { "name": "recordId", "label": "Record ID", "dataType": "Text" },
+                { "name": "sourceFile", "label": "Source File", "dataType": "Text" },
+                { "name": "sourceSection", "label": "Source Section", "dataType": "Text" },
+                { "name": "chunkType", "label": "Chunk Type", "dataType": "Text" },
+                { "name": "content", "label": "Chunk Content", "dataType": "Text" },
+                { "name": "productIds", "label": "Product IDs", "dataType": "Text" },
+                { "name": "docType", "label": "Document Type", "dataType": "Text" },
+                { "name": "atexZone", "label": "ATEX Zone", "dataType": "Text" },
+                { "name": "tempMaxC", "label": "Max Medientemperatur C", "dataType": "Number" },
+                { "name": "foerderleistungM3h", "label": "Foerderleistung m3h", "dataType": "Number" },
+                { "name": "werkstoffGehaeuse", "label": "Werkstoff Gehaeuse", "dataType": "Text" },
+                { "name": "ex_certified", "label": "Ex-zertifiziert", "dataType": "Text" },
+                { "name": "wirkungsgradPct", "label": "Wirkungsgrad Prozent", "dataType": "Number" },
+                { "name": "druckMaxBar", "label": "Max Druck bar", "dataType": "Number" },
+                { "name": "antriebsleistungKW", "label": "Antriebsleistung kW", "dataType": "Number" }
+            ]
+        }
+    ]
+}

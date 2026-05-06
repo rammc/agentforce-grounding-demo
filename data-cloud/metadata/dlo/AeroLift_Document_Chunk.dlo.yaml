@@ -1,133 +1,103 @@
 # Data Lake Object (DLO) – AeroLift_Document_Chunk__dll
 #
 # Deklarative Spezifikation, die das Ziel-DLO in Data Cloud beschreibt.
-# Source-of-Truth für die UI-Konfiguration bzw. die spätere Datakit-/REST-API-
-# Erstellung in Schritt 3.2.2.
+# Source-of-Truth für Schema-Upload via `sf data360 connection schema-upsert`
+# (siehe DEPLOY.md Schritt 4) bzw. UI-Anlage.
 #
-# Hinweis: Klassisches SFDX-Source-Format (force-app/...) ist für DLOs in der
-# aktuellen Salesforce-Release NICHT der dokumentierte Deploy-Pfad. Die
-# tatsächliche Anlage erfolgt über Data Cloud Datakits oder die Connect-REST-
-# API; das Mapping dieser YAML-Spec auf den jeweiligen Aufruf wird im DEPLOY.md
-# (Schritt 3.2.2) hinterlegt.
+# Wichtige Constraints (aus sf-datacloud-Skill belegt):
+#   - DLO-Feldnamen: keine zwei aufeinanderfolgenden Underscores; daher
+#     KEIN `__c`-Suffix wie bei klassischen Custom-Feldern.
+#   - DLO-Felder kennen nur drei primitive Datentypen: Text, Number, DateTime.
+#     Picklists, LongTextArea, Boolean, Currency etc. existieren NICHT auf
+#     DLO-Ebene.  Picklist-artige Felder werden als Text mit dokumentiertem
+#     Wertebereich modelliert; Booleans als Text "true"/"false" (so liegen
+#     sie auch in der CSV).
 
 apiName: AeroLift_Document_Chunk__dll
 label: AeroLift Document Chunk
-category: Engagement   # Engagement | Profile | Other; Demo-Records sind dokumentbasierte Engagements
+# Category-Mapping aus sf-datacloud-prepare Skill:
+#   Profile     – person/entity records
+#   Engagement  – time-based events; verlangt zusätzlich ein Event-Time-Feld
+#   Other       – reference / supporting datasets (= unser Fall)
+category: Other
 description: |
   Atomar zerlegte Markdown-Chunks (Tabellenzeilen + Prose-Sektionen) aus dem
   AeroLift-Pumpenkatalog. Source-of-Truth für die Custom-Vector-Search-Variante
   der Grounding-Demo.
 
 primaryKey: recordId
-recordModifiedField: null   # ingest-only; keine Updates aus der Source
 
 ingestion:
-  source: "CSV-Upload (data-cloud/csv/all-records.csv)"
+  source: "Ingestion API / CSV-Upload (data-cloud/csv/all-records.csv)"
   encoding: "UTF-8 with BOM"
   multiValueDelimiter: ";"   # für productIds
 
 fields:
 
-  - apiName: recordId
+  - name: recordId
     label: Record ID
-    type: Text
-    length: 255
-    required: true
+    dataType: Text
+    isPrimaryKey: true
     description: "Deterministische ID: <sourceFile>::<sectionSlug>::<row|chunk>-<idx>"
 
-  - apiName: sourceFile
+  - name: sourceFile
     label: Source File
-    type: Text
-    length: 100
-    required: true
+    dataType: Text
 
-  - apiName: sourceSection
+  - name: sourceSection
     label: Source Section
-    type: Text
-    length: 255
-    required: false
+    dataType: Text
 
-  - apiName: chunkType
+  - name: chunkType
     label: Chunk Type
-    type: Picklist
-    required: true
-    values: ["table-row", "prose"]
+    dataType: Text
+    description: "Erlaubte Werte: 'table-row' | 'prose' (Konvention, nicht im Schema erzwungen)."
 
-  - apiName: content
+  - name: content
     label: Chunk Content
-    type: LongTextArea
-    length: 32768
-    required: true
+    dataType: Text
     description: "Embedding-Quelle für den Search Index. Bei table-row in 'Spalte: Wert | …'-Form."
 
-  - apiName: productIds
+  - name: productIds
     label: Product IDs
-    type: Text
-    length: 500
-    required: false
+    dataType: Text
     description: "Semikolon-separierte Liste der im Chunk erwähnten Modell-IDs (z.B. 'AL-3000-SX;AL-3500-HT-X')."
 
-  - apiName: docType
+  - name: docType
     label: Document Type
-    type: Picklist
-    required: true
-    values:
-      - catalog
-      - spec-sheet
-      - maintenance
-      - compatibility
-      - atex
-      - changelog
-      - faq
+    dataType: Text
+    description: "Erlaubte Werte: catalog | spec-sheet | maintenance | compatibility | atex | changelog | faq."
 
-  - apiName: atexZone
+  - name: atexZone
     label: ATEX Zone
-    type: Picklist
-    required: false
-    values: ["0", "1", "2"]
+    dataType: Text
+    description: "Erlaubte Werte: '0' | '1' | '2' | '' (kein Ex)."
 
-  - apiName: tempMaxC
+  - name: tempMaxC
     label: Max. Medientemperatur (°C)
-    type: Number
-    precision: 5
-    scale: 1
-    required: false
+    dataType: Number
 
-  - apiName: foerderleistungM3h
+  - name: foerderleistungM3h
     label: Förderleistung (m³/h)
-    type: Number
-    precision: 6
-    scale: 1
-    required: false
+    dataType: Number
 
-  - apiName: werkstoffGehaeuse
+  - name: werkstoffGehaeuse
     label: Werkstoff Gehäuse
-    type: Text
-    length: 100
-    required: false
+    dataType: Text
 
-  - apiName: ex_certified
+  - name: ex_certified
     label: Ex-zertifiziert
-    type: Boolean
-    required: false
+    dataType: Text
+    description: "'true' | 'false' – DLO kennt keinen nativen Boolean-Typ."
 
-  - apiName: wirkungsgradPct
+  - name: wirkungsgradPct
     label: Wirkungsgrad (%)
-    type: Number
-    precision: 4
-    scale: 1
-    required: false
+    dataType: Number
 
-  - apiName: druckMaxBar
+  - name: druckMaxBar
     label: Max. Druck (bar)
-    type: Number
-    precision: 4
-    scale: 1
-    required: false
+    dataType: Number
 
-  - apiName: antriebsleistungKW
+  - name: antriebsleistungKW
     label: Antriebsleistung (kW)
-    type: Number
-    precision: 5
-    scale: 1
-    required: false
+    dataType: Number

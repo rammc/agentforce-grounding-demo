@@ -11,7 +11,7 @@
 
 apiName: AeroLift_Document_Chunk__dlm
 label: AeroLift Document Chunk
-category: Engagement
+category: Other
 description: |
   Konsolidiertes DMO über atomar zerlegte Dokument-Chunks. Quelle für den
   Vector/Hybrid Search Index.

@@ -88,7 +88,7 @@ Setup → Data Cloud → Data Lake Objects → New.
 |---|---|
 | Label | AeroLift Document Chunk |
 | API Name | `AeroLift_Document_Chunk__dll` |
-| Category | Engagement |
+| Category | Other |
 | Primary Key | `recordId` |
 
 Felder anlegen entsprechend `data-cloud/metadata/dlo/AeroLift_Document_Chunk.dlo.yaml`. Schneller Weg: das YAML als Single-Source-of-Truth offen halten und Feld für Feld übernehmen.
