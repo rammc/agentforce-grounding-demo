@@ -52,9 +52,9 @@ private class ProductIndexRetrieverTest {
     @IsTest
     static void testBuildProductIdFilterSingleId() {
         String filter = ProductIndexRetriever.buildProductIdFilter(new List<String>{ 'AL-3000-S' });
-        // Innere Quotes sind verdoppelt, weil der Filter selbst in einem Single-
-        // Quote-String-Literal in der SQL-Funktion landet.
-        System.assertEquals('productIds__c LIKE \'\'%AL-3000-S%\'\'', filter);
+        // Pro ID werden zwei Klauseln erzeugt (Equality für Single-ID-Records,
+        // Prefix-LIKE für Multi-ID-Records mit dieser ID an erster Position).
+        System.assertEquals('productIds__c = \'\'AL-3000-S\'\' OR productIds__c LIKE \'\'AL-3000-S;%\'\'', filter);
     }
 
     @IsTest
@@ -63,7 +63,8 @@ private class ProductIndexRetrieverTest {
         System.assert(filter.contains('AL-3000-SX'), 'erste ID enthalten');
         System.assert(filter.contains('AL-3500-HT-X'), 'zweite ID enthalten');
         System.assert(filter.contains(' OR '), 'Klauseln per OR verknüpft');
-        System.assertEquals(2, filter.split(' OR ').size(), 'genau zwei Klauseln');
+        // Zwei Klauseln pro ID -> bei zwei IDs vier Klauseln, also drei OR-Trennzeichen.
+        System.assertEquals(4, filter.split(' OR ').size(), 'vier Klauseln (2 pro ID)');
     }
 
     @IsTest
@@ -76,9 +77,10 @@ private class ProductIndexRetrieverTest {
         );
         System.assert(sql.contains('hybrid_search('), 'hybrid_search() im SQL');
         System.assert(sql.contains('TABLE("AeroLift_Document_Chunk_index__dlm")'), 'Index-DLM korrekt referenziert');
-        System.assert(sql.contains('"AeroLift_Document_Chunk__dlm"'), 'Source-DMO im JOIN');
+        System.assert(sql.contains('"AeroLift_Document_Chunk_chunk__dlm"'), 'Chunk-DMO im JOIN für Original-Text');
         System.assert(sql.contains('AL-3000-SX'), 'Filter-ID landet im SQL');
-        System.assert(sql.contains('productIds__c LIKE \'\'%AL-3000-SX%\'\''), 'Filter-Expression korrekt eingebettet');
+        System.assert(sql.contains('productIds__c = \'\'AL-3000-SX\'\''), 'Equality-Klausel im Filter');
+        System.assert(sql.contains('productIds__c LIKE \'\'AL-3000-SX;%\'\''), 'Prefix-LIKE im Filter');
         System.assert(sql.contains('ORDER BY "score" DESC'), 'Score-Sortierung');
         System.assert(sql.endsWith('ORDER BY "score" DESC'), 'SQL endet sauber');
     }

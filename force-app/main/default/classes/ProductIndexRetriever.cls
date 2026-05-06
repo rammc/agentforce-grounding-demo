@@ -19,7 +19,7 @@ global with sharing class ProductIndexRetriever {
     // Der genaue Name ist durch die Index-Konfiguration in DEPLOY.md 4d
     // festgelegt; bei abweichendem Naming nur diese Konstante anpassen.
     private static final String INDEX_DLM_NAME = 'AeroLift_Document_Chunk_index__dlm';
-    private static final String SOURCE_DMO_NAME = 'AeroLift_Document_Chunk__dlm';
+    private static final String CHUNK_DLM_NAME = 'AeroLift_Document_Chunk_chunk__dlm';
     private static final Integer DEFAULT_TOP_K = 5;
 
     // ------------------------------------------------------------------
@@ -125,21 +125,22 @@ global with sharing class ProductIndexRetriever {
      * Single Quotes steht, müssen Single Quotes innerhalb der Expression
      * verdoppelt werden.  Beispiel-Output für ID 'AL-3000-S':
      *
-     *     productIds__c LIKE ''%AL-3000-S%''
+     *     productIds__c = ''AL-3000-S'' OR productIds__c LIKE ''AL-3000-S;%''
      *
-     * Hinweis: Die `__c`-Suffixe in den DMO-Feldnamen sind Salesforce-
-     * spezifisch.  DLO-Felder selbst werden ohne Suffix angelegt (UI-Constraint:
-     * keine zwei consecutive Underscores), DMO-Felder bekommen das `__c`
-     * automatisch beim Mapping.  Das hybrid_search()-SQL geht gegen das DMO.
+     * Hinweis: Hybrid-Search-Filter lassen führende Wildcards (`%X`) NICHT zu –
+     * das wäre die saubere Lösung für Multi-Value-Strings.  Stattdessen wird
+     * pro ID eine Equality (Single-ID-Record) und ein Prefix-LIKE
+     * (Multi-ID-Record mit dieser ID an erster Position) erzeugt.  Das
+     * matched alle Single-ID-Treffer und Multi-ID-Treffer, wo die gesuchte
+     * ID alphabetisch zuerst kommt.  Das Embedding-Ranking deckt den Rest ab.
      */
     @TestVisible
     private static String buildProductIdFilter(List<String> ids) {
         List<String> clauses = new List<String>();
         for (String id : ids) {
-            // String.escapeSingleQuotes schützt vor SQL-Injection im äußeren
-            // Statement; die innere Doppel-Quote-Ebene ist unten manuell.
             String safeId = String.escapeSingleQuotes(id);
-            clauses.add('productIds__c LIKE \'\'%' + safeId + '%\'\'');
+            clauses.add('productIds__c = \'\'' + safeId + '\'\'');
+            clauses.add('productIds__c LIKE \'\'' + safeId + ';%\'\'');
         }
         return String.join(clauses, ' OR ');
     }
@@ -147,23 +148,25 @@ global with sharing class ProductIndexRetriever {
     /**
      * Baut den vollständigen ANSI-SQL-Ausdruck für queryAnsiSqlV2.
      *
-     * Die hybrid_search()-Funktion gibt eine Tabelle mit RecordId__c und einem
-     * hybrid_score pro Treffer zurück; per JOIN wird der Original-Chunk
-     * angereichert.  Filter-Expression wird als String-Literal an Position 3
-     * übergeben (leerer String, wenn kein Boost).
+     * Die hybrid_search()-Funktion gibt eine Tabelle mit RecordId__c (interne
+     * UUID), den Score-Spalten (hybrid_score__c, vector_score__c, keyword_score__c)
+     * und allen ausgewählten Metadaten-Feldern direkt zurück.  Den Original-
+     * Text liefert der Chunk-DMO über `Chunk__c`, JOIN per RecordId__c (UUID).
+     * SourceRecordId__c im Chunk-DMO trägt unsere fachliche recordId.
      *
-     * DMO-Feldnamen tragen den `__c`-Suffix (DLO-Layer ohne, DMO-Layer mit).
+     * Filter-Expression wird als String-Literal an Position 3 übergeben
+     * (leerer String, wenn kein Boost).
      */
     @TestVisible
     private static String buildSearchSql(String query, String filterExpr, Integer topK) {
         String escapedQuery = String.escapeSingleQuotes(query);
         String safeFilter = filterExpr == null ? '' : filterExpr;
         return 'SELECT "v"."hybrid_score__c" AS "score", ' +
-            '"c"."content__c" AS "content", ' +
-            '"c"."sourceFile__c" AS "sourceFile", ' +
-            '"c"."sourceSection__c" AS "sourceSection", ' +
-            '"c"."productIds__c" AS "productIds", ' +
-            '"c"."docType__c" AS "docType" ' +
+            '"c"."Chunk__c" AS "content", ' +
+            '"v"."sourceFile__c" AS "sourceFile", ' +
+            '"v"."sourceSection__c" AS "sourceSection", ' +
+            '"v"."productIds__c" AS "productIds", ' +
+            '"v"."docType__c" AS "docType" ' +
             'FROM hybrid_search(TABLE("' +
             INDEX_DLM_NAME +
             '"), \'' +
@@ -174,7 +177,7 @@ global with sharing class ProductIndexRetriever {
             topK +
             ') AS "v" ' +
             'INNER JOIN "' +
-            SOURCE_DMO_NAME +
+            CHUNK_DLM_NAME +
             '" AS "c" ON "c"."RecordId__c" = "v"."RecordId__c" ' +
             'ORDER BY "score" DESC';
     }
