@@ -256,7 +256,7 @@
   <g filter="url(#boxshadow)">
     <rect x="660" y="130" width="320" height="36" rx="6" fill="#0070AD"/>
   </g>
-  <text x="820" y="153" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">Variant B · Custom Hybrid Search</text>
+  <text x="820" y="153" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">Variant B · Hybrid Search Index + Pre-Filter</text>
   <text x="820" y="172" text-anchor="middle" font-size="10" fill="#fff" opacity="0.85">engineered</text>
 
   <!-- Path B boxes -->
@@ -295,8 +295,8 @@
     <rect x="662" y="399" width="4" height="48" fill="#F4007E" rx="2"/>
     <circle cx="692" cy="423" r="13" fill="#fff" stroke="#F4007E" stroke-width="1.2"/>
     <text x="692" y="428" text-anchor="middle" font-size="13" font-weight="700" fill="#F4007E">4</text>
-    <text x="718" y="419" font-size="12" font-weight="700" fill="#14213D">Apex Retriever + Lexical Boost</text>
-    <text x="718" y="435" font-size="11" fill="#5C6B7A">extracts AL-* IDs · adds equality + prefix-LIKE</text>
+    <text x="718" y="419" font-size="12" font-weight="700" fill="#14213D">Apex Retriever + ID Pre-Filter</text>
+    <text x="718" y="435" font-size="11" fill="#5C6B7A">detects AL-* IDs in query → productIds__c pre-filter</text>
   </g>
   <line x1="820" y1="449" x2="820" y2="468" stroke="#0070AD" stroke-width="1.5" marker-end="url(#arrow-blue)"/>
 
@@ -428,7 +428,7 @@
     </div>
 
     <div class="demo-side">
-      <h4 class="pass">B (Custom Hybrid Search + Boost) <span class="verdict-tag pass">PASS</span></h4>
+      <h4 class="pass">B (Hybrid Search + ID Pre-Filter) <span class="verdict-tag pass">PASS</span></h4>
       <p class="answer">"The AL-3000-SX is approved for food contact and carries the ATEX certificate number <span class="gt-hit">BVS 23 ATEX E 089 X</span>."</p>
       <div class="demo-trace"><span class="src-label">[Source 1: AL-3000 series]</span>
 Date: 2023-04 | Model: AL-3000-SX | Version: 1.0 | Change: Launch of stainless-steel variant with ATEX Zone 1, media temperature up to 150 °C, certificate <span class="gt-hit">BVS 23 ATEX E 089 X</span>
@@ -474,7 +474,7 @@ Model: AL-3000-SX | Pump type: single-stage centrifugal | Flow rate: 80 m³/h | 
   </div>
 
   <div class="row">
-    <div class="label">B-boosted (retrieval)<small>Hybrid Search Index + lexical boost · REST direct</small></div>
+    <div class="label">B-boosted (retrieval)<small>Hybrid Search Index + ID pre-filter · REST direct</small></div>
     <div class="bar">
       <div class="seg pass" style="width: 93.3%">14 <span class="pct">93%</span></div>
       <div class="seg partial" style="width: 6.7%">1 <span class="pct">7%</span></div>
@@ -555,8 +555,8 @@ Model: AL-3000-SX | Pump type: single-stage centrifugal | Flow rate: 80 m³/h | 
     </tr>
     <tr>
       <td><strong>B-boosted (retrieval)</strong></td>
-      <td>Same Hybrid Search Index, additional filter <code>productIds__c = 'AL-3000-SX'</code> when model IDs are detected in the question</td>
-      <td>Effect of the lexical boost on ID disambiguation (AL-3000 vs. AL-3000-SX)</td>
+      <td>Same Hybrid Search Index, additional pre-filter <code>productIds__c = 'AL-3000-SX'</code> when model IDs are detected in the question</td>
+      <td>Effect of the ID pre-filter on disambiguation (AL-3000 vs. AL-3000-SX)</td>
       <td class="num">14 · 93%</td>
     </tr>
     <tr>

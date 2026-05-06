@@ -185,12 +185,27 @@ near-disastrous tool for taxonomies of similar SKUs. In our test data,
 `AL-3000-S` and `AL-3000-SX` are two different products with two different
 ATEX zones (Zone 2 vs Zone 1), and a vector-only index will mix them up
 roughly half the time. The fix is not a better embedding — it is to add a
-lexical search lane (BM25) and let the retriever apply a hard filter when an
+lexical search lane (BM25) and let the retriever apply a pre-filter when an
 ID pattern matches in the query.
 
-That logic lives in 30 lines of Apex (`ProductIndexRetriever.extractProductIds`
-+ `buildProductIdFilter`). It is the single highest-leverage piece of code in
-the entire demo.
+Salesforce Data Cloud's **Hybrid Search Index** does exactly this. It runs
+BM25 and embedding cosine in parallel and fuses the rankings via one of three
+configurable rankers (Linear Fusion, Deep Fusion, or Reciprocal Rank Fusion,
+default `keyword_weight α = 0.5`). On top of that, the index supports up to
+**10 pre-filter fields** declared at creation time — these are what we use to
+restrict candidate chunks to the matched product ID before fusion ranking
+even runs. The combination of fusion ranking + ID pre-filter is what makes
+the disambiguation deterministic.
+
+The detection-and-filter logic lives in 30 lines of Apex
+(`ProductIndexRetriever.extractProductIds` + `buildProductIdFilter`). It is
+the single highest-leverage piece of code in the entire demo.
+
+**References:** [Salesforce Help — Create a Hybrid Search Index][sf-hybrid] ·
+[Trailhead — Optimize Hybrid Search Results for RAG][th-hybrid].
+
+[sf-hybrid]: https://help.salesforce.com/s/articleView?id=data.c360_a_hybridsearch_index.htm&type=5
+[th-hybrid]: https://trailhead.salesforce.com/de/content/learn/modules/hybrid-search-for-rag-quick-look/optimize-hybrid-search-results-for-rag
 
 ### 3. Salesforce metadata reality is messier than the docs suggest
 

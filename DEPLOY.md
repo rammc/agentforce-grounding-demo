@@ -145,7 +145,9 @@ Setup → Data Cloud → AI Search → Search Indexes → New.
 | Mode | **Hybrid** (lexical + semantic) |
 | topK | 5 (Default; per Query überschreibbar) |
 
-**Filterable Metadata Fields** (genau in dieser Reihenfolge aktivieren):
+**Pre-filter Fields** (genau in dieser Reihenfolge aktivieren — Salesforce
+erlaubt bis zu 10 Felder pro Index, nur jetzt deklarierbar, nicht
+nachträglich):
 - `productIds__c`
 - `docType__c`
 - `sourceFile__c`
