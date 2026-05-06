@@ -115,6 +115,26 @@
 
   ol li { margin: 8px 0; }
   ol li strong { color: var(--cap-navy); }
+
+  /* Learnings comparison */
+  .learnings-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .learn-side { background: var(--bg); border: 1px solid var(--line); border-radius: 6px; padding: 18px; }
+  .learn-side.hybrid { border-color: var(--cap-blue); background: linear-gradient(180deg, #F5FAFD 0%, #ffffff 50%); }
+  .learn-side h4 { margin: 0 0 4px; font-size: 14px; color: var(--cap-navy); display: flex; align-items: center; gap: 8px; }
+  .learn-side h4 .pill { font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 3px; letter-spacing: 0.04em; text-transform: uppercase; }
+  .learn-side h4 .pill.std { background: #5C6B7A; color: #fff; }
+  .learn-side h4 .pill.hyb { background: var(--cap-blue); color: #fff; }
+  .learn-side .how { font-size: 12px; color: var(--muted); margin: 0 0 12px; font-style: italic; }
+  .learn-side h5 { font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); margin: 12px 0 6px; }
+  .learn-side ul { margin: 0; padding-left: 18px; font-size: 13px; color: var(--text); }
+  .learn-side ul li { margin: 4px 0; }
+  .learn-side ul li.weak { color: var(--fail); }
+  .learn-side code { background: var(--section); padding: 1px 5px; border-radius: 3px; font-size: 11px; }
+  .learn-takeaway { background: linear-gradient(135deg, #F5FAFD 0%, #FFF5F9 100%); border-left: 3px solid var(--cap-pink); padding: 14px 18px; border-radius: 4px; margin-top: 18px; font-size: 13px; }
+  .learn-takeaway strong { color: var(--cap-pink); }
+  .learn-ref { margin-top: 14px; font-size: 12px; color: var(--muted); }
+  .learn-ref a { color: var(--cap-blue); text-decoration: none; font-weight: 500; }
+  .learn-ref a:hover { text-decoration: underline; }
 </style>
 </head>
 <body>
@@ -319,6 +339,69 @@
   <span><i class="sw" style="background: #FFCD00"></i>Same input both sides</span>
   <span><i class="sw" style="background: #F4007E"></i>Eval harness</span>
 </div>
+</div>
+
+<h2>Learnings · Standard Embeddings vs. Hybrid Search</h2>
+<div class="card">
+  <p style="margin: 0 0 16px; color: var(--text); font-size: 13px;">
+    Salesforce Data Cloud lets you build a Search Index in two configurations: <strong>vector-only (semantic)</strong> or
+    <strong>Hybrid</strong>. The same source data, indexed both ways, behaves very differently for product catalogs with
+    similar identifiers — which is exactly the failure mode this demo targets.
+  </p>
+
+  <div class="learnings-grid">
+    <div class="learn-side">
+      <h4><span class="pill std">A · Standard</span> Vector-only semantic search</h4>
+      <p class="how">Embeddings only — query and chunks are encoded into the same vector space, ranked by cosine similarity. This is what the Salesforce Data Library uses by default.</p>
+
+      <h5>Strong at</h5>
+      <ul>
+        <li>Paraphrasing ("Wartung" vs. "Inspektion")</li>
+        <li>Conceptual similarity, multilingual queries</li>
+        <li>Long natural-language questions</li>
+      </ul>
+
+      <h5>Weak at</h5>
+      <ul>
+        <li class="weak">Similar SKU variants (<code>AL-3000-S</code> vs <code>AL-3000-SX</code> collapse in the embedding space)</li>
+        <li class="weak">Exact identifiers, certificate numbers, version strings</li>
+        <li class="weak">Out-of-vocabulary technical terms</li>
+        <li class="weak">No structured filtering on metadata fields</li>
+      </ul>
+    </div>
+
+    <div class="learn-side hybrid">
+      <h4><span class="pill hyb">B · Hybrid</span> BM25 + embedding combined</h4>
+      <p class="how">Two retrieval lanes per query: a lexical lane (BM25, keyword-weighted) and a semantic lane (embedding cosine). Salesforce returns three score columns — <code>hybrid_score__c</code>, <code>vector_score__c</code>, <code>keyword_score__c</code> — and ranks by the fused hybrid score.</p>
+
+      <h5>Strong at</h5>
+      <ul>
+        <li>ID disambiguation — exact tokens like <code>-S</code> vs. <code>-SX</code> separate cleanly</li>
+        <li>Mix of paraphrased intent and exact-match constraints in one query</li>
+        <li>Filterable metadata fields (<code>productIds__c</code>, <code>atexZone__c</code>, …)</li>
+        <li>Auditable: each result carries a hybrid + lexical + vector score</li>
+      </ul>
+
+      <h5>Weak at / constraints</h5>
+      <ul>
+        <li class="weak">Filter grammar in <code>hybrid_search()</code> only supports <code>=</code> and prefix-<code>LIKE 'X;%'</code> — no leading wildcards, no <code>CONTAINS</code></li>
+        <li class="weak">Build time and indexing cost roughly double vs. vector-only</li>
+        <li class="weak">Requires explicit setup: DLO → DMO → Search Index with <em>Mode: Hybrid</em></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="learn-takeaway">
+    <strong>What makes this demo win for B:</strong> Variant B does not just enable Hybrid mode — it adds an Apex layer
+    that detects model IDs in the query (regex on <code>AL-\d{4}(?:-[A-Z]+)*</code>) and translates them into a
+    <code>productIds__c = 'AL-3000-SX' OR productIds__c LIKE 'AL-3000-SX;%'</code> filter that is passed into the
+    <code>hybrid_search()</code> call. The hybrid index supplies the relevance ranking, the lexical filter supplies
+    deterministic ID matching. Vector-only retrieval cannot replicate this — there is no exact-match lane to filter on.
+  </div>
+
+  <p class="learn-ref">
+    Reference: <a href="https://help.salesforce.com/s/articleView?id=data.c360_a_hybridsearch_index.htm&type=5" target="_blank" rel="noopener">Salesforce Help — Create a Hybrid Search Index in Data Cloud</a>.
+  </p>
 </div>
 
 <h2>Demo question (Q13)</h2>
