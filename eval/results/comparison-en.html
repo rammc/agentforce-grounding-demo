@@ -5,90 +5,258 @@
 <title>AeroLift Grounding Demo — Eval Comparison</title>
 <style>
   :root {
-    --bg: #0d1117;
-    --card: #161b22;
-    --text: #e6edf3;
-    --muted: #8b949e;
-    --line: #30363d;
-    --pass: #3fb950;
-    --partial: #d29922;
-    --fail: #f85149;
-    --accent: #58a6ff;
+    /* Capgemini brand palette */
+    --cap-blue: #0070AD;
+    --cap-vibrant: #12ABDB;
+    --cap-pink: #F4007E;
+    --cap-navy: #14213D;
+    --cap-yellow: #FFCD00;
+
+    --bg: #ffffff;
+    --section: #F5F7FA;
+    --card: #ffffff;
+    --text: #14213D;
+    --muted: #5C6B7A;
+    --line: #E1E5EB;
+
+    --pass: #2E7D32;
+    --pass-bg: #E8F5E9;
+    --partial: #ED6C02;
+    --partial-bg: #FFF4E5;
+    --fail: #C8102E;
+    --fail-bg: #FDECEE;
   }
   * { box-sizing: border-box; }
   body {
     margin: 0;
-    background: var(--bg);
+    background: var(--section);
     color: var(--text);
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
-    line-height: 1.5;
+    line-height: 1.55;
   }
   .container { max-width: 1100px; margin: 0 auto; padding: 32px 24px 64px; }
-  h1 { font-size: 28px; margin: 0 0 8px; }
-  .subtitle { color: var(--muted); margin: 0 0 32px; font-size: 14px; }
-  h2 { font-size: 20px; margin: 32px 0 12px; border-bottom: 1px solid var(--line); padding-bottom: 6px; }
-  .card { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 20px; margin-bottom: 16px; }
+  h1 { font-size: 30px; margin: 0 0 6px; color: var(--cap-navy); letter-spacing: -0.01em; }
+  .subtitle { color: var(--muted); margin: 0 0 28px; font-size: 14px; }
+  h2 { font-size: 20px; margin: 36px 0 12px; color: var(--cap-navy); border-bottom: 2px solid var(--cap-blue); padding-bottom: 6px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 6px; padding: 22px; margin-bottom: 16px; box-shadow: 0 1px 3px rgba(20, 33, 61, 0.04); }
   table { border-collapse: collapse; width: 100%; font-size: 14px; }
-  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); }
-  th { color: var(--muted); font-weight: 500; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; }
-  td.num { text-align: right; font-variant-numeric: tabular-nums; }
-  .legend { display: flex; gap: 16px; margin-bottom: 12px; font-size: 13px; color: var(--muted); }
+  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); }
+  th { color: var(--cap-navy); font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; background: var(--section); }
+  td.num { text-align: right; font-variant-numeric: tabular-nums; font-weight: 500; }
+  .legend { display: flex; gap: 18px; margin-bottom: 14px; font-size: 13px; color: var(--muted); }
   .legend span { display: inline-flex; align-items: center; gap: 6px; }
   .swatch { width: 12px; height: 12px; border-radius: 2px; display: inline-block; }
-  .row { display: grid; grid-template-columns: 240px 1fr 100px; gap: 12px; align-items: center; margin: 6px 0; }
-  .row .label { font-size: 13px; color: var(--text); }
-  .row .label small { display: block; color: var(--muted); font-size: 11px; }
-  .bar { height: 22px; display: flex; border-radius: 4px; overflow: hidden; background: #21262d; }
-  .seg { height: 100%; display: flex; align-items: center; justify-content: center; font-size: 11px; color: #fff; min-width: 0; }
+  .row { display: grid; grid-template-columns: 250px 1fr 100px; gap: 14px; align-items: center; margin: 8px 0; }
+  .row .label { font-size: 13px; color: var(--text); font-weight: 500; }
+  .row .label small { display: block; color: var(--muted); font-size: 11px; font-weight: 400; margin-top: 2px; }
+  .bar { height: 24px; display: flex; border-radius: 4px; overflow: hidden; background: var(--section); border: 1px solid var(--line); }
+  .seg { height: 100%; display: flex; align-items: center; justify-content: center; font-size: 11px; color: #fff; min-width: 0; font-weight: 600; }
   .seg.pass { background: var(--pass); }
-  .seg.partial { background: var(--partial); color: #1e1e1e; }
+  .seg.partial { background: var(--partial); }
   .seg.fail { background: var(--fail); }
+  .seg .pct { opacity: 0.85; margin-left: 4px; font-size: 10px; font-weight: 400; }
   .row .total { font-variant-numeric: tabular-nums; font-size: 12px; color: var(--muted); text-align: right; }
-  .seg .pct { opacity: 0.85; margin-left: 4px; font-size: 10px; }
-  .heatmap { display: grid; grid-template-columns: 110px repeat(15, 1fr); gap: 2px; font-size: 11px; }
-  .heatmap .hcell { padding: 4px 0; text-align: center; border-radius: 2px; font-variant-numeric: tabular-nums; }
-  .heatmap .hcell.h { background: transparent; color: var(--muted); }
-  .heatmap .hcell.label { background: transparent; color: var(--muted); text-align: left; padding-left: 0; }
-  .heatmap .hcell.PASS { background: var(--pass); color: #0d1117; font-weight: 600; }
-  .heatmap .hcell.PARTIAL { background: var(--partial); color: #0d1117; font-weight: 600; }
+  .heatmap { display: grid; grid-template-columns: 130px repeat(15, 1fr); gap: 3px; font-size: 11px; }
+  .heatmap .hcell { padding: 5px 0; text-align: center; border-radius: 2px; font-variant-numeric: tabular-nums; }
+  .heatmap .hcell.h { background: transparent; color: var(--muted); font-weight: 500; }
+  .heatmap .hcell.label { background: transparent; color: var(--cap-navy); text-align: left; padding-left: 0; font-weight: 600; }
+  .heatmap .hcell.PASS { background: var(--pass); color: #fff; font-weight: 600; }
+  .heatmap .hcell.PARTIAL { background: var(--partial); color: #fff; font-weight: 600; }
   .heatmap .hcell.FAIL { background: var(--fail); color: #fff; font-weight: 600; }
-  .heatmap .hcell.NA { background: #21262d; color: var(--muted); }
-  .summary-stat { display: inline-block; margin-right: 24px; }
-  .summary-stat .v { font-size: 22px; font-weight: 600; color: var(--accent); }
-  .summary-stat .l { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
-  .footnote { color: var(--muted); font-size: 12px; margin-top: 8px; font-style: italic; }
-  code { background: #21262d; padding: 1px 5px; border-radius: 3px; font-size: 12px; }
-  .demo-card { background: linear-gradient(135deg, #1f2937 0%, #161b22 100%); border: 1px solid #58a6ff; }
-  .demo-tag { display: inline-block; background: var(--accent); color: #0d1117; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 3px; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 12px; }
-  .demo-question { font-size: 18px; font-weight: 500; margin: 0 0 8px; color: var(--text); }
-  .demo-meta { color: var(--muted); font-size: 12px; margin: 0 0 16px; }
-  .demo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-  .demo-side { background: #0d1117; border: 1px solid var(--line); border-radius: 6px; padding: 16px; }
-  .demo-side h4 { margin: 0 0 8px; font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em; }
+  .summary-stat { display: inline-block; margin-right: 28px; padding: 4px 0; }
+  .summary-stat .v { font-size: 26px; font-weight: 700; color: var(--cap-blue); letter-spacing: -0.02em; }
+  .summary-stat .l { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-top: 2px; }
+  .footnote { color: var(--muted); font-size: 12px; margin-top: 10px; font-style: italic; }
+  code { background: var(--section); padding: 1px 5px; border-radius: 3px; font-size: 12px; color: var(--cap-navy); }
+
+  /* Demo question card */
+  .demo-card { background: linear-gradient(135deg, #ffffff 0%, #F5F9FC 100%); border: 2px solid var(--cap-blue); }
+  .demo-tag { display: inline-block; background: var(--cap-blue); color: #fff; font-size: 10px; font-weight: 700; padding: 3px 10px; border-radius: 3px; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 12px; }
+  .demo-question { font-size: 18px; font-weight: 500; margin: 0 0 8px; color: var(--cap-navy); }
+  .demo-meta { color: var(--muted); font-size: 12px; margin: 0 0 18px; }
+  .demo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .demo-side { background: var(--bg); border: 1px solid var(--line); border-radius: 6px; padding: 16px; }
+  .demo-side h4 { margin: 0 0 10px; font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em; display: flex; justify-content: space-between; align-items: center; }
   .demo-side h4.fail { color: var(--fail); }
   .demo-side h4.pass { color: var(--pass); }
   .demo-side .answer { font-size: 13px; line-height: 1.55; color: var(--text); margin: 0 0 8px; }
-  .demo-side .verdict-tag { display: inline-block; font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 3px; letter-spacing: 0.05em; }
-  .demo-side .verdict-tag.fail { background: var(--fail); color: #fff; }
-  .demo-side .verdict-tag.pass { background: var(--pass); color: #0d1117; }
-  .demo-trace { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 11px; color: var(--muted); background: #161b22; border-radius: 4px; padding: 8px 10px; margin-top: 8px; white-space: pre-wrap; word-break: break-word; max-height: 240px; overflow: auto; }
-  .demo-trace .src-label { color: var(--accent); font-weight: 600; }
-  .demo-trace .gt-hit { background: rgba(63, 185, 80, 0.18); padding: 0 2px; border-radius: 2px; color: var(--pass); font-weight: 600; }
-  .demo-takeaway { background: rgba(248, 81, 73, 0.08); border-left: 3px solid var(--fail); padding: 10px 14px; border-radius: 4px; margin-top: 16px; font-size: 13px; color: var(--text); }
+  .verdict-tag { display: inline-block; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 3px; letter-spacing: 0.05em; }
+  .verdict-tag.fail { background: var(--fail); color: #fff; }
+  .verdict-tag.pass { background: var(--pass); color: #fff; }
+  .demo-trace { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 11px; color: var(--text); background: var(--section); border-radius: 4px; padding: 10px 12px; margin-top: 10px; white-space: pre-wrap; word-break: break-word; max-height: 260px; overflow: auto; border: 1px solid var(--line); }
+  .demo-trace .src-label { color: var(--cap-blue); font-weight: 600; }
+  .demo-trace .gt-hit { background: rgba(46, 125, 50, 0.15); padding: 0 3px; border-radius: 2px; color: var(--pass); font-weight: 600; }
+  .demo-trace .diag { color: var(--muted); }
+  .demo-takeaway { background: var(--fail-bg); border-left: 3px solid var(--fail); padding: 12px 16px; border-radius: 4px; margin-top: 18px; font-size: 13px; color: var(--text); }
   .demo-takeaway strong { color: var(--fail); }
+
+  /* Architecture diagram */
+  .arch-diagram { width: 100%; height: auto; display: block; }
+  .arch-legend { display: flex; gap: 18px; margin-top: 12px; font-size: 12px; color: var(--muted); flex-wrap: wrap; }
+  .arch-legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .arch-legend .sw { width: 14px; height: 14px; border-radius: 2px; display: inline-block; border: 1px solid var(--line); }
+
+  /* Question reference (collapsible) */
+  details.q-list { background: var(--card); border: 1px solid var(--line); border-radius: 6px; padding: 0; margin-bottom: 16px; box-shadow: 0 1px 3px rgba(20, 33, 61, 0.04); }
+  details.q-list summary { cursor: pointer; padding: 16px 22px; font-weight: 600; color: var(--cap-navy); list-style: none; display: flex; align-items: center; justify-content: space-between; }
+  details.q-list summary::-webkit-details-marker { display: none; }
+  details.q-list summary::after { content: "▾"; font-size: 14px; color: var(--cap-blue); transition: transform 0.15s; }
+  details.q-list[open] summary::after { transform: rotate(180deg); }
+  details.q-list summary:hover { background: var(--section); }
+  .q-list-body { padding: 0 22px 22px; }
+  .q-item { padding: 12px 0; border-bottom: 1px solid var(--line); }
+  .q-item:last-child { border-bottom: none; }
+  .q-item .q-id { display: inline-block; background: var(--cap-blue); color: #fff; font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 3px; letter-spacing: 0.04em; margin-right: 8px; }
+  .q-item .q-cat { display: inline-block; background: var(--section); color: var(--muted); font-size: 10px; font-weight: 600; padding: 2px 7px; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.04em; margin-right: 8px; }
+  .q-item .q-fair { display: inline-block; background: var(--cap-yellow); color: var(--cap-navy); font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 3px; letter-spacing: 0.04em; }
+  .q-item .q-q { font-size: 14px; color: var(--cap-navy); margin: 6px 0 4px; }
+  .q-item .q-gt { font-size: 12px; color: var(--muted); }
+  .q-item .q-gt strong { color: var(--text); font-weight: 600; }
+
+  ol li { margin: 8px 0; }
+  ol li strong { color: var(--cap-navy); }
 </style>
 </head>
 <body>
 <div class="container">
 
 <h1>AeroLift Grounding Demo — Eval Comparison</h1>
-<p class="subtitle">15 questions · run date 2026-05-06</p>
+<p class="subtitle">15 questions · 3 grounding strategies · run date 2026-05-06</p>
 
 <div class="card">
   <div class="summary-stat"><div class="v">14/15 · 93%</div><div class="l">B-boosted Retrieval PASS</div></div>
   <div class="summary-stat"><div class="v">13/15 · 87%</div><div class="l">B-naive Retrieval PASS</div></div>
   <div class="summary-stat"><div class="v">12/15 · 80%</div><div class="l">A (Data Library) PASS</div></div>
   <div class="summary-stat"><div class="v">stable</div><div class="l">retrieval across all B variants</div></div>
+</div>
+
+<h2>Architecture</h2>
+<div class="card">
+<svg class="arch-diagram" viewBox="0 0 1040 700" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#5C6B7A"/>
+    </marker>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#0070AD"/>
+    </marker>
+  </defs>
+
+  <!-- Source documents (top, centered) -->
+  <g>
+    <rect x="380" y="20" width="280" height="64" rx="6" fill="#F5F7FA" stroke="#E1E5EB"/>
+    <text x="520" y="44" text-anchor="middle" font-size="13" font-weight="600" fill="#14213D">8 Markdown source documents</text>
+    <text x="520" y="62" text-anchor="middle" font-size="11" fill="#5C6B7A">product-catalog · maintenance-manual · atex-guide · changelog · …</text>
+    <text x="520" y="76" text-anchor="middle" font-size="10" fill="#5C6B7A">Single source of truth · 164 atomic records after preprocessing</text>
+  </g>
+
+  <!-- Split arrows down -->
+  <line x1="450" y1="84" x2="220" y2="130" stroke="#5C6B7A" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="590" y1="84" x2="820" y2="130" stroke="#0070AD" stroke-width="1.5" marker-end="url(#arrow-blue)"/>
+
+  <!-- Path A header -->
+  <rect x="60" y="130" width="320" height="32" rx="4" fill="#5C6B7A"/>
+  <text x="220" y="151" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">Variant A · Data Library (out-of-the-box)</text>
+
+  <!-- Path A boxes -->
+  <g>
+    <rect x="60" y="180" width="320" height="48" rx="4" fill="#fff" stroke="#E1E5EB"/>
+    <text x="220" y="200" text-anchor="middle" font-size="12" font-weight="600" fill="#14213D">build-pdfs.sh</text>
+    <text x="220" y="216" text-anchor="middle" font-size="11" fill="#5C6B7A">Pandoc + Eisvogel → 8 PDFs</text>
+  </g>
+  <line x1="220" y1="228" x2="220" y2="245" stroke="#5C6B7A" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <g>
+    <rect x="60" y="245" width="320" height="48" rx="4" fill="#fff" stroke="#E1E5EB"/>
+    <text x="220" y="265" text-anchor="middle" font-size="12" font-weight="600" fill="#14213D">Salesforce Data Library</text>
+    <text x="220" y="281" text-anchor="middle" font-size="11" fill="#5C6B7A">Upload · default chunker · auto-managed index</text>
+  </g>
+  <line x1="220" y1="293" x2="220" y2="310" stroke="#5C6B7A" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <g>
+    <rect x="60" y="310" width="320" height="48" rx="4" fill="#fff" stroke="#E1E5EB"/>
+    <text x="220" y="330" text-anchor="middle" font-size="12" font-weight="600" fill="#14213D">Built-in semantic search</text>
+    <text x="220" y="346" text-anchor="middle" font-size="11" fill="#5C6B7A">Salesforce-managed embeddings · vector-only</text>
+  </g>
+  <line x1="220" y1="358" x2="220" y2="375" stroke="#5C6B7A" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <g>
+    <rect x="60" y="375" width="320" height="48" rx="4" fill="#fff" stroke="#E1E5EB"/>
+    <text x="220" y="395" text-anchor="middle" font-size="12" font-weight="600" fill="#14213D">Standard Action: Answer Questions</text>
+    <text x="220" y="411" text-anchor="middle" font-size="11" fill="#5C6B7A">with Knowledge (built-in)</text>
+  </g>
+  <line x1="220" y1="423" x2="220" y2="440" stroke="#5C6B7A" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <g>
+    <rect x="60" y="440" width="320" height="48" rx="4" fill="#5C6B7A"/>
+    <text x="220" y="460" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">Agent A</text>
+    <text x="220" y="476" text-anchor="middle" font-size="11" fill="#E1E5EB">Topic: Produktwissen AeroLift</text>
+  </g>
+
+  <!-- Path B header -->
+  <rect x="660" y="130" width="320" height="32" rx="4" fill="#0070AD"/>
+  <text x="820" y="151" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">Variant B · Custom Hybrid Search (engineered)</text>
+
+  <!-- Path B boxes -->
+  <g>
+    <rect x="660" y="180" width="320" height="48" rx="4" fill="#fff" stroke="#0070AD"/>
+    <text x="820" y="200" text-anchor="middle" font-size="12" font-weight="600" fill="#14213D">preprocess.ts</text>
+    <text x="820" y="216" text-anchor="middle" font-size="11" fill="#5C6B7A">AST table parser → 164 atomic records · CSV + JSON</text>
+  </g>
+  <line x1="820" y1="228" x2="820" y2="245" stroke="#0070AD" stroke-width="1.5" marker-end="url(#arrow-blue)"/>
+
+  <g>
+    <rect x="660" y="245" width="320" height="48" rx="4" fill="#fff" stroke="#0070AD"/>
+    <text x="820" y="265" text-anchor="middle" font-size="12" font-weight="600" fill="#14213D">Data Cloud · DLO → DMO</text>
+    <text x="820" y="281" text-anchor="middle" font-size="11" fill="#5C6B7A">structured fields: productIds, atexZone, tempMaxC, …</text>
+  </g>
+  <line x1="820" y1="293" x2="820" y2="310" stroke="#0070AD" stroke-width="1.5" marker-end="url(#arrow-blue)"/>
+
+  <g>
+    <rect x="660" y="310" width="320" height="48" rx="4" fill="#E6F4FA" stroke="#0070AD"/>
+    <text x="820" y="330" text-anchor="middle" font-size="12" font-weight="700" fill="#14213D">Hybrid Search Index (BM25 + embedding)</text>
+    <text x="820" y="346" text-anchor="middle" font-size="11" fill="#5C6B7A">Multilingual E5 Large · filterable productIds</text>
+  </g>
+  <line x1="820" y1="358" x2="820" y2="375" stroke="#0070AD" stroke-width="1.5" marker-end="url(#arrow-blue)"/>
+
+  <g>
+    <rect x="660" y="375" width="320" height="48" rx="4" fill="#E6F4FA" stroke="#0070AD"/>
+    <text x="820" y="395" text-anchor="middle" font-size="12" font-weight="700" fill="#14213D">Apex Retriever + Lexical Boost</text>
+    <text x="820" y="411" text-anchor="middle" font-size="11" fill="#5C6B7A">extracts AL-* IDs · adds equality + prefix-LIKE filter</text>
+  </g>
+  <line x1="820" y1="423" x2="820" y2="440" stroke="#0070AD" stroke-width="1.5" marker-end="url(#arrow-blue)"/>
+
+  <g>
+    <rect x="660" y="440" width="320" height="48" rx="4" fill="#0070AD"/>
+    <text x="820" y="460" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">Agent B</text>
+    <text x="820" y="476" text-anchor="middle" font-size="11" fill="#fff" opacity="0.9">Topic + custom AeroLift Vector Search action</text>
+  </g>
+
+  <!-- User question (bottom) -->
+  <line x1="220" y1="488" x2="450" y2="540" stroke="#5C6B7A" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="820" y1="488" x2="590" y2="540" stroke="#0070AD" stroke-width="1.5" marker-end="url(#arrow-blue)"/>
+
+  <g>
+    <rect x="380" y="540" width="280" height="60" rx="6" fill="#FFCD00"/>
+    <text x="520" y="565" text-anchor="middle" font-size="13" font-weight="700" fill="#14213D">User question</text>
+    <text x="520" y="585" text-anchor="middle" font-size="11" fill="#14213D">"Which model is approved for food contact …?"</text>
+  </g>
+
+  <!-- Eval harness annotation -->
+  <g>
+    <rect x="380" y="620" width="280" height="56" rx="6" fill="#F4007E"/>
+    <text x="520" y="643" text-anchor="middle" font-size="12" font-weight="700" fill="#fff">Eval Harness · Anthropic Judge</text>
+    <text x="520" y="660" text-anchor="middle" font-size="10" fill="#fff" opacity="0.9">15 questions × 3 conditions · OAuth Client Credentials Flow</text>
+  </g>
+  <line x1="520" y1="600" x2="520" y2="615" stroke="#F4007E" stroke-width="1.5" marker-end="url(#arrow-blue)" />
+
+</svg>
+<div class="arch-legend">
+  <span><i class="sw" style="background: #5C6B7A"></i>Variant A path</span>
+  <span><i class="sw" style="background: #0070AD"></i>Variant B path</span>
+  <span><i class="sw" style="background: #FFCD00"></i>Same input both sides</span>
+  <span><i class="sw" style="background: #F4007E"></i>Eval harness</span>
+</div>
 </div>
 
 <h2>Demo question (Q13)</h2>
@@ -113,7 +281,7 @@ Date: 2023-04 | Model: AL-3000-SX | Version: 1.0 | Change: Launch of stainless-s
 <span class="src-label">[Source 4: Specifications overview]</span>
 Model: AL-3000-SX | Pump type: single-stage centrifugal | Flow rate: 80 m³/h | Max. media temp: 150 °C | Housing material: 1.4408 (stainless steel) | ATEX Zone 1 (Gas)
 
-<span style="color: var(--muted)">Diagnostic: Boost applied: filter on product IDs (AL-3000-SX) | rowCount=5</span></div>
+<span class="diag">Diagnostic: Boost applied: filter on product IDs (AL-3000-SX) | rowCount=5</span></div>
     </div>
   </div>
 
@@ -131,7 +299,7 @@ Model: AL-3000-SX | Pump type: single-stage centrifugal | Flow rate: 80 m³/h | 
   </div>
 
   <div class="row">
-    <div class="label">A (Data Library)<small>built-in library + Knowledge action</small></div>
+    <div class="label">A (Data Library)<small>built-in semantic search · Knowledge action</small></div>
     <div class="bar">
       <div class="seg pass" style="width: 80%">12 <span class="pct">80%</span></div>
       <div class="seg partial" style="width: 6.7%">1 <span class="pct">7%</span></div>
@@ -141,7 +309,7 @@ Model: AL-3000-SX | Pump type: single-stage centrifugal | Flow rate: 80 m³/h | 
   </div>
 
   <div class="row">
-    <div class="label">B-naive (retrieval)<small>hybrid search without boost · REST direct</small></div>
+    <div class="label">B-naive (retrieval)<small>Hybrid Search Index, no boost · REST direct</small></div>
     <div class="bar">
       <div class="seg pass" style="width: 86.7%">13 <span class="pct">87%</span></div>
       <div class="seg partial" style="width: 13.3%">2 <span class="pct">13%</span></div>
@@ -151,7 +319,7 @@ Model: AL-3000-SX | Pump type: single-stage centrifugal | Flow rate: 80 m³/h | 
   </div>
 
   <div class="row">
-    <div class="label">B-boosted (retrieval)<small>hybrid search + lexical boost · REST direct</small></div>
+    <div class="label">B-boosted (retrieval)<small>Hybrid Search Index + lexical boost · REST direct</small></div>
     <div class="bar">
       <div class="seg pass" style="width: 93.3%">14 <span class="pct">93%</span></div>
       <div class="seg partial" style="width: 6.7%">1 <span class="pct">7%</span></div>
@@ -226,13 +394,13 @@ Model: AL-3000-SX | Pump type: single-stage centrifugal | Flow rate: 80 m³/h | 
   <tbody>
     <tr>
       <td><strong>B-naive (retrieval)</strong></td>
-      <td>Hybrid search index, no lexical filter, REST endpoint <code>/services/apexrest/aerolift/retrieve/naive</code></td>
+      <td>Data Cloud Hybrid Search Index, no lexical filter, REST endpoint <code>/services/apexrest/aerolift/retrieve/naive</code></td>
       <td>Pure embedding + BM25 hit quality without ID steering</td>
       <td class="num">13 · 87%</td>
     </tr>
     <tr>
       <td><strong>B-boosted (retrieval)</strong></td>
-      <td>Same index, additional filter <code>productIds__c = 'AL-3000-SX'</code> when model IDs are detected in the question</td>
+      <td>Same Hybrid Search Index, additional filter <code>productIds__c = 'AL-3000-SX'</code> when model IDs are detected in the question</td>
       <td>Effect of the lexical boost on ID disambiguation (AL-3000 vs. AL-3000-SX)</td>
       <td class="num">14 · 93%</td>
     </tr>
@@ -247,10 +415,92 @@ Model: AL-3000-SX | Pump type: single-stage centrifugal | Flow rate: 80 m³/h | 
 <p class="footnote">A (Data Library) is consistent at 12/15 PASS across runs. Retrieval columns are independent of topic configuration.</p>
 </div>
 
+<h2>Question reference</h2>
+<details class="q-list">
+  <summary>All 15 evaluation questions (click to expand)</summary>
+  <div class="q-list-body">
+    <div class="q-item">
+      <span class="q-id">Q01</span><span class="q-cat">factual-precise</span>
+      <p class="q-q">"Was ist die maximal zulässige Medientemperatur der AL-3000-SX?"</p>
+      <p class="q-gt"><strong>Ground truth:</strong> 150 °C · <strong>Source:</strong> product-catalog.md</p>
+    </div>
+    <div class="q-item">
+      <span class="q-id">Q02</span><span class="q-cat">factual-precise</span><span class="q-fair">fair-winnable A</span>
+      <p class="q-q">"Welche Förderleistung hat die AL-3500?"</p>
+      <p class="q-gt"><strong>Ground truth:</strong> 140 m³/h · <strong>Source:</strong> product-catalog.md</p>
+    </div>
+    <div class="q-item">
+      <span class="q-id">Q03</span><span class="q-cat">factual-precise</span>
+      <p class="q-q">"In welchem Intervall ist die Großinspektion bei der AL-3500-HT-X durchzuführen?"</p>
+      <p class="q-gt"><strong>Ground truth:</strong> 2.000 Bh oder 6 Monate (zuerst erreichter Wert) · <strong>Source:</strong> maintenance-manual.md</p>
+    </div>
+    <div class="q-item">
+      <span class="q-id">Q04</span><span class="q-cat">factual-precise</span><span class="q-fair">fair-winnable A</span>
+      <p class="q-q">"Welche Antriebsleistung hat die AL-3000?"</p>
+      <p class="q-gt"><strong>Ground truth:</strong> 22 kW · <strong>Source:</strong> product-catalog.md</p>
+    </div>
+    <div class="q-item">
+      <span class="q-id">Q05</span><span class="q-cat">factual-precise</span><span class="q-fair">fair-winnable A</span>
+      <p class="q-q">"Welchen Wirkungsgrad erreicht die AL-3500?"</p>
+      <p class="q-gt"><strong>Ground truth:</strong> 76 % · <strong>Source:</strong> product-catalog.md</p>
+    </div>
+    <div class="q-item">
+      <span class="q-id">Q06</span><span class="q-cat">multi-criteria</span>
+      <p class="q-q">"Welche AeroLift-Pumpe ist sowohl für ATEX Zone 1 zertifiziert als auch für eine Förderleistung von mindestens 120 m³/h ausgelegt?"</p>
+      <p class="q-gt"><strong>Ground truth:</strong> AL-3500-HT-X · <strong>Source:</strong> product-catalog.md, atex-guide.md</p>
+    </div>
+    <div class="q-item">
+      <span class="q-id">Q07</span><span class="q-cat">multi-criteria</span>
+      <p class="q-q">"Welche Modelle haben ein Edelstahlgehäuse, sind ATEX-Zone-1-zertifiziert und vertragen eine Medientemperatur von mindestens 140 °C?"</p>
+      <p class="q-gt"><strong>Ground truth:</strong> AL-3000-SX und AL-3500-HT-X · <strong>Source:</strong> product-catalog.md</p>
+    </div>
+    <div class="q-item">
+      <span class="q-id">Q08</span><span class="q-cat">multi-hop</span>
+      <p class="q-q">"Welche Antriebsleistung hat das einzige Modell der AL-3000-Reihe ohne ATEX-Zulassung und welchen Wirkungsgrad erreicht es?"</p>
+      <p class="q-gt"><strong>Ground truth:</strong> AL-3000, 22 kW Antriebsleistung, 72 % Wirkungsgrad · <strong>Source:</strong> atex-guide.md, product-catalog.md</p>
+    </div>
+    <div class="q-item">
+      <span class="q-id">Q09</span><span class="q-cat">multi-criteria</span>
+      <p class="q-q">"Welche Pumpe der AL-3000-Reihe verträgt eine Medientemperatur über 120 °C?"</p>
+      <p class="q-gt"><strong>Ground truth:</strong> AL-3000-SX · <strong>Source:</strong> product-catalog.md</p>
+    </div>
+    <div class="q-item">
+      <span class="q-id">Q10</span><span class="q-cat">multi-criteria</span>
+      <p class="q-q">"Welche Pumpen mit 140 m³/h Förderleistung haben ein Großinspektionsintervall von höchstens 2.500 Betriebsstunden?"</p>
+      <p class="q-gt"><strong>Ground truth:</strong> AL-3500-HT (2.500 Bh) und AL-3500-HT-X (2.000 Bh) · <strong>Source:</strong> product-catalog.md, maintenance-manual.md</p>
+    </div>
+    <div class="q-item">
+      <span class="q-id">Q11</span><span class="q-cat">multi-hop</span>
+      <p class="q-q">"Welches Großinspektionsintervall hat die einzige ATEX-Zone-1-zertifizierte Pumpe der AL-3500-Reihe?"</p>
+      <p class="q-gt"><strong>Ground truth:</strong> AL-3500-HT-X, 2.000 Bh oder 6 Monate · <strong>Source:</strong> atex-guide.md, maintenance-manual.md</p>
+    </div>
+    <div class="q-item">
+      <span class="q-id">Q12</span><span class="q-cat">multi-hop</span>
+      <p class="q-q">"Wann wurde die erste ATEX-Zone-1-zertifizierte Pumpe von AeroLift eingeführt und welche Förderleistung hat dieses Modell?"</p>
+      <p class="q-gt"><strong>Ground truth:</strong> AL-3000-SX, eingeführt 2023-04, 80 m³/h · <strong>Source:</strong> changelog.md, product-catalog.md</p>
+    </div>
+    <div class="q-item" style="background: rgba(0, 112, 173, 0.05); padding: 12px 14px; border-radius: 4px;">
+      <span class="q-id" style="background: var(--cap-pink)">Q13 · DEMO</span><span class="q-cat">multi-hop</span>
+      <p class="q-q">"Welches Modell der AL-3000-Reihe ist für den Lebensmittelkontakt freigegeben und welche Zertifikatsnummer trägt seine ATEX-Zulassung?"</p>
+      <p class="q-gt"><strong>Ground truth:</strong> AL-3000-SX, Zertifikatsnummer BVS 23 ATEX E 089 X · <strong>Source:</strong> compatibility-matrix.md, atex-guide.md</p>
+    </div>
+    <div class="q-item">
+      <span class="q-id">Q14</span><span class="q-cat">id-disambiguation</span>
+      <p class="q-q">"Für welche ATEX-Zone ist die AL-3000-S zertifiziert?"</p>
+      <p class="q-gt"><strong>Ground truth:</strong> Zone 2 (Gas) · <strong>Source:</strong> atex-guide.md, product-catalog.md</p>
+    </div>
+    <div class="q-item">
+      <span class="q-id">Q15</span><span class="q-cat">id-disambiguation</span>
+      <p class="q-q">"Aus welchem Werkstoff besteht das Pumpengehäuse der AL-3000-SX?"</p>
+      <p class="q-gt"><strong>Ground truth:</strong> 1.4408 (Edelstahl) · <strong>Source:</strong> product-catalog.md, spec-sheet-AL-3000-family.md</p>
+    </div>
+  </div>
+</details>
+
 <h2>Key observations for the demo</h2>
 <div class="card">
 <ol>
-  <li><strong>Retrieval quality is the central story.</strong> B-boosted reaches 14/15 (93%), B-naive 13/15 (87%) with two PARTIAL hits, A 12/15 (80%). The boost reliably separates ID variants (AL-3000 vs. AL-3000-S vs. AL-3000-SX). Even without the boost, the custom retriever already edges out the Data Library.</li>
+  <li><strong>Retrieval quality is the central story.</strong> B-boosted reaches 14/15 (93%), B-naive 13/15 (87%) with two PARTIAL hits, A 12/15 (80%). The boost reliably separates ID variants (AL-3000 vs. AL-3000-S vs. AL-3000-SX). Even without the boost, the custom retriever already edges out the Data Library — pre-processing alone moves the needle.</li>
   <li><strong>The agent's answer reflects the retrieved content.</strong> In the UI, B-boosted reaches 12/15 (80%) — the LLM presents a brief intro and the action surfaces the grounded source panel alongside it.</li>
   <li><strong>Implication:</strong> For programmatic integration (API-only) the action output needs to be aggregated explicitly. For the interactive demo experience inside Agent Builder, B-boosted is state of the art.</li>
 </ol>
