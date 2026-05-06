@@ -28,7 +28,6 @@ export function readEnv(): SalesforceEnv {
         'SF_CLIENT_SECRET',
         'AGENT_A_ID',
         'AGENT_B_ID',
-        'ANTHROPIC_API_KEY',
     ] as const;
     const missing = required.filter((k) => !process.env[k]);
     if (missing.length > 0) {
@@ -37,13 +36,15 @@ export function readEnv(): SalesforceEnv {
                 `Siehe .env.example und DEPLOY.md Schritt 6.5.`,
         );
     }
+    // ANTHROPIC_API_KEY ist nur für den LLM-Judge-Pfad erforderlich.  Bei
+    // --skip-judge darf der Wert leer bleiben.
     return {
         instanceUrl: process.env.SF_INSTANCE_URL!.replace(/\/$/, ''),
         clientId: process.env.SF_CLIENT_ID!,
         clientSecret: process.env.SF_CLIENT_SECRET!,
         agentAId: process.env.AGENT_A_ID!,
         agentBId: process.env.AGENT_B_ID!,
-        anthropicApiKey: process.env.ANTHROPIC_API_KEY!,
+        anthropicApiKey: process.env.ANTHROPIC_API_KEY ?? '',
     };
 }
 
@@ -52,6 +53,12 @@ export async function getAccessToken(env: SalesforceEnv): Promise<{ token: strin
         return { token: cachedToken, instanceUrl: cachedInstanceUrl };
     }
     const tokenUrl = `${env.instanceUrl}/services/oauth2/token`;
+    // Salesforce Client Credentials Flow akzeptiert KEINEN scope-Parameter im
+    // Request – die Scopes werden ausschließlich aus der ECA-Konfiguration
+    // übernommen.  Falls die ECA mehr Scopes als nötig konfiguriert hat
+    // (z.B. refresh_token, offline_access, web, openid), führt das zu
+    // 'too many scopes requested'.  Reduzieren in: ECA → OAuth Settings →
+    // Selected Scopes auf api, chatbot_api, sfap_api.
     const body = new URLSearchParams({
         grant_type: 'client_credentials',
         client_id: env.clientId,

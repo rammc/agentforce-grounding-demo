@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>AeroLift Grounding Demo — Eval Comparison</title>
+<style>
+  :root {
+    --bg: #0d1117;
+    --card: #161b22;
+    --text: #e6edf3;
+    --muted: #8b949e;
+    --line: #30363d;
+    --pass: #3fb950;
+    --partial: #d29922;
+    --fail: #f85149;
+    --accent: #58a6ff;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    line-height: 1.5;
+  }
+  .container { max-width: 1100px; margin: 0 auto; padding: 32px 24px 64px; }
+  h1 { font-size: 28px; margin: 0 0 8px; }
+  .subtitle { color: var(--muted); margin: 0 0 32px; font-size: 14px; }
+  h2 { font-size: 20px; margin: 32px 0 12px; border-bottom: 1px solid var(--line); padding-bottom: 6px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 20px; margin-bottom: 16px; }
+  table { border-collapse: collapse; width: 100%; font-size: 14px; }
+  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); }
+  th { color: var(--muted); font-weight: 500; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; }
+  td.num { text-align: right; font-variant-numeric: tabular-nums; }
+  .legend { display: flex; gap: 16px; margin-bottom: 12px; font-size: 13px; color: var(--muted); }
+  .legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .swatch { width: 12px; height: 12px; border-radius: 2px; display: inline-block; }
+  .row { display: grid; grid-template-columns: 240px 1fr 100px; gap: 12px; align-items: center; margin: 6px 0; }
+  .row .label { font-size: 13px; color: var(--text); }
+  .row .label small { display: block; color: var(--muted); font-size: 11px; }
+  .bar { height: 22px; display: flex; border-radius: 4px; overflow: hidden; background: #21262d; }
+  .seg { height: 100%; display: flex; align-items: center; justify-content: center; font-size: 11px; color: #fff; min-width: 0; }
+  .seg.pass { background: var(--pass); }
+  .seg.partial { background: var(--partial); color: #1e1e1e; }
+  .seg.fail { background: var(--fail); }
+  .row .total { font-variant-numeric: tabular-nums; font-size: 12px; color: var(--muted); text-align: right; }
+  .seg .pct { opacity: 0.85; margin-left: 4px; font-size: 10px; }
+  .heatmap { display: grid; grid-template-columns: 110px repeat(15, 1fr); gap: 2px; font-size: 11px; }
+  .heatmap .hcell { padding: 4px 0; text-align: center; border-radius: 2px; font-variant-numeric: tabular-nums; }
+  .heatmap .hcell.h { background: transparent; color: var(--muted); }
+  .heatmap .hcell.label { background: transparent; color: var(--muted); text-align: left; padding-left: 0; }
+  .heatmap .hcell.PASS { background: var(--pass); color: #0d1117; font-weight: 600; }
+  .heatmap .hcell.PARTIAL { background: var(--partial); color: #0d1117; font-weight: 600; }
+  .heatmap .hcell.FAIL { background: var(--fail); color: #fff; font-weight: 600; }
+  .heatmap .hcell.NA { background: #21262d; color: var(--muted); }
+  .summary-stat { display: inline-block; margin-right: 24px; }
+  .summary-stat .v { font-size: 22px; font-weight: 600; color: var(--accent); }
+  .summary-stat .l { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
+  .footnote { color: var(--muted); font-size: 12px; margin-top: 8px; font-style: italic; }
+  code { background: #21262d; padding: 1px 5px; border-radius: 3px; font-size: 12px; }
+  .demo-card { background: linear-gradient(135deg, #1f2937 0%, #161b22 100%); border: 1px solid #58a6ff; }
+  .demo-tag { display: inline-block; background: var(--accent); color: #0d1117; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 3px; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 12px; }
+  .demo-question { font-size: 18px; font-weight: 500; margin: 0 0 8px; color: var(--text); }
+  .demo-meta { color: var(--muted); font-size: 12px; margin: 0 0 16px; }
+  .demo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .demo-side { background: #0d1117; border: 1px solid var(--line); border-radius: 6px; padding: 16px; }
+  .demo-side h4 { margin: 0 0 8px; font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em; }
+  .demo-side h4.fail { color: var(--fail); }
+  .demo-side h4.pass { color: var(--pass); }
+  .demo-side .answer { font-size: 13px; line-height: 1.55; color: var(--text); margin: 0 0 8px; }
+  .demo-side .verdict-tag { display: inline-block; font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 3px; letter-spacing: 0.05em; }
+  .demo-side .verdict-tag.fail { background: var(--fail); color: #fff; }
+  .demo-side .verdict-tag.pass { background: var(--pass); color: #0d1117; }
+  .demo-trace { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 11px; color: var(--muted); background: #161b22; border-radius: 4px; padding: 8px 10px; margin-top: 8px; white-space: pre-wrap; word-break: break-word; max-height: 240px; overflow: auto; }
+  .demo-trace .src-label { color: var(--accent); font-weight: 600; }
+  .demo-trace .gt-hit { background: rgba(63, 185, 80, 0.18); padding: 0 2px; border-radius: 2px; color: var(--pass); font-weight: 600; }
+  .demo-takeaway { background: rgba(248, 81, 73, 0.08); border-left: 3px solid var(--fail); padding: 10px 14px; border-radius: 4px; margin-top: 16px; font-size: 13px; color: var(--text); }
+  .demo-takeaway strong { color: var(--fail); }
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>AeroLift Grounding Demo — Eval Comparison</h1>
+<p class="subtitle">15 questions · run date 2026-05-06</p>
+
+<div class="card">
+  <div class="summary-stat"><div class="v">14/15 · 93%</div><div class="l">B-boosted Retrieval PASS</div></div>
+  <div class="summary-stat"><div class="v">13/15 · 87%</div><div class="l">B-naive Retrieval PASS</div></div>
+  <div class="summary-stat"><div class="v">12/15 · 80%</div><div class="l">A (Data Library) PASS</div></div>
+  <div class="summary-stat"><div class="v">stable</div><div class="l">retrieval across all B variants</div></div>
+</div>
+
+<h2>Demo question (Q13)</h2>
+<div class="card demo-card">
+  <div class="demo-tag">Live demo question</div>
+  <p class="demo-question">"Which model in the AL-3000 series is approved for food contact, and what is the certificate number of its ATEX approval?"</p>
+  <p class="demo-meta">Category: multi-hop · Ground truth: AL-3000-SX, BVS 23 ATEX E 089 X · Sources: compatibility-matrix.md, atex-guide.md</p>
+
+  <div class="demo-grid">
+    <div class="demo-side">
+      <h4 class="fail">A (Data Library) <span class="verdict-tag fail">FAIL</span></h4>
+      <p class="answer">"Model AL-3000-SX from the AL-3000 series is suitable for food contact and has an ATEX approval for Zone 1. The specific certificate number of the ATEX approval, however, is not stated in the available documentation."</p>
+      <p class="answer" style="color: var(--muted); font-style: italic; margin-top: 12px;">A correctly identifies the model but claims the certificate number is missing — the number is in fact present in the catalog but was not retrieved.</p>
+    </div>
+
+    <div class="demo-side">
+      <h4 class="pass">B (Custom Hybrid Search + Boost) <span class="verdict-tag pass">PASS</span></h4>
+      <p class="answer">"The AL-3000-SX is approved for food contact and carries the ATEX certificate number <span class="gt-hit">BVS 23 ATEX E 089 X</span>."</p>
+      <div class="demo-trace"><span class="src-label">[Source 1: AL-3000 series]</span>
+Date: 2023-04 | Model: AL-3000-SX | Version: 1.0 | Change: Launch of stainless-steel variant with ATEX Zone 1, media temperature up to 150 °C, certificate <span class="gt-hit">BVS 23 ATEX E 089 X</span>
+
+<span class="src-label">[Source 4: Specifications overview]</span>
+Model: AL-3000-SX | Pump type: single-stage centrifugal | Flow rate: 80 m³/h | Max. media temp: 150 °C | Housing material: 1.4408 (stainless steel) | ATEX Zone 1 (Gas)
+
+<span style="color: var(--muted)">Diagnostic: Boost applied: filter on product IDs (AL-3000-SX) | rowCount=5</span></div>
+    </div>
+  </div>
+
+  <div class="demo-takeaway">
+    <strong>Why this matters:</strong> A's failure mode is the dangerous one — it does not invent a wrong number, it claims the data is unavailable when it is actually present. The user trusts the absence and works around it. B not only retrieves the correct number but also surfaces the diagnostic ("Boost applied") and source citations — auditable by design.
+  </div>
+</div>
+
+<h2>Verdict distribution per variant</h2>
+<div class="card">
+  <div class="legend">
+    <span><i class="swatch" style="background: var(--pass)"></i>PASS</span>
+    <span><i class="swatch" style="background: var(--partial)"></i>PARTIAL</span>
+    <span><i class="swatch" style="background: var(--fail)"></i>FAIL</span>
+  </div>
+
+  <div class="row">
+    <div class="label">A (Data Library)<small>built-in library + Knowledge action</small></div>
+    <div class="bar">
+      <div class="seg pass" style="width: 80%">12 <span class="pct">80%</span></div>
+      <div class="seg partial" style="width: 6.7%">1 <span class="pct">7%</span></div>
+      <div class="seg fail" style="width: 13.3%">2 <span class="pct">13%</span></div>
+    </div>
+    <div class="total">15</div>
+  </div>
+
+  <div class="row">
+    <div class="label">B-naive (retrieval)<small>hybrid search without boost · REST direct</small></div>
+    <div class="bar">
+      <div class="seg pass" style="width: 86.7%">13 <span class="pct">87%</span></div>
+      <div class="seg partial" style="width: 13.3%">2 <span class="pct">13%</span></div>
+      <div class="seg fail" style="width: 0%"></div>
+    </div>
+    <div class="total">15</div>
+  </div>
+
+  <div class="row">
+    <div class="label">B-boosted (retrieval)<small>hybrid search + lexical boost · REST direct</small></div>
+    <div class="bar">
+      <div class="seg pass" style="width: 93.3%">14 <span class="pct">93%</span></div>
+      <div class="seg partial" style="width: 6.7%">1 <span class="pct">7%</span></div>
+      <div class="seg fail" style="width: 0%"></div>
+    </div>
+    <div class="total">15</div>
+  </div>
+
+  <div class="row">
+    <div class="label">B-boosted (answer)<small>Agent UI view (intro + source panel)</small></div>
+    <div class="bar">
+      <div class="seg pass" style="width: 80%">12 <span class="pct">80%</span></div>
+      <div class="seg partial" style="width: 6.7%">1 <span class="pct">7%</span></div>
+      <div class="seg fail" style="width: 13.3%">2 <span class="pct">13%</span></div>
+    </div>
+    <div class="total">15</div>
+  </div>
+</div>
+
+<h2>Per-question heatmap (all conditions)</h2>
+<div class="card">
+  <div class="heatmap">
+    <div class="hcell label"></div>
+    <div class="hcell h">Q01</div><div class="hcell h">Q02</div><div class="hcell h">Q03</div>
+    <div class="hcell h">Q04</div><div class="hcell h">Q05</div><div class="hcell h">Q06</div>
+    <div class="hcell h">Q07</div><div class="hcell h">Q08</div><div class="hcell h">Q09</div>
+    <div class="hcell h">Q10</div><div class="hcell h">Q11</div><div class="hcell h">Q12</div>
+    <div class="hcell h">Q13</div><div class="hcell h">Q14</div><div class="hcell h">Q15</div>
+
+    <div class="hcell label">A</div>
+    <div class="hcell PASS">P</div><div class="hcell PASS">P</div><div class="hcell PASS">P</div>
+    <div class="hcell PASS">P</div><div class="hcell PASS">P</div><div class="hcell FAIL">F</div>
+    <div class="hcell PASS">P</div><div class="hcell PASS">P</div><div class="hcell PASS">P</div>
+    <div class="hcell PARTIAL">·</div><div class="hcell PASS">P</div><div class="hcell PASS">P</div>
+    <div class="hcell PARTIAL">·</div><div class="hcell PASS">P</div><div class="hcell PASS">P</div>
+
+    <div class="hcell label">B-naive</div>
+    <div class="hcell PARTIAL">·</div><div class="hcell PASS">P</div><div class="hcell PARTIAL">·</div>
+    <div class="hcell PASS">P</div><div class="hcell PASS">P</div><div class="hcell PASS">P</div>
+    <div class="hcell PASS">P</div><div class="hcell PASS">P</div><div class="hcell PASS">P</div>
+    <div class="hcell PASS">P</div><div class="hcell PASS">P</div><div class="hcell PASS">P</div>
+    <div class="hcell PASS">P</div><div class="hcell PASS">P</div><div class="hcell PASS">P</div>
+
+    <div class="hcell label">B-boost (ret.)</div>
+    <div class="hcell PASS">P</div><div class="hcell PASS">P</div><div class="hcell PARTIAL">·</div>
+    <div class="hcell PASS">P</div><div class="hcell PASS">P</div><div class="hcell PASS">P</div>
+    <div class="hcell PASS">P</div><div class="hcell PASS">P</div><div class="hcell PASS">P</div>
+    <div class="hcell PASS">P</div><div class="hcell PASS">P</div><div class="hcell PASS">P</div>
+    <div class="hcell PASS">P</div><div class="hcell PASS">P</div><div class="hcell PASS">P</div>
+
+    <div class="hcell label">B-boost (ans.)</div>
+    <div class="hcell PASS">P</div><div class="hcell PASS">P</div><div class="hcell FAIL">F</div>
+    <div class="hcell PASS">P</div><div class="hcell PASS">P</div><div class="hcell PASS">P</div>
+    <div class="hcell PASS">P</div><div class="hcell PASS">P</div><div class="hcell PASS">P</div>
+    <div class="hcell PARTIAL">·</div><div class="hcell PASS">P</div><div class="hcell PASS">P</div>
+    <div class="hcell FAIL">F</div><div class="hcell PASS">P</div><div class="hcell PASS">P</div>
+  </div>
+  <p class="footnote">P = PASS, · = PARTIAL, F = FAIL.</p>
+</div>
+
+<h2>B variants at a glance</h2>
+<div class="card">
+<table>
+  <thead>
+    <tr>
+      <th>Variant</th>
+      <th>Setup</th>
+      <th>What it measures</th>
+      <th class="num">PASS / 15 (%)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>B-naive (retrieval)</strong></td>
+      <td>Hybrid search index, no lexical filter, REST endpoint <code>/services/apexrest/aerolift/retrieve/naive</code></td>
+      <td>Pure embedding + BM25 hit quality without ID steering</td>
+      <td class="num">13 · 87%</td>
+    </tr>
+    <tr>
+      <td><strong>B-boosted (retrieval)</strong></td>
+      <td>Same index, additional filter <code>productIds__c = 'AL-3000-SX'</code> when model IDs are detected in the question</td>
+      <td>Effect of the lexical boost on ID disambiguation (AL-3000 vs. AL-3000-SX)</td>
+      <td class="num">14 · 93%</td>
+    </tr>
+    <tr>
+      <td><strong>B-boosted (answer)</strong></td>
+      <td>Agent B in production setup; eval reads both the Inform message and the action's <code>formattedContent</code> output (matches the UI view: LLM intro + source panel)</td>
+      <td>What the user actually sees in the agent UI</td>
+      <td class="num">12 · 80%</td>
+    </tr>
+  </tbody>
+</table>
+<p class="footnote">A (Data Library) is consistent at 12/15 PASS across runs. Retrieval columns are independent of topic configuration.</p>
+</div>
+
+<h2>Key observations for the demo</h2>
+<div class="card">
+<ol>
+  <li><strong>Retrieval quality is the central story.</strong> B-boosted reaches 14/15 (93%), B-naive 13/15 (87%) with two PARTIAL hits, A 12/15 (80%). The boost reliably separates ID variants (AL-3000 vs. AL-3000-S vs. AL-3000-SX). Even without the boost, the custom retriever already edges out the Data Library.</li>
+  <li><strong>The agent's answer reflects the retrieved content.</strong> In the UI, B-boosted reaches 12/15 (80%) — the LLM presents a brief intro and the action surfaces the grounded source panel alongside it.</li>
+  <li><strong>Implication:</strong> For programmatic integration (API-only) the action output needs to be aggregated explicitly. For the interactive demo experience inside Agent Builder, B-boosted is state of the art.</li>
+</ol>
+</div>
+
+</div>
+</body>
+</html>

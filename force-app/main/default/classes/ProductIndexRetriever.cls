@@ -12,7 +12,11 @@
  */
 global with sharing class ProductIndexRetriever {
     // Erkennt AeroLift-Modell-IDs (AL-3000, AL-3000-S, AL-3000-SX, AL-3500, AL-3500-HT, AL-3500-HT-X).
-    private static final Pattern PRODUCT_ID_PATTERN = Pattern.compile('AL-\\d{4}(?:-[A-Z]+)*');
+    // Negative Lookahead `(?![a-z])`: lehnt Matches ab, denen ein Kleinbuchstabe
+    // folgt — sonst würde "AL-3000-Reihe" als "AL-3000-R" gematched werden
+    // (R ist Großbuchstabe, der Regex-Loop stoppt vor 'eihe' mangels nächstem
+    // [A-Z], aber das ergibt eine Phantom-ID, die nicht existiert).
+    private static final Pattern PRODUCT_ID_PATTERN = Pattern.compile('AL-\\d{4}(?:-[A-Z]+)*(?![a-z])');
 
     // [Inference] Search-Index-DLM-Name.  Beim Build eines Search Index in
     // Data Cloud wird ein virtuelles DLM mit dem Suffix '_index__dlm' erzeugt.
@@ -90,6 +94,7 @@ global with sharing class ProductIndexRetriever {
             input.sql = sql;
             ConnectApi.CdpQueryOutputV2 out = ConnectApi.CdpQuery.queryAnsiSqlV2(input);
             resp.results = mapResults(out);
+            resp.formattedContent = formatResults(resp.results);
             resp.diagnosticInfo = diag + ' | rowCount=' + (out == null ? 0 : out.rowCount);
         } catch (Exception e) {
             resp.diagnosticInfo = diag + ' | ERROR: ' + e.getTypeName() + ': ' + e.getMessage();
@@ -211,6 +216,29 @@ global with sharing class ProductIndexRetriever {
         return results;
     }
 
+    /**
+     * Bereitet die Treffer für den Agent-Planner als plain-text-Block auf.
+     * Jeder Treffer wird mit Source-Beleg + Inhalt formatiert; das LLM kann
+     * den Block direkt als Grounding-Kontext zitieren.
+     */
+    @TestVisible
+    private static String formatResults(List<SearchResult> hits) {
+        if (hits == null || hits.isEmpty()) {
+            return 'Keine relevanten Dokument-Chunks im Index gefunden.';
+        }
+        List<String> blocks = new List<String>();
+        for (Integer i = 0; i < hits.size(); i++) {
+            SearchResult sr = hits[i];
+            String src = (sr.sourceFile == null ? '' : sr.sourceFile);
+            if (sr.sourceSection != null && !sr.sourceSection.equals('')) {
+                src += ' / ' + sr.sourceSection;
+            }
+            String body = sr.content == null ? '' : sr.content;
+            blocks.add('[Quelle ' + (i + 1) + ': ' + src + ']\n' + body);
+        }
+        return String.join(blocks, '\n\n');
+    }
+
     private static String toStringOrNull(Object v) {
         return v == null ? null : String.valueOf(v);
     }
@@ -256,6 +284,15 @@ global with sharing class ProductIndexRetriever {
 
         @InvocableVariable
         global String diagnosticInfo;
+
+        /**
+         * Plain-Text-Repräsentation der Treffer für den Agent-Planner.  Der
+         * Planner kann komplexe Listen-Objekte (results) nicht in das LLM-
+         * Prompt einspeisen; ein zusammengesetzter String wird hingegen
+         * direkt als Grounding-Text verwendet.
+         */
+        @InvocableVariable
+        global String formattedContent;
     }
 
     global class SearchResult {

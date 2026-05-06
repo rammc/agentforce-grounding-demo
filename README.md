@@ -236,6 +236,56 @@ REST API.
   understands and answers in German anyway. This is documented as an
   inline comment, since it is a likely future-edit pitfall.
 
+- **DLO and DMO do not behave the same way regarding `__c` suffixes.** DLO
+  field names must NOT contain double underscores — the validator rejects
+  any `__c` suffix. The DMO mapping layer then automatically appends `__c`
+  to every field. So the same logical field is `productIds` in the DLO and
+  `productIds__c` in the DMO. SQL queries against the index DLM go through
+  the DMO column names, which means the Apex retriever references
+  `productIds__c` even though the source data does not.
+
+- **DLO field types are restricted.** Only `Text`, `Number`, `DateTime`.
+  Booleans become `Text` (`"true"` / `"false"`), Picklists become `Text`,
+  LongTextArea becomes `Text`. Plan for that early — the YAML schema in
+  `data-cloud/metadata/dlo/` reflects what works.
+
+- **Data Stream wizard creates its own DLO.** A pre-built DLO is not
+  reusable; the wizard insists on creating a fresh one as part of the
+  stream definition (1:1 binding). Stream first, DLO inferred — not the
+  other way around.
+
+- **Hybrid Search filter expressions support `=` and prefix-`LIKE` only.**
+  No leading wildcards, no `INSTR`, no `STARTS_WITH`. The filter for
+  multi-value `productIds` had to be modeled as
+  `productIds__c = 'AL-3000-SX' OR productIds__c LIKE 'AL-3000-SX;%'` —
+  one equality clause for single-ID rows, one prefix-LIKE clause for
+  multi-ID rows where the searched ID happens to come first
+  alphabetically. The embedding score covers the rest.
+
+- **Agent Runtime Users live on the `Einstein Agent` license.** Custom
+  Permission Sets must declare `<license>Einstein Agent</license>` — and
+  once created, the license field is not updatable, so getting it right on
+  the first deploy matters.
+
+- **`ConnectApi.CdpQuery.queryAnsiSqlV2` requires Data-Cloud-query
+  permission separately.** The Agent Runtime User needs both the custom
+  permset (Apex class access to `ProductIndexRetriever`) AND a
+  Data-Cloud-query permset like the standard `CDPAdmin` or
+  `xDO_DataCloud_Base_PSG`. Symptom of missing the second one is silent:
+  the action gets called, returns `result: []`, and the trace shows
+  `Insufficient Privileges: This feature is not currently enabled for
+  this user.`
+
+- **Action output `Show in conversation` is a UI override, not a schema
+  setting.** `copilotAction:isDisplayable: false` in `output/schema.json`
+  is honored by the metadata layer but does not turn off the runtime
+  rendering of the action output as a separate panel. Net effect via API:
+  the LLM produces only a brief intro ("Hier sind die Details ...")
+  expecting the panel to appear separately, while the API caller only
+  sees the intro. The eval harness aggregates `result[]` from the
+  response to get the user-visible content; that is the cleanest
+  workaround until the schema setting wins over the UI default.
+
 The general lesson: when working with Salesforce metadata for AI features in
 the current release, **retrieve a known-working example from the target org
 before trusting any external schema reference, including official docs and

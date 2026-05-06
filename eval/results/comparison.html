@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8" />
+<title>AeroLift Grounding Demo — Eval Comparison</title>
+<style>
+  :root {
+    --bg: #0d1117;
+    --card: #161b22;
+    --text: #e6edf3;
+    --muted: #8b949e;
+    --line: #30363d;
+    --pass: #3fb950;
+    --partial: #d29922;
+    --fail: #f85149;
+    --accent: #58a6ff;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    line-height: 1.5;
+  }
+  .container { max-width: 1100px; margin: 0 auto; padding: 32px 24px 64px; }
+  h1 { font-size: 28px; margin: 0 0 8px; }
+  .subtitle { color: var(--muted); margin: 0 0 32px; font-size: 14px; }
+  h2 { font-size: 20px; margin: 32px 0 12px; border-bottom: 1px solid var(--line); padding-bottom: 6px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 20px; margin-bottom: 16px; }
+  .grid { display: grid; gap: 16px; }
+  .grid-2 { grid-template-columns: 1fr 1fr; }
+  table { border-collapse: collapse; width: 100%; font-size: 14px; }
+  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); }
+  th { color: var(--muted); font-weight: 500; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; }
+  td.num { text-align: right; font-variant-numeric: tabular-nums; }
+  .legend { display: flex; gap: 16px; margin-bottom: 12px; font-size: 13px; color: var(--muted); }
+  .legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .swatch { width: 12px; height: 12px; border-radius: 2px; display: inline-block; }
+  .row { display: grid; grid-template-columns: 220px 1fr 100px; gap: 12px; align-items: center; margin: 6px 0; }
+  .row .label { font-size: 13px; color: var(--text); }
+  .row .label small { display: block; color: var(--muted); font-size: 11px; }
+  .bar { height: 22px; display: flex; border-radius: 4px; overflow: hidden; background: #21262d; }
+  .seg { height: 100%; display: flex; align-items: center; justify-content: center; font-size: 11px; color: #fff; min-width: 0; }
+  .seg.pass { background: var(--pass); }
+  .seg.partial { background: var(--partial); color: #1e1e1e; }
+  .seg.fail { background: var(--fail); }
+  .row .total { font-variant-numeric: tabular-nums; font-size: 12px; color: var(--muted); text-align: right; }
+  .heatmap { display: grid; grid-template-columns: 80px repeat(15, 1fr); gap: 2px; font-size: 11px; }
+  .heatmap .hcell { padding: 4px 0; text-align: center; border-radius: 2px; font-variant-numeric: tabular-nums; }
+  .heatmap .hcell.h { background: transparent; color: var(--muted); }
+  .heatmap .hcell.label { background: transparent; color: var(--muted); text-align: left; padding-left: 0; }
+  .heatmap .hcell.PASS { background: var(--pass); color: #0d1117; font-weight: 600; }
+  .heatmap .hcell.PARTIAL { background: var(--partial); color: #0d1117; font-weight: 600; }
+  .heatmap .hcell.FAIL { background: var(--fail); color: #fff; font-weight: 600; }
+  .heatmap .hcell.NA { background: #21262d; color: var(--muted); }
+  .summary-stat { display: inline-block; margin-right: 24px; }
+  .summary-stat .v { font-size: 22px; font-weight: 600; color: var(--accent); }
+  .summary-stat .l { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
+  .footnote { color: var(--muted); font-size: 12px; margin-top: 8px; font-style: italic; }
+  code { background: #21262d; padding: 1px 5px; border-radius: 3px; font-size: 12px; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>AeroLift Grounding Demo — Eval Comparison</h1>
+<p class="subtitle">15 Fragen · 4 Varianten · Run-Datum 2026-05-06</p>
+
+<div class="card">
+  <div class="summary-stat"><div class="v">14/15</div><div class="l">B-boosted Retrieval PASS</div></div>
+  <div class="summary-stat"><div class="v">13/15</div><div class="l">B-naive Retrieval PASS</div></div>
+  <div class="summary-stat"><div class="v">12/15</div><div class="l">A (Data Library) PASS</div></div>
+  <div class="summary-stat"><div class="v">stabil</div><div class="l">Retrieval über alle B-Varianten</div></div>
+</div>
+
+<h2>Verdict-Verteilung pro Variante</h2>
+<div class="card">
+  <div class="legend">
+    <span><i class="swatch" style="background: var(--pass)"></i>PASS</span>
+    <span><i class="swatch" style="background: var(--partial)"></i>PARTIAL</span>
+    <span><i class="swatch" style="background: var(--fail)"></i>FAIL</span>
+  </div>
+
+  <div class="row">
+    <div class="label">A (Data Library)<small>built-in Library + Knowledge-Action</small></div>
+    <div class="bar">
+      <div class="seg pass" style="width: 80%">12</div>
+      <div class="seg partial" style="width: 6.7%">1</div>
+      <div class="seg fail" style="width: 13.3%">2</div>
+    </div>
+    <div class="total">15</div>
+  </div>
+
+  <div class="row">
+    <div class="label">B-naive (Retrieval)<small>Hybrid Search ohne Boost · REST direkt</small></div>
+    <div class="bar">
+      <div class="seg pass" style="width: 86.7%">13</div>
+      <div class="seg partial" style="width: 13.3%">2</div>
+      <div class="seg fail" style="width: 0%"></div>
+    </div>
+    <div class="total">15</div>
+  </div>
+
+  <div class="row">
+    <div class="label">B-boosted (Retrieval)<small>Hybrid Search + Lexikal-Boost · REST direkt</small></div>
+    <div class="bar">
+      <div class="seg pass" style="width: 93.3%">14</div>
+      <div class="seg partial" style="width: 6.7%">1</div>
+      <div class="seg fail" style="width: 0%"></div>
+    </div>
+    <div class="total">15</div>
+  </div>
+
+  <div class="row">
+    <div class="label">B-boosted (Antwort)<small>Agentforce Topic, schlanke Instructions, raw API</small></div>
+    <div class="bar">
+      <div class="seg pass" style="width: 13.3%">2</div>
+      <div class="seg partial" style="width: 0%"></div>
+      <div class="seg fail" style="width: 86.7%">13</div>
+    </div>
+    <div class="total">15</div>
+  </div>
+
+  <div class="row">
+    <div class="label">B-boosted (Antwort)<small>starke Instructions, raw API</small></div>
+    <div class="bar">
+      <div class="seg pass" style="width: 20%">3</div>
+      <div class="seg partial" style="width: 0%"></div>
+      <div class="seg fail" style="width: 80%">12</div>
+    </div>
+    <div class="total">15</div>
+  </div>
+
+  <div class="row">
+    <div class="label">B-boosted (Antwort)<small>starke Instructions + Concat-Workaround</small></div>
+    <div class="bar">
+      <div class="seg pass" style="width: 80%">12</div>
+      <div class="seg partial" style="width: 6.7%">1</div>
+      <div class="seg fail" style="width: 13.3%">2</div>
+    </div>
+    <div class="total">15</div>
+  </div>
+</div>
+
+<h2>Per-Frage-Heatmap (alle Bedingungen)</h2>
+<div class="card">
+  <div class="heatmap">
+    <div class="hcell label"></div>
+    <div class="hcell h">Q01</div><div class="hcell h">Q02</div><div class="hcell h">Q03</div>
+    <div class="hcell h">Q04</div><div class="hcell h">Q05</div><div class="hcell h">Q06</div>
+    <div class="hcell h">Q07</div><div class="hcell h">Q08</div><div class="hcell h">Q09</div>
+    <div class="hcell h">Q10</div><div class="hcell h">Q11</div><div class="hcell h">Q12</div>
+    <div class="hcell h">Q13</div><div class="hcell h">Q14</div><div class="hcell h">Q15</div>
+
+    <div class="hcell label">A</div>
+    <div class="hcell PASS">P</div><div class="hcell PASS">P</div><div class="hcell PASS">P</div>
+    <div class="hcell PASS">P</div><div class="hcell PASS">P</div><div class="hcell FAIL">F</div>
+    <div class="hcell PASS">P</div><div class="hcell PASS">P</div><div class="hcell PASS">P</div>
+    <div class="hcell PARTIAL">·</div><div class="hcell PASS">P</div><div class="hcell PASS">P</div>
+    <div class="hcell PARTIAL">·</div><div class="hcell PASS">P</div><div class="hcell PASS">P</div>
+
+    <div class="hcell label">B-naive</div>
+    <div class="hcell PARTIAL">·</div><div class="hcell PASS">P</div><div class="hcell PARTIAL">·</div>
+    <div class="hcell PASS">P</div><div class="hcell PASS">P</div><div class="hcell PASS">P</div>
+    <div class="hcell PASS">P</div><div class="hcell PASS">P</div><div class="hcell PASS">P</div>
+    <div class="hcell PASS">P</div><div class="hcell PASS">P</div><div class="hcell PASS">P</div>
+    <div class="hcell PASS">P</div><div class="hcell PASS">P</div><div class="hcell PASS">P</div>
+
+    <div class="hcell label">B-boost (Ret.)</div>
+    <div class="hcell PASS">P</div><div class="hcell PASS">P</div><div class="hcell PARTIAL">·</div>
+    <div class="hcell PASS">P</div><div class="hcell PASS">P</div><div class="hcell PASS">P</div>
+    <div class="hcell PASS">P</div><div class="hcell PASS">P</div><div class="hcell PASS">P</div>
+    <div class="hcell PASS">P</div><div class="hcell PASS">P</div><div class="hcell PASS">P</div>
+    <div class="hcell PASS">P</div><div class="hcell PASS">P</div><div class="hcell PASS">P</div>
+
+    <div class="hcell label">B-boost (Ans.)</div>
+    <div class="hcell PASS">P</div><div class="hcell PASS">P</div><div class="hcell FAIL">F</div>
+    <div class="hcell PASS">P</div><div class="hcell PASS">P</div><div class="hcell PASS">P</div>
+    <div class="hcell PASS">P</div><div class="hcell PASS">P</div><div class="hcell PASS">P</div>
+    <div class="hcell PARTIAL">·</div><div class="hcell PASS">P</div><div class="hcell PASS">P</div>
+    <div class="hcell FAIL">F</div><div class="hcell PASS">P</div><div class="hcell PASS">P</div>
+  </div>
+  <p class="footnote">B-boost (Ans.) zeigt die Variante mit starken Instructions + Concat-Workaround (12/1/2). P = PASS, · = PARTIAL, F = FAIL.</p>
+</div>
+
+<h2>B-Varianten im Überblick</h2>
+<div class="card">
+<table>
+  <thead>
+    <tr>
+      <th>Variante</th>
+      <th>Setup</th>
+      <th>Was wird gemessen</th>
+      <th class="num">PASS / 15</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>B-naive (Retrieval)</strong></td>
+      <td>Hybrid Search Index, kein Lexikal-Filter, REST-Endpoint <code>/services/apexrest/aerolift/retrieve/naive</code></td>
+      <td>Reine Embedding+BM25-Trefferqualität ohne ID-Steuerung</td>
+      <td class="num">13</td>
+    </tr>
+    <tr>
+      <td><strong>B-boosted (Retrieval)</strong></td>
+      <td>Gleicher Index, zusätzlich Filter <code>productIds__c = 'AL-3000-SX'</code> bei erkannten Modell-IDs in der Frage</td>
+      <td>Wirkung des Lexikal-Boosts auf ID-Disambiguierung (AL-3000 vs. AL-3000-SX)</td>
+      <td class="num">14</td>
+    </tr>
+    <tr>
+      <td><strong>B-boosted (Antwort), schlanke Instr., raw API</strong></td>
+      <td>Agent B mit Topic-Instruction <em>"Halte dich an exakte Modellbezeichnungen ..."</em>, Eval extrahiert nur die Inform-Message</td>
+      <td>Was das LLM in der Antwort tatsächlich formuliert, ohne Konkretisierungs-Pflicht</td>
+      <td class="num">2</td>
+    </tr>
+    <tr>
+      <td><strong>B-boosted (Antwort), starke Instr., raw API</strong></td>
+      <td>Topic mit drei Instructions: Pflicht-Action, konkrete Werte, ID-Schreibweise; Eval extrahiert nur Inform-Message</td>
+      <td>Test, ob Topic-Tuning die Antwort-Qualität via API hebt</td>
+      <td class="num">3</td>
+    </tr>
+    <tr>
+      <td><strong>B-boosted (Antwort), starke Instr. + Concat</strong></td>
+      <td>Eval konkateniert zusätzlich den <code>formattedContent</code> aus dem Action-Result (entspricht UI-Sicht: LLM-Intro + Panel)</td>
+      <td>Was der User im Agent-UI tatsächlich sieht (Intro-Text + Source-Panel)</td>
+      <td class="num">12</td>
+    </tr>
+  </tbody>
+</table>
+<p class="footnote">A (Data Library) liegt für alle Runs konstant bei 12/15 PASS. Die Retrieval-Spalten sind Topic-unabhängig.</p>
+</div>
+
+<h2>Kernbeobachtungen für die Demo</h2>
+<div class="card">
+<ol>
+  <li><strong>Retrieval-Qualität ist die zentrale Story.</strong> B-boosted erreicht 14/15 PASS, B-naive 13/15 mit zwei PARTIAL — das Boosting trennt zuverlässig ID-Varianten (AL-3000 vs. AL-3000-S vs. AL-3000-SX). A liegt bei 12/15.</li>
+  <li><strong>Topic-Instructions beeinflussen die Antwort-Qualität via API kaum.</strong> Schlank → 2 PASS, stark → 3 PASS. Der Unterschied liegt im Rauschen.</li>
+  <li><strong>Der API-Antwort-Drop kommt aus dem Action-Output-Setting</strong> <em>"Show in conversation"</em>. Das LLM gibt nur eine Einleitung ("Hier sind die Details ...") aus, weil es davon ausgeht, dass der <code>formattedContent</code>-Block separat im UI gerendert wird.</li>
+  <li><strong>Im UI ist die Antwort vollständig.</strong> Sobald wir den Action-Output mitlesen (Concat-Workaround), erreicht B-boosted 12/15 PASS — das ist die User-Sicht.</li>
+  <li><strong>Konsequenz:</strong> Für eine programmatische Integration (API-only) braucht es entweder das UI-Setting deaktiviert oder einen expliziten Wrapper, der die Action-Outputs aggregiert. Für das interaktive Demo-Erlebnis im Agent-Builder ist B-boosted state-of-the-art.</li>
+</ol>
+</div>
+
+</div>
+</body>
+</html>

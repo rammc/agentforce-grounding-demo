@@ -1,11 +1,11 @@
 {
     "properties": {
-        "results": {
-            "title": "Results",
-            "description": "Liste der gefundenen Dokument-Chunks mit Score, Inhalt und Metadaten.",
+        "formattedContent": {
+            "title": "Grounding Content",
+            "description": "Plain-Text-Block mit den gefundenen Dokument-Chunks und Source-Belegen. Direkt als Grounding-Kontext für die Antwort verwenden.",
             "lightning:type": "lightning__textType",
             "lightning:isPII": false,
-            "copilotAction:isDisplayable": true,
+            "copilotAction:isDisplayable": false,
             "copilotAction:isUsedByPlanner": true
         },
         "diagnosticInfo": {

@@ -1,8 +1,8 @@
 # DEPLOY.md – AeroLift Grounding Demo Runbook
 
 Step-by-Step für die Live-Demo. Jeder Schritt nennt Klick-Pfad, Eingabewert
-und Erwartungswert. Screenshot-Platzhalter zeigen, wo später eigene
-Screenshots eingefügt werden können.
+und Erwartungswert. Reihenfolge ist wichtig — viele Setups in Data Cloud sind
+einbahnstraßenartig (Stream → DLO → DMO → Index).
 
 > **Hinweis zur Org-Sicherheit:** Diese Demo wird ausschließlich in einer
 > dedizierten Demo-/Dev-Sandbox aufgesetzt – nicht in einer kunden-benannten
@@ -16,7 +16,7 @@ Screenshots eingefügt werden können.
 |---|---|---|
 | Salesforce Org mit Agentforce + Data Cloud Lizenzen | Spring '26 oder neuer | UI: Setup → Company Information |
 | `sf` CLI authentifiziert | ≥ 2.118 | `sf --version` |
-| Pandoc + xelatex (Schritt 3.1) | – | `which pandoc && which xelatex` |
+| Pandoc + xelatex (Schritt 2) | – | `which pandoc && which xelatex` |
 | Node.js | ≥ v23 | `node --version` |
 
 ```sh
@@ -25,7 +25,6 @@ sf org display --target-org aerolift-demo
 ```
 
 Erwartung: Org-Domain wird angezeigt (z. B. `https://orgfarm-….my.salesforce.com`).
-Die Domain wird in Schritt 6a benötigt.
 
 ---
 
@@ -44,11 +43,13 @@ Erwartung:
 - `data-cloud/csv/all-records.csv` enthält alle 164 Records.
 - Konsistenz-Check meldet `alle Spotchecks bestanden`.
 
-![Screenshot: Konsole mit erfolgreichem preprocess-Lauf](docs/screenshots/02-preprocess-output.png)
-
 ---
 
-## 3. Salesforce-Metadaten deployen
+## 3. Salesforce-Metadaten deployen (Apex + GenAi)
+
+Der Initial-Deploy bringt Apex, GenAiFunction (Schema only), Topics und das
+Permission Set in die Org. Agents/Bots werden NICHT als SFDX-Source deployed
+(siehe README → Learnings → "Bot/BotVersion deploy is brittle").
 
 ```sh
 sf project deploy start \
@@ -61,99 +62,134 @@ sf project deploy start \
 
 Erwartung:
 - `Status: Succeeded`
-- `Tests: 6 passed, 0 failed`
-- Coverage `ProductIndexRetriever`: ≥ 85 %.
+- 9 Tests grün (inkl. `testExtractProductIdsRejectsReihenSuffix`)
+- `ProductIndexRetriever` Coverage ~47 % — `ConnectApi.CdpQuery` ist nicht
+  mockbar; Tests decken nur die deterministischen Bits ab.
 
-Häufige Fehler:
-- `Variable does not exist: AiCopilot__ReAct` → siehe `[Inference]`-Liste in der README; den `plannerType`-Wert auf den in der eigenen Org sichtbaren ersetzen (Setup → Agentforce → Planners).
-- `Cannot find type EinsteinServiceAgent` → analog für den Bot-`<type>` (siehe Bot-Datei).
-- `Variable does not exist: GenAiPlannerBundle` → Org-API-Version unter v64.0 oder ältere Release. Ziel-API auf v64.0+ heben oder die Bundles temporär aus dem Deploy-Set ausschließen.
+### 3.1. Permission Set zuweisen
 
-![Screenshot: erfolgreicher sf-Deploy](docs/screenshots/03-deploy-success.png)
+Wir haben in Schritt 6 später einen dedizierten Agent-Runtime-User. Vorher
+muss ein normaler Demo-User Apex-Class-Access erhalten, falls jemand
+`ProductIndexRetriever` anonym testen möchte.
+
+```sh
+sf org assign permset --name AeroLift_Agent_Access \
+  --target-org aerolift-demo
+```
+
+Das Permission Set ist auf License `Einstein Agent` deklariert (für den
+späteren Agent-Runtime-User). Für die manuelle Anonymous-Apex-Test in
+Schritt 6.1 reicht das Apex-Recht des System Admins.
 
 ---
 
 ## 4. Data Cloud konfigurieren (UI)
 
-> **Voraussetzung:** Data Cloud muss in der Org aktiviert und provisioniert sein,
-> bevor Data Libraries oder Search Indexes anlegbar sind. Verifizieren über
-> Setup → Data Cloud → Setup Home → Status `Provisioned`. Falls nicht: Aktivierung
-> und Workspace-Anlage zuerst durchführen, ggf. mit Salesforce-Account-Team.
+> **Voraussetzung:** Data Cloud muss in der Org aktiviert und provisioniert
+> sein. Verifizieren über Setup → Data Cloud → Setup Home → Status
+> `Provisioned`. Falls nicht: erst Aktivierung und Workspace-Anlage.
 
-### 4a. DLO `AeroLift_Document_Chunk__dll` erstellen
+> **Wichtig — Reihenfolge:** Data Stream → (erzeugt automatisch DLO) → DMO
+> mappen → Search Index erstellen. Ein vorab manuell angelegtes DLO wird
+> vom Data-Stream-Wizard NICHT wiederverwendet — der Wizard erzeugt sein
+> eigenes DLO (1:1-Bindung). Spart Frust, wenn man das Stream-First angeht.
 
-Setup → Data Cloud → Data Lake Objects → New.
+### 4a. Data Stream + DLO erzeugen
 
-| Feld | Wert |
-|---|---|
-| Label | AeroLift Document Chunk |
-| API Name | `AeroLift_Document_Chunk__dll` |
-| Category | Other |
-| Primary Key | `recordId` |
+Setup → Data Cloud → Data Streams → New → CSV Upload.
 
-Felder anlegen entsprechend `data-cloud/metadata/dlo/AeroLift_Document_Chunk.dlo.yaml`. Schneller Weg: das YAML als Single-Source-of-Truth offen halten und Feld für Feld übernehmen.
+1. CSV hochladen: `data-cloud/csv/all-records.csv`
+2. Wizard fragt nach DLO-Name → eingeben:
+   - Label: `AeroLift Document Chunk`
+   - API Name: `AeroLift_Document_Chunk`
+   - **Category: `Other`** (NICHT `Engagement` — sonst verlangt Salesforce
+     ein Event-Time-Feld, das wir nicht haben)
+3. Field Mapping:
+   - Source-Header → DLO-Felder 1:1
+   - **Keine `__c`-Suffixe in DLO-Feldnamen** (Salesforce-Validator lehnt
+     Doppel-Underscores ab)
+   - Erlaubte Typen: nur **Text / Number / DateTime**. Boolean → Text
+     (`"true"`/`"false"`), Picklist → Text, LongTextArea → Text.
+   - `productIds`: als Text mit Trennzeichen `;` (Multi-Value-String)
+4. Run.
 
-Erwartung: 15 Felder, davon ein Primary Key, drei Picklists, drei Boolean/Number-Mischtypen.
+Erwartung:
+- Stream-Status `Successful`
+- 164 Records geladen (Konsistenz-Check aus Schritt 2)
+- DLO `AeroLift_Document_Chunk__dll` ist sichtbar
 
-![Screenshot: DLO mit allen Feldern](docs/screenshots/04a-dlo-fields.png)
+### 4b. DMO mappen
 
-### 4b. CSV-Ingestion
+Setup → Data Cloud → Data Model Objects → New (oder bestehendes mappen).
 
-Pro Datei in `data-cloud/csv/`:
+- Quelle: DLO `AeroLift_Document_Chunk__dll`
+- Mapping: Identity-Mapping (1:1 auf alle Felder)
 
-1. Setup → Data Cloud → Data Streams → New → CSV Upload.
-2. CSV hochladen (z. B. `product-catalog.csv`).
-3. Mapping: Source-Header 1:1 auf DLO-Feldnamen.
-4. Multi-Value-Behandlung für `productIds`: als Text mit Trennzeichen `;`.
-5. Run.
+> **Achtung — DMO-Feld-Suffixe:** Die DMO-Schicht hängt automatisch `__c` an
+> die Feldnamen an (z. B. `productIds` im DLO → `productIds__c` im DMO).
+> Das ist anders als beim DLO und wirkt sich auf alle nachgelagerten
+> SQL-Queries und Filter aus. Im Apex-Retriever entsprechend `productIds__c`
+> referenzieren — `ProductIndexRetriever.cls` ist bereits darauf eingestellt.
 
-Wiederholung für alle acht Quell-CSVs. Alternativ einmalig `all-records.csv`.
-
-Erwartung pro Stream: Status `Successful`, Row-Count = Record-Count laut Konsolen-Summary aus Schritt 3.2.1 (insgesamt 164 Records).
-
-![Screenshot: CSV-Mapping-Dialog](docs/screenshots/04b-csv-mapping.png)
-
-### 4c. DMO `AeroLift_Document_Chunk__dlm` mappen
-
-Setup → Data Cloud → Data Model Objects → New (oder existing).
-
-- Quelle: `AeroLift_Document_Chunk__dll`
-- Mapping: Identity-Mapping (1:1 auf alle Felder, siehe `data-cloud/metadata/dmo/AeroLift_Document_Chunk.dmo.yaml`).
-
-Erwartung: DMO `AeroLift_Document_Chunk__dlm` ist verfügbar, Feld-Profil zeigt 15 Felder.
-
-### 4d. Search Index erstellen
+### 4c. Search Index erstellen
 
 Setup → Data Cloud → AI Search → Search Indexes → New.
 
 | Feld | Wert |
 |---|---|
 | Label | AeroLift Document Chunk – Hybrid Index |
-| API Name | `AeroLift_Document_Chunk_Idx` |
+| API Name | `AeroLift_Document_Chunk_index` |
 | Source DMO | `AeroLift_Document_Chunk__dlm` |
-| Text Field | `content` |
+| Chunking Strategy | Single-Field, Field = `Chunk` |
+| Embedding Model | Multilingual E5 Large (1024 dim, 512 token) |
 | Mode | **Hybrid** (lexical + semantic) |
-| Embedding Model | Salesforce-managed Default |
-| topK | 8 |
+| topK | 5 (Default; per Query überschreibbar) |
 
-Filterable Metadata Fields (in dieser Reihenfolge aktivieren):
-- `productIds`
-- `docType`
-- `atexZone`
-- `tempMaxC`
-- `foerderleistungM3h`
-- `ex_certified`
+**Filterable Metadata Fields** (genau in dieser Reihenfolge aktivieren):
+- `productIds__c`
+- `docType__c`
+- `sourceFile__c`
+- `sourceSection__c`
 
-Return Fields:
-- `recordId`, `sourceFile`, `sourceSection`, `content`, `productIds`, `docType`
+**Return Fields:**
+- `RecordId__c`, `sourceFile__c`, `sourceSection__c`, `productIds__c`, `docType__c`
 
-![Screenshot: Search-Index-Konfiguration](docs/screenshots/04d-search-index.png)
+> **Achtung — DLM-Naming:** Der Index erzeugt zwei virtuelle DLMs:
+> - `AeroLift_Document_Chunk_index__dlm` (Index-Metadaten + Score-Spalten)
+> - `AeroLift_Document_Chunk_chunk__dlm` (Chunk-Texte mit `Chunk__c`)
+>
+> Beide Namen sind in `ProductIndexRetriever.cls` als Konstanten festgehalten
+> (`INDEX_DLM_NAME`, `CHUNK_DLM_NAME`). Falls der Index in deiner Org andere
+> Suffixe vergibt, dort anpassen — nicht raten, sondern via Setup → Data
+> Cloud → Data Model Objects nachschauen.
 
-### 4e. Indexing-Job triggern
+### 4d. Indexing-Job triggern
 
 Save → Build Index.
 
-Erwartung: Status `Building` → `Ready` nach ca. 10–20 Minuten für 164 Records (org-lastabhängig). Abbruch nicht akzeptabel; bei Fehler im Job-Log nachsehen, häufig sind es Encoding-Probleme oder fehlende Pflichtfelder.
+Erwartung: Status `Building` → `Ready` nach 10–20 Minuten für 164 Records.
+Bei `Failed`: ins Job-Log schauen (häufig Encoding oder fehlende Pflichtfelder).
+
+### 4e. SQL-Smoke-Test
+
+In Setup → Data Cloud → Query Editor:
+
+```sql
+SELECT "v"."hybrid_score__c", "c"."Chunk__c", "v"."productIds__c"
+FROM hybrid_search(TABLE("AeroLift_Document_Chunk_index__dlm"),
+                   'maximale Medientemperatur AL-3000-SX',
+                   'productIds__c = ''AL-3000-SX'' OR productIds__c LIKE ''AL-3000-SX;%''',
+                   5) AS "v"
+INNER JOIN "AeroLift_Document_Chunk_chunk__dlm" AS "c"
+       ON "c"."RecordId__c" = "v"."RecordId__c"
+ORDER BY "v"."hybrid_score__c" DESC;
+```
+
+Erwartung: 5 Zeilen, Top-Hit enthält `150 °C`. Der Filter-String hat doppelte
+Single-Quotes — das ist gewollt, weil hybrid_search() den Filter-Ausdruck als
+String-Literal entgegen nimmt. Hybrid-Search-Filter unterstützen ausschließlich
+Equality (`=`) und Prefix-LIKE (`X;%`); leitende Wildcards (`%X`),
+`INSTR`, `CONTAINS`, `STARTS_WITH` werden NICHT akzeptiert.
 
 ---
 
@@ -171,49 +207,44 @@ Setup → Agentforce → Data Libraries → New.
 
 ### 5b. PDFs hochladen
 
-In der Library: Upload → die acht PDFs aus `content/pdf/` auswählen.
+Library öffnen → Upload → die acht PDFs aus `content/pdf/` auswählen.
 
-Erwartung: Pro PDF ein Eintrag, Status zunächst `Indexing`, danach `Ready`.
-Beim Indexieren erzeugt Data Cloud automatisch im Hintergrund:
+Erwartung: Pro PDF ein Eintrag, Status zunächst `Indexing`, dann `Ready` (~5
+Minuten gesamt).
 
+Beim Indexieren erzeugt Data Cloud automatisch:
 - einen Library-Search-Index,
 - einen Standard-Retriever,
-- die Standard-Action **`AnswerQuestionsWithKnowledge`** (in Spring '26;
-  Name in der eigenen Org unter Setup → Agent Builder → Actions verifizieren).
+- die Standard-Action **`Answer Questions with Knowledge`** (in Spring '26).
 
-Diese drei Komponenten sind **nicht** als eigene SFDX-Source-Dateien angelegt
-und stehen nach Indexierung im Agent Builder zur Verfügung.
+Diese drei Komponenten sind **nicht** als SFDX-Source-Dateien angelegt und
+stehen erst nach Indexierung im Agent Builder zur Verfügung.
 
-![Screenshot: Data Library mit acht Dokumenten](docs/screenshots/05b-library-uploaded.png)
+### 5c. Agent A im Builder anlegen
 
-### 5c. Library-Indexierung abwarten
+Setup → Agentforce → Agents → New → Template **EinsteinServiceAgent**.
 
-Erwartung: alle acht Dokumente Status `Ready` (~5 Minuten).
+| Feld | Wert |
+|---|---|
+| Label | AeroLift Agent A (Data Library) |
+| API Name | `AeroLift_Agent_A` |
+| Language | English (Topics dürfen englisch sein, Antworten kommen in DE) |
+| Topics | `Produktwissen AeroLift` (aus Schritt 3 deployed) |
 
-### 5d. Agent A: Library an Topic anhängen + aktivieren
+Im Topic die Action **`Answer Questions with Knowledge`** hinzufügen, im
+Konfigurations-Dialog die Library `AeroLift_Produktwissen` auswählen.
 
-Setup → Agentforce → Agents → AeroLift Agent A (Data Library) → Open in Builder.
-
-1. Topic `Produktwissen AeroLift` öffnen.
-2. Im Topic die Action **`Answer Questions with Knowledge`** (oder den release-aktuell
-   gültigen Standard-Namen) hinzufügen, im Konfigurations-Dialog die Library
-   `AeroLift_Produktwissen` auswählen.
-3. Save → Activate Agent.
-
-Erwartung: Agent erreichbar, Status `Active`. Die Topic-XML im Repo referenziert
-die Action bereits als `AnswerQuestionsWithKnowledge`; falls beim Deploy ein
-Validation-Fehler kommt, Element entfernen und Action ausschließlich im Builder
-hinzufügen.
+Activate Agent → Status `Active`. **Agent ID notieren** (Format `0Xx…`).
 
 ---
 
 ## 6. Variante B einrichten
 
-Variante B nutzt einen Same-Org Apex-Aufruf via `ConnectApi.CdpQuery.queryAnsiSqlV2`.
-Es ist **kein** Named Credential, External Credential oder Self-Callout-Setup
-erforderlich.
+Variante B nutzt einen Same-Org Apex-Aufruf via
+`ConnectApi.CdpQuery.queryAnsiSqlV2`. Es ist **kein** Named Credential,
+External Credential oder Self-Callout-Setup erforderlich.
 
-### 6a. Apex-Retriever per Anonymous Apex testen
+### 6.1. Apex-Retriever per Anonymous Apex testen
 
 Developer Console → Execute Anonymous:
 
@@ -227,33 +258,117 @@ System.debug(JSON.serializePretty(resps));
 ```
 
 Erwartete Debug-Ausgabe:
-- `diagnosticInfo` enthält `Boost applied: filter on product IDs [AL-3000-SX]`.
-- Mindestens ein `results`-Eintrag mit `productIds` = `"AL-3000-SX"`.
-- `content` des Top-Hits enthält `"150 °C"`.
+- `diagnosticInfo`: `Boost applied: filter on product IDs [AL-3000-SX] | rowCount=5`
+- Mindestens ein `results`-Eintrag mit `productIds = "AL-3000-SX"`
+- `formattedContent` enthält `150 °C`
 
 Falls `diagnosticInfo` mit `ERROR:` beginnt:
-- `INVALID_TYPE` / `Object 'AeroLift_Document_Chunk_index__dlm' not found` → Search-Index aus Schritt 4d/4e ist noch nicht `Ready` oder hat einen anderen DLM-Namen. Konstante `INDEX_DLM_NAME` in `ProductIndexRetriever.cls` an den tatsächlichen Namen anpassen.
-- `INSUFFICIENT_ACCESS` → User hat keine Data-Cloud-Query-Permission. Standard-Permission-Set "Data Cloud Query" oder ein orgspezifischer Permission Set zuweisen.
+- `INVALID_TYPE` / `Object 'AeroLift_Document_Chunk_index__dlm' not found` →
+  Search-Index aus 4c/4d ist nicht `Ready` oder hat einen anderen DLM-Namen.
+  Konstante `INDEX_DLM_NAME` in `ProductIndexRetriever.cls` anpassen.
+- `INSUFFICIENT_ACCESS` → User hat keine Data-Cloud-Query-Permission.
+  Standard-Permission-Set `CDPAdmin` (Data Cloud Admin) oder
+  `xDO_DataCloud_Base_PSG` zuweisen — siehe 6.4 für die Agent-Runtime-User-
+  Konfiguration.
 
-![Screenshot: Anonymous Apex Debug Log mit Treffer](docs/screenshots/06a-apex-debug.png)
+### 6.2. Agent B im Builder anlegen
 
-### 6b. Agent B aktivieren
+Setup → Agentforce → Agents → New → Template **EinsteinServiceAgent**.
 
-Setup → Agentforce → Agents → AeroLift Agent B (Vector Search) → Activate.
+| Feld | Wert |
+|---|---|
+| Label | AeroLift Agent B (Vector Search) |
+| API Name | `AeroLift_Agent_B` |
+| Language | English |
+| Topics | `Produktwissen AeroLift` (Topic_B aus Schritt 3) |
 
-Erwartung: Agent erreichbar, Topic ruft `AeroLift_Vector_Search_Boosted` (gemappt
-auf `ProductIndexRetriever`) auf.
+Topic öffnen → Action `AeroLift Vector Search (Boosted)` hinzufügen.
+
+> **Wichtig:** Wenn das Topic bereits eine Funktion hatte (Re-Deploy etc.),
+> kann eine stale `GenAiPluginFunctionDef`-Verknüpfung übrig bleiben, die
+> einen sauberen Re-Deploy blockiert. Symptom: destructiveChanges-Deploy
+> meldet `Generative AI Plugin Function Definition - 17EKY...`. Workaround:
+>
+> ```sh
+> sf data query --use-tooling-api --query \
+>   "SELECT Id, PluginId, Function FROM GenAiPluginFunctionDef \
+>    WHERE Function='<funktion-id>'" --target-org aerolift-demo
+> sf data delete record --use-tooling-api \
+>   --sobject GenAiPluginFunctionDef --record-id <Id> --target-org aerolift-demo
+> ```
+
+Activate Agent → Status `Active`. **Agent ID notieren**.
+
+### 6.3. Schema-Settings der Action prüfen
+
+Im Builder → Topic → Action öffnen → Output-Section:
+
+| Setting | Empfehlung |
+|---|---|
+| `Grounding Content` (formattedContent) → "Show in conversation" | OFF (für API-Konsumenten); ON für UI-Demo (Source-Panel sichtbar) |
+| `Diagnostic Info` → "Show in conversation" | OFF |
+
+> **Bekannte Einschränkung:** `copilotAction:isDisplayable: false` im
+> `output/schema.json` wird vom UI-Override nicht respektiert. Die einzige
+> verlässliche Steuerung läuft über das UI (View/Edit Action). Wenn du das
+> UI nicht editieren kannst (read-only View), ist die Demo trotzdem sauber:
+> für die Live-Demo ist "Show in conversation = ON" gewünscht (User sieht
+> die Quellen). Für reine API-Konsumenten muss der Caller `result[]` aus
+> dem Agent-Response selbst aggregieren — Beispiel siehe
+> `scripts/eval/agents.ts`.
+
+### 6.4. Permission Set für Agent-Runtime-User
+
+Beim Agent-Anlegen erzeugt Salesforce automatisch einen Service-User
+(z. B. `aerolift_agent_b@<orgdomain>.ext`). Dieser User braucht zwei
+Permsets:
+
+```sh
+# 1. Apex-Class-Access (custom, in Schritt 3 deployed)
+sf org assign permset --name AeroLift_Agent_Access \
+  --on-behalf-of aerolift_agent_b@<orgdomain>.ext \
+  --target-org aerolift-demo
+
+# 2. Data Cloud Query Access (Standard-Permset)
+sf org assign permset --name CDPAdmin \
+  --on-behalf-of aerolift_agent_b@<orgdomain>.ext \
+  --target-org aerolift-demo
+```
+
+Erwartung: keine "license doesn't match"-Fehler. Das custom Permset
+deklariert License `Einstein Agent` — passend zum Agent-User-Profil.
+
+> **Symptom ohne CDPAdmin:** Action liefert `result: []` und im Trace
+> `diagnosticInfo: ERROR: System.NoAccessException: Insufficient
+> Privileges: This feature is not currently enabled for this user.`
+
+### 6.5. End-to-End-Test via Diagnostic-Script
+
+```sh
+node scripts/diag-agent.mjs <AGENT_B_ID> "Was ist die maximal zulässige Medientemperatur der AL-3000-SX?"
+```
+
+Erwartung im JSON-Response:
+- `result[0].value.formattedContent` enthält 5 Quellen
+- `result[0].value.diagnosticInfo`: `Boost applied: filter on product IDs (AL-3000-SX) | rowCount=5`
+
+Falls `result: []`:
+- Action nicht aufgerufen → Topic-GenAiFunction-Verknüpfung prüfen
+  (`SELECT Id FROM GenAiPluginFunctionDef WHERE PluginId='<topic-id>'`)
+- Agent-Version nicht aktiv → im Builder Deactivate → Activate
+- **Wichtig:** Nach jeder Topic-/Action-Änderung Agent neu aktivieren.
+  Aktive Versionen snapshotten die Konfig — neue Verknüpfungen greifen
+  erst nach Reaktivierung.
 
 ---
 
-## 6.5. External Client App für den Eval-Harness anlegen
+## 7. External Client App (ECA) für den Eval-Harness
 
-Der Eval-Harness in `scripts/eval/` ruft die Agent Runtime API und die Apex-REST-
-Wrapper über OAuth 2.0 Client Credentials Flow auf. Dafür wird eine **External
-Client App (ECA)** angelegt – die klassische Connected App mit User-Login passt
-hier nicht.
+Der Eval-Harness in `scripts/eval/` ruft die Agent Runtime API über OAuth 2.0
+Client Credentials Flow auf. Dafür wird eine **External Client App (ECA)**
+angelegt – die klassische Connected App passt nicht.
 
-### 6.5a. ECA anlegen (UI)
+### 7a. ECA anlegen
 
 Setup → App Manager → New Connected App → **External Client App**.
 
@@ -262,100 +377,125 @@ Setup → App Manager → New Connected App → **External Client App**.
 | Name | `AeroLift Eval Harness` |
 | API Name | `AeroLift_Eval_Harness` |
 | Contact Email | (Demo-Admin) |
-| Description | OAuth Client Credentials für den Eval-Harness aus `scripts/eval/` |
 
 Unter **OAuth Settings**:
 
 - ✅ Enable Client Credentials Flow
-- ✅ Issue JWT-based access tokens for named users
-- Callback URL: `https://login.salesforce.com/services/oauth2/callback` (für Client Credentials irrelevant, Feld ist Pflicht)
+- Callback URL: `https://login.salesforce.com/services/oauth2/callback`
 
-Scopes (alle drei sind erforderlich, siehe sf-ai-agentforce-testing/eca-setup-guide):
+**Scopes** (genau diese drei):
 
-- `api` – generelle API-Calls (Apex REST)
-- `chatbot_api` – Agent Runtime API
-- `sfap_api` – Salesforce API Platform für Agent Runtime
-- `refresh_token, offline_access` (empfohlen)
+- `api`
+- `chatbot_api`
+- `sfap_api`
 
-### 6.5b. Run-As-User setzen
+> **Achtung:** Mehr Scopes (z. B. `refresh_token`, `offline_access`, `web`,
+> `openid`) führen beim Token-Request zu `error: invalid_scope, message:
+> too many scopes requested`. Salesforce akzeptiert für Client-Credentials
+> nur den minimalen Set, den die App bei der Anlage konfiguriert hat —
+> der `scope`-Parameter im Request wird ignoriert/abgelehnt.
+
+### 7b. Run-As-User setzen
 
 App-Detail → Policy → Edit:
 
-- ✅ Enable Client Credentials Flow
-- Run As (Username): Demo-User mit Zugriff auf beide Agents und Apex-Klasse `RetrieverRestEndpoint` (System Administrator funktioniert; Least-Privilege bevorzugt).
+- Run As (Username): User mit Zugriff auf beide Agents und das Permset
+  `AeroLift_Agent_Access` (System Administrator funktioniert für die Demo)
 
-### 6.5c. Consumer Key + Secret holen
+### 7c. Consumer Key + Secret holen
 
-App-Detail → Manage Consumer Details → (E-Mail-/SMS-Bestätigung) → Werte kopieren.
+App-Detail → Manage Consumer Details → (E-Mail-/SMS-Bestätigung) → Werte
+kopieren.
 
-### 6.5d. Agent IDs notieren
-
-Setup → Agent Builder → Agent öffnen → API Name oder ID kopieren (Format `0XxQ…`).
-
-### 6.5e. `.env` anlegen
+### 7d. `.env` anlegen
 
 Im Repo-Root:
 
 ```sh
 cp .env.example .env
-$EDITOR .env   # Werte aus 6.5c und 6.5d eintragen, ANTHROPIC_API_KEY ergänzen
+$EDITOR .env
 ```
 
-`.env` wird **nicht** committed (Gitignore-Eintrag in eigener Initiative empfohlen).
+```env
+SF_INSTANCE_URL=https://<your-org>.my.salesforce.com
+SF_CLIENT_ID=<consumer-key>
+SF_CLIENT_SECRET=<consumer-secret>
+AGENT_A_ID=0Xx...
+AGENT_B_ID=0Xx...
+ANTHROPIC_API_KEY=sk-ant-...   # nur für LLM-Judge; --skip-judge erlaubt leer
+```
 
-### 6.5f. Smoke-Test des Harness ohne LLM-Judge
+### 7e. Smoke-Test
 
 ```sh
 npm install
-node scripts/eval/run-eval.ts --skip-judge --only Q01,Q02
+npm run eval:smoke
 ```
 
-Erwartung: zwei Zeilen Eval-Output, kein OAuth-Fehler. Bei `401`/`403`: Scopes
-oder Run-As-User in 6.5a/b prüfen.
+Erwartung: 2 Zeilen Eval-Output, kein OAuth-Fehler.
 
 ---
 
-## 7. Smoke-Tests vor der Demo
+## 8. Smoke-Tests vor der Demo
 
-Wahlweise:
+```sh
+# Voller Eval-Run (15 Fragen × 4 Bedingungen)
+npm run eval
+```
 
-- **Manuell** über die Agent-Builder-Test-Konsole (siehe Tabelle unten).
-- **Automatisiert** über den Eval-Harness (`npm run eval` oder mit `--only`-Filter
-  als Stichprobe). Der Harness liefert maschinenlesbare JSON-/Markdown-Reports
-  unter `eval/results/run-<timestamp>.{json,md}` – bevorzugt für reproduzierbare
-  Demo-Vorbereitung.
+Erwartung (Ausgangslage 2026-05-06):
 
-Manuelle Stichprobe:
+| Bedingung | PASS |
+|---|---|
+| A (Data Library) | 12/15 |
+| B-naive (Retrieval) | 13/15 |
+| B-boosted (Retrieval) | **14/15** |
+| B-boosted (Antwort, UI-View) | 12/15 |
 
-Drei Live-Fragen pro Agent durchspielen:
+Reports unter `eval/results/run-<timestamp>.{json,md}`.
 
-| ID | Frage | Erwartung A (Library) | Erwartung B (Vector + Boost) |
-|---|---|---|---|
-| Q01 (factual-precise, ID-Disambiguation) | "Welche maximale Medientemperatur hat die AL-3000-SX?" | Häufig 120 °C (verwechselt mit AL-3000-S) | 150 °C, mit Beleg aus `product-catalog.md` |
-| Q06 (multi-criteria) | "Welche Pumpe ist ATEX Zone 1 zertifiziert und liefert mindestens 120 m³/h?" | AL-3000-SX (falsch, nur 80 m³/h) oder unsicher | AL-3500-HT-X mit Begründung |
-| Q14 (id-disambiguation) | "Für welche ATEX-Zone ist die AL-3000-S zertifiziert?" | Häufig Zone 1 (verwechselt mit -SX) | Zone 2, mit Beleg aus `atex-guide.md` |
-
-Beide Agents in der Agent Builder Test-Konsole testen, Antworten als Backup-Screenshots ablegen unter `docs/screenshots/07-smoketest-*.png`.
+Visualisierung: `eval/results/comparison-en.html` öffnen (oder
+`comparison.html` für die deutsche Variante). Enthält Bar-Chart-Vergleich,
+Heatmap pro Frage und Q13 als hervorgehobene Demo-Question.
 
 ---
 
-## 8. Demo-Tag-Checkliste
+## 9. Demo-Tag-Checkliste
 
 **T-30 Minuten**
-- Beide Agents einzeln pingen (einmal pro Smoke-Test-Frage).
-- Network-Latenz prüfen: Antworten innerhalb < 15 s.
+- Beide Agents pingen (`scripts/diag-agent.mjs <AGENT_ID> "<frage>"`)
+- Browser-Tabs vorab öffnen: zwei Builder mit Conversation Preview, eine
+  Tab auf `comparison-en.html`.
 
 **T-15 Minuten**
-- Backup-Aufzeichnung der Smoke-Tests öffnen (Live-Demos können kippen, dann Screen-Recording einspielen).
-- Browser-Profil ohne Erweiterungen verwenden, um Renderingprobleme zu vermeiden.
+- Sessions vorwärmen (Cold-Start kostet ~30 s)
+- Backup-Aufzeichnung der Smoke-Tests griffbereit
 
-**Q&A-Vorab-Antizipation**
+**Demo-Fragen** (siehe `docs/demo-script.md`):
+1. Q02 (Parität): "Welche Förderleistung hat die AL-3500?" → 140 m³/h
+2. **Q13 (Differenzierer)**: "Welches Modell der AL-3000-Reihe ist für den
+   Lebensmittelkontakt freigegeben und welche Zertifikatsnummer trägt
+   seine ATEX-Zulassung?" → A vermisst die Cert-Nummer ("nicht angegeben"),
+   B liefert `BVS 23 ATEX E 089 X` mit Quellen
+3. Reserve Q03 (Tabellen-Chunking-Risiko)
 
-| Einwurf | Antwort-Skizze |
-|---|---|
-| "Ist B nicht einfach besser, weil ihr ein anderes Modell nutzt?" | Embedding-Modell ist identisch. B gewinnt durch Pre-Processing + Hybrid-Filter. Eval-Frageset zeigt das pro Kategorie. |
-| "Funktioniert das auch mit englischen Dokumenten?" | Pre-Processing-Logik ist sprach-agnostisch (AST-Tabellen-Parser). Embedding-Modell handled DE/EN. Multi-Sprach-Demo wäre Folge-Iteration. |
-| "Was passiert bei Updates der Quelldokumente?" | `node scripts/preprocess.ts` regeneriert Records deterministisch (recordId hängt an Datei + Section + Row); CSV neu hochladen. Keine manuellen Mapping-Schritte. |
+---
+
+## Anhang: Häufige Fallstricke (Quickref)
+
+| Symptom | Ursache | Fix |
+|---|---|---|
+| DLO-Anlage: "Field name must not contain two consecutive underscores" | `__c`-Suffix in DLO-Feld | Suffix entfernen, der DLO macht keine `__c` |
+| DLO-Anlage: "Engagement category requires Event Time field" | falsche Category | Category auf `Other` |
+| `hybrid_search()` Foreign-Data-Source-Error | leitende Wildcard im Filter (`%X`) | nur `=` und `X;%` |
+| Action-Output zeigt nur "Hier sind die Details..." | "Show in conversation" = ON | UI-Setting OFF, oder Caller aggregiert `result[]` selbst |
+| `sf project deploy` "Unchanged" trotz lokaler Änderung am Schema | SFDX-Source-Tracking-Bug | Function via destructive deploy löschen, neu deployen, Topic-XML re-deployen |
+| Agent: "doesn't have access to one or more reference actions" | Agent-User fehlt Apex-Class-Access | Permset `AeroLift_Agent_Access` zuweisen |
+| Agent: `result: []`, Trace zeigt "NoAccessException" | Agent-User fehlt Data-Cloud-Query | Permset `CDPAdmin` zuweisen |
+| Agent-Session-Create 404 "No valid version available" | Agent ist nicht aktiviert | Builder → Activate |
+| OAuth: "too many scopes requested" | ECA hat zu viele Scopes | Scopes auf `api, chatbot_api, sfap_api` reduzieren |
+| Permset-Assign: "user license doesn't match" | Permset hat falsche License | `<license>Einstein Agent</license>`; Permset löschen + neu erstellen (License nicht updatebar) |
+| Action liefert phantome IDs (z. B. `AL-3000-R` aus "AL-3000-Reihe") | Regex matcht greedy | bereits gefixt: `(?![a-z])` Lookahead in `PRODUCT_ID_PATTERN` |
 
 ---
 
@@ -370,9 +510,16 @@ node scripts/preprocess.ts
 
 # 2. Deploy
 sf project deploy start --source-dir force-app/main/default \
-  --test-level RunSpecifiedTests --tests ProductIndexRetrieverTest
+  --test-level RunSpecifiedTests \
+  --tests ProductIndexRetrieverTest
 
-# 3. UI-Setup laut Abschnitten 4–6
+# 3. UI-Setup laut Abschnitten 4–6 (Data Cloud, Library, Agents)
+
+# 4. ECA + .env (Abschnitt 7)
+
+# 5. Smoke-Test
+npm run eval:smoke
+
+# 6. Voller Eval-Run
+npm run eval
 ```
-
-Alles, was in Abschnitten 4–6 als UI-Schritt beschrieben ist, lässt sich in der aktuellen Release nicht via `sf project deploy` automatisieren – siehe `[Inference]`-Liste in der README.

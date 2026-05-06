@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>AeroLift Agent Access</label>
+    <description>Apex-Zugriff für Agent-Runtime-User auf den ProductIndexRetriever (Hybrid Vector Search Action).</description>
+    <hasActivationRequired>false</hasActivationRequired>
+    <license>Einstein Agent</license>
+    <classAccesses>
+        <apexClass>ProductIndexRetriever</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+</PermissionSet>

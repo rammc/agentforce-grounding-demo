@@ -14,10 +14,18 @@ import type { Chunk } from './types.ts';
 
 const AGENT_API_BASE = 'https://api.salesforce.com/einstein/ai-agent/v1';
 
+interface AgentApiActionResult {
+    type?: string;
+    value?: {
+        formattedContent?: string;
+        diagnosticInfo?: string;
+    };
+}
+
 interface AgentApiMessage {
     type: string;
     message?: string;
-    result?: unknown[];
+    result?: AgentApiActionResult[];
     citedReferences?: unknown[];
 }
 

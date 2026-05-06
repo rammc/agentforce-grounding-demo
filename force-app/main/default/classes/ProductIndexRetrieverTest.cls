@@ -43,6 +43,20 @@ private class ProductIndexRetrieverTest {
     }
 
     @IsTest
+    static void testExtractProductIdsRejectsReihenSuffix() {
+        // 'AL-3000-Reihe' / 'AL-3500-Reihe' dürfen NICHT als 'AL-3000-R' /
+        // 'AL-3500-R' gematched werden — Negative Lookahead schließt
+        // nachgestellte Kleinbuchstaben aus. Stattdessen soll der Match das
+        // 'R' überspringen und nur die Basis-ID treffen.
+        List<String> ids = ProductIndexRetriever.extractProductIds('Vergleich AL-3000-Reihe und AL-3500-Reihe');
+        System.assertEquals(2, ids.size(), 'Genau zwei Basis-IDs erkannt: ' + ids);
+        System.assert(ids.contains('AL-3000'), 'AL-3000 ohne Phantom-Suffix');
+        System.assert(ids.contains('AL-3500'), 'AL-3500 ohne Phantom-Suffix');
+        System.assert(!ids.contains('AL-3000-R'), 'Phantom-ID AL-3000-R ausgeschlossen');
+        System.assert(!ids.contains('AL-3500-R'), 'Phantom-ID AL-3500-R ausgeschlossen');
+    }
+
+    @IsTest
     static void testExtractProductIdsDeduplicates() {
         List<String> ids = ProductIndexRetriever.extractProductIds('AL-3000-S vs AL-3000-S vs AL-3000-S');
         System.assertEquals(1, ids.size(), 'Doppelte IDs werden dedupliziert');
