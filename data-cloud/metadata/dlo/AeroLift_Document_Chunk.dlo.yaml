@@ -18,56 +18,56 @@ description: |
   AeroLift-Pumpenkatalog. Source-of-Truth für die Custom-Vector-Search-Variante
   der Grounding-Demo.
 
-primaryKey: recordId__c
+primaryKey: recordId
 recordModifiedField: null   # ingest-only; keine Updates aus der Source
 
 ingestion:
   source: "CSV-Upload (data-cloud/csv/all-records.csv)"
   encoding: "UTF-8 with BOM"
-  multiValueDelimiter: ";"   # für productIds__c
+  multiValueDelimiter: ";"   # für productIds
 
 fields:
 
-  - apiName: recordId__c
+  - apiName: recordId
     label: Record ID
     type: Text
     length: 255
     required: true
     description: "Deterministische ID: <sourceFile>::<sectionSlug>::<row|chunk>-<idx>"
 
-  - apiName: sourceFile__c
+  - apiName: sourceFile
     label: Source File
     type: Text
     length: 100
     required: true
 
-  - apiName: sourceSection__c
+  - apiName: sourceSection
     label: Source Section
     type: Text
     length: 255
     required: false
 
-  - apiName: chunkType__c
+  - apiName: chunkType
     label: Chunk Type
     type: Picklist
     required: true
     values: ["table-row", "prose"]
 
-  - apiName: content__c
+  - apiName: content
     label: Chunk Content
     type: LongTextArea
     length: 32768
     required: true
     description: "Embedding-Quelle für den Search Index. Bei table-row in 'Spalte: Wert | …'-Form."
 
-  - apiName: productIds__c
+  - apiName: productIds
     label: Product IDs
     type: Text
     length: 500
     required: false
     description: "Semikolon-separierte Liste der im Chunk erwähnten Modell-IDs (z.B. 'AL-3000-SX;AL-3500-HT-X')."
 
-  - apiName: docType__c
+  - apiName: docType
     label: Document Type
     type: Picklist
     required: true
@@ -80,52 +80,52 @@ fields:
       - changelog
       - faq
 
-  - apiName: atexZone__c
+  - apiName: atexZone
     label: ATEX Zone
     type: Picklist
     required: false
     values: ["0", "1", "2"]
 
-  - apiName: tempMaxC__c
+  - apiName: tempMaxC
     label: Max. Medientemperatur (°C)
     type: Number
     precision: 5
     scale: 1
     required: false
 
-  - apiName: foerderleistungM3h__c
+  - apiName: foerderleistungM3h
     label: Förderleistung (m³/h)
     type: Number
     precision: 6
     scale: 1
     required: false
 
-  - apiName: werkstoffGehaeuse__c
+  - apiName: werkstoffGehaeuse
     label: Werkstoff Gehäuse
     type: Text
     length: 100
     required: false
 
-  - apiName: ex_certified__c
+  - apiName: ex_certified
     label: Ex-zertifiziert
     type: Boolean
     required: false
 
-  - apiName: wirkungsgradPct__c
+  - apiName: wirkungsgradPct
     label: Wirkungsgrad (%)
     type: Number
     precision: 4
     scale: 1
     required: false
 
-  - apiName: druckMaxBar__c
+  - apiName: druckMaxBar
     label: Max. Druck (bar)
     type: Number
     precision: 4
     scale: 1
     required: false
 
-  - apiName: antriebsleistungKW__c
+  - apiName: antriebsleistungKW
     label: Antriebsleistung (kW)
     type: Number
     precision: 5

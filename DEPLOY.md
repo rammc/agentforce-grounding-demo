@@ -89,7 +89,7 @@ Setup → Data Cloud → Data Lake Objects → New.
 | Label | AeroLift Document Chunk |
 | API Name | `AeroLift_Document_Chunk__dll` |
 | Category | Engagement |
-| Primary Key | `recordId__c` |
+| Primary Key | `recordId` |
 
 Felder anlegen entsprechend `data-cloud/metadata/dlo/AeroLift_Document_Chunk.dlo.yaml`. Schneller Weg: das YAML als Single-Source-of-Truth offen halten und Feld für Feld übernehmen.
 
@@ -131,21 +131,21 @@ Setup → Data Cloud → AI Search → Search Indexes → New.
 | Label | AeroLift Document Chunk – Hybrid Index |
 | API Name | `AeroLift_Document_Chunk_Idx` |
 | Source DMO | `AeroLift_Document_Chunk__dlm` |
-| Text Field | `content__c` |
+| Text Field | `content` |
 | Mode | **Hybrid** (lexical + semantic) |
 | Embedding Model | Salesforce-managed Default |
 | topK | 8 |
 
 Filterable Metadata Fields (in dieser Reihenfolge aktivieren):
-- `productIds__c`
-- `docType__c`
-- `atexZone__c`
-- `tempMaxC__c`
-- `foerderleistungM3h__c`
-- `ex_certified__c`
+- `productIds`
+- `docType`
+- `atexZone`
+- `tempMaxC`
+- `foerderleistungM3h`
+- `ex_certified`
 
 Return Fields:
-- `recordId__c`, `sourceFile__c`, `sourceSection__c`, `content__c`, `productIds__c`, `docType__c`
+- `recordId`, `sourceFile`, `sourceSection`, `content`, `productIds`, `docType`
 
 ![Screenshot: Search-Index-Konfiguration](docs/screenshots/04d-search-index.png)
 

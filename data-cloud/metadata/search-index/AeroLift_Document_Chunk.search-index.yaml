@@ -8,14 +8,14 @@
 apiName: AeroLift_Document_Chunk_Idx
 label: AeroLift Document Chunk – Hybrid Index
 description: |
-  Hybrid Search Index (lexikalisch + semantisch) über das content__c-Feld des
+  Hybrid Search Index (lexikalisch + semantisch) über das content-Feld des
   DMOs AeroLift_Document_Chunk__dlm. Die lexikalische Komponente ist der
   zentrale Demo-Hebel: sie disambiguiert ähnliche Modell-IDs (AL-3000-S vs.
   AL-3000-SX), an denen reines Vektor-Retrieval scheitert.
 
 target:
   dmo: AeroLift_Document_Chunk__dlm
-  textField: content__c
+  textField: content
 
 retrieval:
   mode: hybrid          # hybrid | vector | lexical – hybrid kombiniert BM25 + Embedding-Cosine
@@ -26,29 +26,29 @@ retrieval:
 # Diese sind der zweite Demo-Hebel: Multi-Kriterien-Anfragen werden zu strukturierten
 # Filtern, die das Treffer-Set vor dem Embedding-Lookup einschränken.
 filterableFields:
-  - apiName: productIds__c
+  - apiName: productIds
     type: Text
     operators: [equals, contains, in]
     multiValue: true
     note: "Semikolon-separierter Multi-Value-String; im Retriever per CONTAINS gefiltert."
 
-  - apiName: docType__c
+  - apiName: docType
     type: Picklist
     operators: [equals, in]
 
-  - apiName: atexZone__c
+  - apiName: atexZone
     type: Picklist
     operators: [equals, in, isNull]
 
-  - apiName: tempMaxC__c
+  - apiName: tempMaxC
     type: Number
     operators: [equals, greaterOrEqual, lessOrEqual, between]
 
-  - apiName: foerderleistungM3h__c
+  - apiName: foerderleistungM3h
     type: Number
     operators: [equals, greaterOrEqual, lessOrEqual, between]
 
-  - apiName: ex_certified__c
+  - apiName: ex_certified
     type: Boolean
     operators: [equals]
 
@@ -56,12 +56,12 @@ filterableFields:
 # später vom Apex-Custom-Retriever in den Citation-Block der Agent-Antwort
 # übernommen).
 returnFields:
-  - recordId__c
-  - sourceFile__c
-  - sourceSection__c
-  - content__c
-  - productIds__c
-  - docType__c
+  - recordId
+  - sourceFile
+  - sourceSection
+  - content
+  - productIds
+  - docType
 
 ranking:
   scoreFusion: rrf      # reciprocal rank fusion zwischen BM25 und Vector-Score

@@ -125,7 +125,11 @@ global with sharing class ProductIndexRetriever {
      * Single Quotes steht, müssen Single Quotes innerhalb der Expression
      * verdoppelt werden.  Beispiel-Output für ID 'AL-3000-S':
      *
-     *     productIds__c LIKE ''%AL-3000-S%''
+     *     productIds LIKE ''%AL-3000-S%''
+     *
+     * Hinweis: DLO-/DMO-Feldnamen sind in Data Cloud ohne `__c`-Suffix
+     * (UI-Constraint: keine zwei aufeinanderfolgenden Underscores in
+     * Feldnamen).
      */
     @TestVisible
     private static String buildProductIdFilter(List<String> ids) {
@@ -134,7 +138,7 @@ global with sharing class ProductIndexRetriever {
             // String.escapeSingleQuotes schützt vor SQL-Injection im äußeren
             // Statement; die innere Doppel-Quote-Ebene ist unten manuell.
             String safeId = String.escapeSingleQuotes(id);
-            clauses.add('productIds__c LIKE \'\'%' + safeId + '%\'\'');
+            clauses.add('productIds LIKE \'\'%' + safeId + '%\'\'');
         }
         return String.join(clauses, ' OR ');
     }
@@ -142,21 +146,23 @@ global with sharing class ProductIndexRetriever {
     /**
      * Baut den vollständigen ANSI-SQL-Ausdruck für queryAnsiSqlV2.
      *
-     * Die hybrid_search()-Funktion gibt eine Tabelle mit RecordId__c und einem
-     * hybrid_score__c pro Treffer zurück; per JOIN wird der Original-Chunk
+     * Die hybrid_search()-Funktion gibt eine Tabelle mit recordId und einem
+     * hybrid_score pro Treffer zurück; per JOIN wird der Original-Chunk
      * angereichert.  Filter-Expression wird als String-Literal an Position 3
      * übergeben (leerer String, wenn kein Boost).
+     *
+     * DLO-/DMO-Feldnamen ohne `__c`-Suffix (Data-Cloud-Constraint).
      */
     @TestVisible
     private static String buildSearchSql(String query, String filterExpr, Integer topK) {
         String escapedQuery = String.escapeSingleQuotes(query);
         String safeFilter = filterExpr == null ? '' : filterExpr;
-        return 'SELECT "v"."hybrid_score__c" AS "score", ' +
-            '"c"."content__c" AS "content", ' +
-            '"c"."sourceFile__c" AS "sourceFile", ' +
-            '"c"."sourceSection__c" AS "sourceSection", ' +
-            '"c"."productIds__c" AS "productIds", ' +
-            '"c"."docType__c" AS "docType" ' +
+        return 'SELECT "v"."hybrid_score" AS "score", ' +
+            '"c"."content" AS "content", ' +
+            '"c"."sourceFile" AS "sourceFile", ' +
+            '"c"."sourceSection" AS "sourceSection", ' +
+            '"c"."productIds" AS "productIds", ' +
+            '"c"."docType" AS "docType" ' +
             'FROM hybrid_search(TABLE("' +
             INDEX_DLM_NAME +
             '"), \'' +
@@ -168,7 +174,7 @@ global with sharing class ProductIndexRetriever {
             ') AS "v" ' +
             'INNER JOIN "' +
             SOURCE_DMO_NAME +
-            '" AS "c" ON "c"."RecordId__c" = "v"."RecordId__c" ' +
+            '" AS "c" ON "c"."recordId" = "v"."recordId" ' +
             'ORDER BY "score" DESC';
     }
 
