@@ -1,0 +1,133 @@
+# Data Lake Object (DLO) – AeroLift_Document_Chunk__dll
+#
+# Deklarative Spezifikation, die das Ziel-DLO in Data Cloud beschreibt.
+# Source-of-Truth für die UI-Konfiguration bzw. die spätere Datakit-/REST-API-
+# Erstellung in Schritt 3.2.2.
+#
+# Hinweis: Klassisches SFDX-Source-Format (force-app/...) ist für DLOs in der
+# aktuellen Salesforce-Release NICHT der dokumentierte Deploy-Pfad. Die
+# tatsächliche Anlage erfolgt über Data Cloud Datakits oder die Connect-REST-
+# API; das Mapping dieser YAML-Spec auf den jeweiligen Aufruf wird im DEPLOY.md
+# (Schritt 3.2.2) hinterlegt.
+
+apiName: AeroLift_Document_Chunk__dll
+label: AeroLift Document Chunk
+category: Engagement   # Engagement | Profile | Other; Demo-Records sind dokumentbasierte Engagements
+description: |
+  Atomar zerlegte Markdown-Chunks (Tabellenzeilen + Prose-Sektionen) aus dem
+  AeroLift-Pumpenkatalog. Source-of-Truth für die Custom-Vector-Search-Variante
+  der Grounding-Demo.
+
+primaryKey: recordId__c
+recordModifiedField: null   # ingest-only; keine Updates aus der Source
+
+ingestion:
+  source: "CSV-Upload (data-cloud/csv/all-records.csv)"
+  encoding: "UTF-8 with BOM"
+  multiValueDelimiter: ";"   # für productIds__c
+
+fields:
+
+  - apiName: recordId__c
+    label: Record ID
+    type: Text
+    length: 255
+    required: true
+    description: "Deterministische ID: <sourceFile>::<sectionSlug>::<row|chunk>-<idx>"
+
+  - apiName: sourceFile__c
+    label: Source File
+    type: Text
+    length: 100
+    required: true
+
+  - apiName: sourceSection__c
+    label: Source Section
+    type: Text
+    length: 255
+    required: false
+
+  - apiName: chunkType__c
+    label: Chunk Type
+    type: Picklist
+    required: true
+    values: ["table-row", "prose"]
+
+  - apiName: content__c
+    label: Chunk Content
+    type: LongTextArea
+    length: 32768
+    required: true
+    description: "Embedding-Quelle für den Search Index. Bei table-row in 'Spalte: Wert | …'-Form."
+
+  - apiName: productIds__c
+    label: Product IDs
+    type: Text
+    length: 500
+    required: false
+    description: "Semikolon-separierte Liste der im Chunk erwähnten Modell-IDs (z.B. 'AL-3000-SX;AL-3500-HT-X')."
+
+  - apiName: docType__c
+    label: Document Type
+    type: Picklist
+    required: true
+    values:
+      - catalog
+      - spec-sheet
+      - maintenance
+      - compatibility
+      - atex
+      - changelog
+      - faq
+
+  - apiName: atexZone__c
+    label: ATEX Zone
+    type: Picklist
+    required: false
+    values: ["0", "1", "2"]
+
+  - apiName: tempMaxC__c
+    label: Max. Medientemperatur (°C)
+    type: Number
+    precision: 5
+    scale: 1
+    required: false
+
+  - apiName: foerderleistungM3h__c
+    label: Förderleistung (m³/h)
+    type: Number
+    precision: 6
+    scale: 1
+    required: false
+
+  - apiName: werkstoffGehaeuse__c
+    label: Werkstoff Gehäuse
+    type: Text
+    length: 100
+    required: false
+
+  - apiName: ex_certified__c
+    label: Ex-zertifiziert
+    type: Boolean
+    required: false
+
+  - apiName: wirkungsgradPct__c
+    label: Wirkungsgrad (%)
+    type: Number
+    precision: 4
+    scale: 1
+    required: false
+
+  - apiName: druckMaxBar__c
+    label: Max. Druck (bar)
+    type: Number
+    precision: 4
+    scale: 1
+    required: false
+
+  - apiName: antriebsleistungKW__c
+    label: Antriebsleistung (kW)
+    type: Number
+    precision: 5
+    scale: 1
+    required: false

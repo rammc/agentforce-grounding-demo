@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bot xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>AeroLift Agent A (Data Library)</label>
+    <description>Variante A der Grounding-Demo: Standard-Data-Library-Grounding auf hochgeladene PDFs.</description>
+    <!-- [Inference] type=Bot mit conversationDefinition für Agentforce Service Agent.
+         In Spring '26 ist die genaue type-Enumeration release-abhängig; 'EinsteinServiceAgent'
+         oder 'AgentforceServiceAgent' sind die wahrscheinlichen Werte. -->
+    <type>EinsteinServiceAgent</type>
+    <agentType>AiCopilot</agentType>
+    <conversationDefinition>AeroLift_Agent_A</conversationDefinition>
+    <contextVariables>
+        <contextVariableName>UserMessage</contextVariableName>
+        <dataType>Text</dataType>
+        <visibility>Internal</visibility>
+    </contextVariables>
+</Bot>

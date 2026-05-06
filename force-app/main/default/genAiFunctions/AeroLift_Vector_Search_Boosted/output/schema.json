@@ -1,0 +1,21 @@
+{
+    "properties": {
+        "results": {
+            "title": "Results",
+            "description": "Liste der gefundenen Dokument-Chunks mit Score, Inhalt und Metadaten.",
+            "lightning:type": "lightning__textType",
+            "lightning:isPII": false,
+            "copilotAction:isDisplayable": true,
+            "copilotAction:isUsedByPlanner": true
+        },
+        "diagnosticInfo": {
+            "title": "Diagnostic Info",
+            "description": "Technische Diagnose: ob Boost angewendet wurde, welche IDs erkannt wurden, Trefferanzahl. Für Demo-Transparenz.",
+            "lightning:type": "lightning__textType",
+            "lightning:isPII": false,
+            "copilotAction:isDisplayable": true,
+            "copilotAction:isUsedByPlanner": false
+        }
+    },
+    "lightning:type": "lightning__objectType"
+}

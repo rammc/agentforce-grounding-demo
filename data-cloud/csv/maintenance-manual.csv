@@ -1,0 +1,41 @@
+﻿recordId,sourceFile,sourceSection,chunkType,content,productIds,docType,atexZone,tempMaxC,foerderleistungM3h,werkstoffGehaeuse,ex_certified,wirkungsgradPct,druckMaxBar,antriebsleistungKW
+maintenance-manual.md::wartungsintervalle::chunk-0,maintenance-manual.md,Wartungsintervalle,prose,"Die Intervalle werden in Betriebsstunden (Bh) bzw. Kalenderzeit angegeben –
+maßgeblich ist der zuerst erreichte Wert.",,maintenance,,,,,,,,
+maintenance-manual.md::wartungsintervalle::row-1,maintenance-manual.md,Wartungsintervalle,table-row,Modell: AL-3000 | Großinspektion: 4.000 Bh / 12 Monate | Lagerwechsel: 16.000 Bh | Ölwechsel Lagerträger: – (fettgeschmiert) | GLRD-Wechsel (geplant): 8.000 Bh,AL-3000,maintenance,,,,,,,,
+maintenance-manual.md::wartungsintervalle::row-2,maintenance-manual.md,Wartungsintervalle,table-row,Modell: AL-3000-S | Großinspektion: 3.500 Bh / 12 Monate | Lagerwechsel: 14.000 Bh | Ölwechsel Lagerträger: – (fettgeschmiert) | GLRD-Wechsel (geplant): 7.000 Bh,AL-3000-S,maintenance,,,,,,,,
+maintenance-manual.md::wartungsintervalle::row-3,maintenance-manual.md,Wartungsintervalle,table-row,Modell: AL-3000-SX | Großinspektion: 3.000 Bh / 12 Monate | Lagerwechsel: 12.000 Bh | Ölwechsel Lagerträger: – (fettgeschmiert) | GLRD-Wechsel (geplant): 6.000 Bh,AL-3000-SX,maintenance,,,,,,,,
+maintenance-manual.md::wartungsintervalle::row-4,maintenance-manual.md,Wartungsintervalle,table-row,Modell: AL-3500 | Großinspektion: 4.000 Bh / 12 Monate | Lagerwechsel: 16.000 Bh | Ölwechsel Lagerträger: – (fettgeschmiert) | GLRD-Wechsel (geplant): 8.000 Bh,AL-3500,maintenance,,,,,,,,
+maintenance-manual.md::wartungsintervalle::row-5,maintenance-manual.md,Wartungsintervalle,table-row,Modell: AL-3500-HT | Großinspektion: 2.500 Bh / 6 Monate | Lagerwechsel: 10.000 Bh | Ölwechsel Lagerträger: 2.500 Bh / 6 Monate | GLRD-Wechsel (geplant): 5.000 Bh,AL-3500-HT,maintenance,,,,,,,,
+maintenance-manual.md::wartungsintervalle::row-6,maintenance-manual.md,Wartungsintervalle,table-row,Modell: AL-3500-HT-X | Großinspektion: 2.000 Bh / 6 Monate | Lagerwechsel: 8.000 Bh | Ölwechsel Lagerträger: 2.000 Bh / 6 Monate | GLRD-Wechsel (geplant): 4.000 Bh,AL-3500-HT-X,maintenance,,,,,,,,
+maintenance-manual.md::wartungsintervalle::chunk-1,maintenance-manual.md,Wartungsintervalle,prose,"ATEX-zertifizierte Pumpen (-S, -SX, -HT-X) haben kürzere Großinspektions-
+intervalle, weil zusätzliche Prüfungen an Temperaturüberwachung und
+Erdungsverbindungen vorgeschrieben sind.
+
+Die HT-Modelle haben deutlich kürzere Intervalle, weil die thermische Belastung
+der Lager und Dichtungen höher ist und die Lagerträgerkühlung halbjährlich
+geprüft werden muss.",,maintenance,,,,,,,,
+maintenance-manual.md::routine-inspektion-alle-500-bh::chunk-2,maintenance-manual.md,Routine-Inspektion (alle 500 Bh),prose,"Unabhängig vom Modell:
+
+- Sichtkontrolle auf Leckage an GLRD und Flanschdichtungen
+- Vibrationsmessung am Lagergehäuse, Grenzwert 4,5 mm/s RMS (DIN ISO 10816-3)
+- Sauberkeit der Lüfterhaube prüfen
+- Bei ATEX-Pumpen: Erdungsklemme auf festen Sitz prüfen",,maintenance,,,,,,,,
+maintenance-manual.md::ersatzteilliste-standard::chunk-3,maintenance-manual.md,Ersatzteilliste (Standard),prose,Pro Großinspektion mindestens vorzuhalten:,,maintenance,,,,,,,,
+maintenance-manual.md::ersatzteilliste-standard::row-1,maintenance-manual.md,Ersatzteilliste (Standard),table-row,Position: Gleitringdichtung Set | AL-3000 / AL-3000-S: 30-100-001 | AL-3000-SX: 30-100-005 | AL-3500 / AL-3500-HT(-X): 35-100-001,AL-3000;AL-3000-S;AL-3000-SX;AL-3500;AL-3500-HT,maintenance,,,,,,,,
+maintenance-manual.md::ersatzteilliste-standard::row-2,maintenance-manual.md,Ersatzteilliste (Standard),table-row,Position: Spaltring Saug | AL-3000 / AL-3000-S: 30-200-010 | AL-3000-SX: 30-200-015 | AL-3500 / AL-3500-HT(-X): 35-200-010,AL-3000;AL-3000-S;AL-3000-SX;AL-3500;AL-3500-HT,maintenance,,,,,,,,
+maintenance-manual.md::ersatzteilliste-standard::row-3,maintenance-manual.md,Ersatzteilliste (Standard),table-row,Position: Spaltring Druck | AL-3000 / AL-3000-S: 30-200-011 | AL-3000-SX: 30-200-016 | AL-3500 / AL-3500-HT(-X): 35-200-011,AL-3000;AL-3000-S;AL-3000-SX;AL-3500;AL-3500-HT,maintenance,,,,,,,,
+maintenance-manual.md::ersatzteilliste-standard::row-4,maintenance-manual.md,Ersatzteilliste (Standard),table-row,Position: Lagerset Antriebsseite | AL-3000 / AL-3000-S: 30-300-100 | AL-3000-SX: 30-300-100 | AL-3500 / AL-3500-HT(-X): 35-300-100,AL-3000;AL-3000-S;AL-3000-SX;AL-3500;AL-3500-HT,maintenance,,,,,,,,
+maintenance-manual.md::ersatzteilliste-standard::row-5,maintenance-manual.md,Ersatzteilliste (Standard),table-row,Position: Lagerset Pumpenseite | AL-3000 / AL-3000-S: 30-300-101 | AL-3000-SX: 30-300-101 | AL-3500 / AL-3500-HT(-X): 35-300-101,AL-3000;AL-3000-S;AL-3000-SX;AL-3500;AL-3500-HT,maintenance,,,,,,,,
+maintenance-manual.md::ersatzteilliste-standard::row-6,maintenance-manual.md,Ersatzteilliste (Standard),table-row,Position: Dichtungssatz Gehäuse | AL-3000 / AL-3000-S: 30-400-200 | AL-3000-SX: 30-400-205 | AL-3500 / AL-3500-HT(-X): 35-400-200,AL-3000;AL-3000-S;AL-3000-SX;AL-3500;AL-3500-HT,maintenance,,,,,,,,
+maintenance-manual.md::ersatzteilliste-standard::chunk-4,maintenance-manual.md,Ersatzteilliste (Standard),prose,"Für AL-3000-SX und AL-3500-HT-X gilt: Ersatzteile mit Mediumkontakt sind
+ausschließlich in der zertifizierten Ausführung zu verwenden, andernfalls
+erlischt die ATEX-Zulassung.",AL-3000-SX;AL-3500-HT-X,maintenance,,,,,,,,
+maintenance-manual.md::lagerfett-al-3000-reihe-und-al-3500::row-1,maintenance-manual.md,Lagerfett (AL-3000-Reihe und AL-3500),table-row,"Hersteller: Klüber | Produkt: Klüberplex BEM 41-132 | Eigenschaften: Lithiumkomplex, NLGI 2, –30 bis +130 °C",,maintenance,,,,,,,,
+maintenance-manual.md::lagerfett-al-3000-reihe-und-al-3500::row-2,maintenance-manual.md,Lagerfett (AL-3000-Reihe und AL-3500),table-row,"Hersteller: SKF | Produkt: LGHP 2 | Eigenschaften: Polyharnstoff, NLGI 2/3, –40 bis +150 °C",,maintenance,,,,,,,,
+maintenance-manual.md::lagerfett-al-3000-reihe-und-al-3500::chunk-5,maintenance-manual.md,Lagerfett (AL-3000-Reihe und AL-3500),prose,"Befüllmenge je Lager: 25 g (AL-3000-Reihe), 40 g (AL-3500).",AL-3000;AL-3500,maintenance,,,,,,,,
+maintenance-manual.md::lagertraegeroel-al-3500-ht-al-3500-ht-x::row-1,maintenance-manual.md,"Lagerträgeröl (AL-3500-HT, AL-3500-HT-X)",table-row,"Hersteller: Klüber | Produkt: Klüberoil GEM 1-150 N | Eigenschaften: Mineralöl, ISO VG 150",,maintenance,,,,,,,,
+maintenance-manual.md::lagertraegeroel-al-3500-ht-al-3500-ht-x::row-2,maintenance-manual.md,"Lagerträgeröl (AL-3500-HT, AL-3500-HT-X)",table-row,"Hersteller: Mobil | Produkt: SHC 629 | Eigenschaften: Synthetiköl, ISO VG 150",,maintenance,,,,,,,,
+maintenance-manual.md::lagertraegeroel-al-3500-ht-al-3500-ht-x::chunk-6,maintenance-manual.md,"Lagerträgeröl (AL-3500-HT, AL-3500-HT-X)",prose,"Füllvolumen Lagerträger: 1,8 Liter. Ölstand am Schauglas mittig halten.",,maintenance,,,,,,,,
+maintenance-manual.md::stillstand-und-lagerung::chunk-7,maintenance-manual.md,Stillstand und Lagerung,prose,"Bei Stillstand >2 Wochen muss die Welle wöchentlich von Hand mind. eine halbe
+Umdrehung gedreht werden, um Standabdrücke an den Lagern zu vermeiden. Bei
+ATEX-Pumpen darf das nur nach Freischalten und ggf. Inertisierung erfolgen.",,maintenance,,,,,,,,

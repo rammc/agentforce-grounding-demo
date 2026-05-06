@@ -1,0 +1,40 @@
+﻿recordId,sourceFile,sourceSection,chunkType,content,productIds,docType,atexZone,tempMaxC,foerderleistungM3h,werkstoffGehaeuse,ex_certified,wirkungsgradPct,druckMaxBar,antriebsleistungKW
+faq.md::welche-pumpen-eignen-sich-fuer-den-einsatz-in-der-lebensmittelindustrie::chunk-0,faq.md,Welche Pumpen eignen sich für den Einsatz in der Lebensmittelindustrie?,prose,"Für den direkten Lebensmittelkontakt müssen alle medienberührten Teile aus
+Edelstahl bestehen. Diese Anforderung erfüllen die Modelle **AL-3000-SX**,
+**AL-3500-HT** und **AL-3500-HT-X**. Die Graugussvarianten (AL-3000, AL-3000-S,
+AL-3500) sind dafür nicht geeignet.",AL-3000-SX;AL-3500-HT;AL-3500-HT-X;AL-3000;AL-3000-S;AL-3500,faq,,,,,,,,
+faq.md::welche-pumpe-brauche-ich-fuer-140-m-h-foerderleistung-in-einer-ex-zone-1-umgebung::chunk-1,faq.md,Welche Pumpe brauche ich für 140 m³/h Förderleistung in einer Ex-Zone-1-Umgebung?,prose,"Die einzige Pumpe der Familie, die diese Kombination abdeckt, ist die
+**AL-3500-HT-X**. Die normale AL-3500 liefert zwar 140 m³/h, hat aber keine
+ATEX-Zertifizierung.",AL-3500-HT-X;AL-3500,faq,,,,,,,,
+faq.md::was-ist-der-unterschied-zwischen-al-3000-s-und-al-3000-sx::chunk-2,faq.md,Was ist der Unterschied zwischen AL-3000-S und AL-3000-SX?,prose,"Die AL-3000-S ist eine ATEX-Zone-2-Variante mit Graugussgehäuse und max.
+Medientemperatur 120 °C. Die AL-3000-SX ist eine ATEX-Zone-1-Variante mit
+Edelstahlgehäuse (1.4408) und Medientemperatur bis 150 °C. Die SX ist nicht
+einfach eine ""höher zertifizierte S"" – sie unterscheidet sich auch im
+Werkstoff und Temperaturbereich.",AL-3000-S;AL-3000-SX,faq,,,,,,,,
+faq.md::darf-ich-eine-al-3500-ht-in-einer-ex-zone-betreiben::chunk-3,faq.md,Darf ich eine AL-3500-HT in einer Ex-Zone betreiben?,prose,"Nein. Die AL-3500-HT besitzt keine ATEX-Zertifizierung, auch nicht für Zone 2.
+Für Heißmedien in Ex-Bereichen ist ausschließlich die AL-3500-HT-X freigegeben.",AL-3500-HT;AL-3500-HT-X,faq,,,,,,,,
+faq.md::wir-haben-ph-3-saeure-zu-foerdern-welches-modell-empfehlt-ihr::chunk-4,faq.md,Wir haben pH 3-Säure zu fördern. Welches Modell empfehlt ihr?,prose,"Stark saure Medien (pH < 4) sind in der Standardausführung kein Auslegungsfall.
+Mit Edelstahl 1.4408 und FFKM-Dichtung sind AL-3000-SX, AL-3500-HT und
+AL-3500-HT-X bedingt geeignet – die finale Freigabe macht das
+AeroLift-Anwendungsteam projektspezifisch.",AL-3000-SX;AL-3500-HT;AL-3500-HT-X,faq,,,,,,,,
+faq.md::welche-antriebsleistung-haben-die-pumpen::chunk-5,faq.md,Welche Antriebsleistung haben die Pumpen?,prose,"Die gesamte AL-3000-Reihe hat 22 kW Antriebsleistung, die gesamte AL-3500-Reihe
+37 kW. Die Antriebsleistung ist innerhalb einer Reihe identisch, unabhängig
+von ATEX- oder HT-Variante.",AL-3000;AL-3500,faq,,,,,,,,
+faq.md::wie-hoch-ist-der-wirkungsgrad::chunk-6,faq.md,Wie hoch ist der Wirkungsgrad?,prose,"Im Auslegungspunkt: AL-3000 / AL-3000-S 72 %, AL-3000-SX 70 %, AL-3500 76 %,
+AL-3500-HT / AL-3500-HT-X 74 %.",AL-3000;AL-3000-S;AL-3000-SX;AL-3500;AL-3500-HT;AL-3500-HT-X,faq,,,,,,,,
+faq.md::welche-anschlussgroessen-haben-die-pumpen::chunk-7,faq.md,Welche Anschlussgrößen haben die Pumpen?,prose,"AL-3000-Reihe: Saug DN65, Druck DN50. AL-3500-Reihe: Saug DN80, Druck DN65.
+Bei den HT-Varianten sind die Flansche in PN25 ausgeführt, sonst PN16.",AL-3000;AL-3500,faq,,,,,,,,
+faq.md::wie-oft-muss-eine-grossinspektion-durchgefuehrt-werden::chunk-8,faq.md,Wie oft muss eine Großinspektion durchgeführt werden?,prose,"Standardmodelle (AL-3000, AL-3500): 4.000 Bh oder 12 Monate. ATEX-Modelle der
+AL-3000-Reihe: 3.500 Bh (S) bzw. 3.000 Bh (SX). HT-Modelle: 2.500 Bh / 6 Monate
+(HT) bzw. 2.000 Bh / 6 Monate (HT-X). Maßgeblich ist der zuerst erreichte
+Wert.",AL-3000;AL-3500,faq,,,,,,,,
+faq.md::welche-schmierstoffe-sind-freigegeben::chunk-9,faq.md,Welche Schmierstoffe sind freigegeben?,prose,"Lagerfett: Klüberplex BEM 41-132 oder SKF LGHP 2. Lagerträgeröl (nur HT):
+Klüberoil GEM 1-150 N oder Mobil SHC 629. Andere Produkte nur nach Freigabe.",,faq,,,,,,,,
+faq.md::wer-hat-die-atex-zertifikate-ausgestellt::chunk-10,faq.md,Wer hat die ATEX-Zertifikate ausgestellt?,prose,"Alle ATEX-Zertifikate stammen von der DEKRA EXAM GmbH (notifizierte Stelle
+0158). Die aktuellen Zertifikatsnummern stehen im `atex-guide.md`.",,faq,,,,,,,,
+faq.md::sind-die-pumpen-nach-fda-zugelassen::chunk-11,faq.md,Sind die Pumpen nach FDA zugelassen?,prose,"Die Edelstahlvarianten (AL-3000-SX, AL-3500-HT, AL-3500-HT-X) erfüllen die
+Anforderungen aus FDA 21 CFR 177 und EG 1935/2004. Eine separate FDA-Zulassung
+gibt es nicht – relevant ist die Konformität der Werkstoffe.",AL-3000-SX;AL-3500-HT;AL-3500-HT-X,faq,,,,,,,,
+faq.md::wie-lange-ist-die-ersatzteilversorgung-garantiert::chunk-12,faq.md,Wie lange ist die Ersatzteilversorgung garantiert?,prose,"AeroLift garantiert die Ersatzteilversorgung mindestens 10 Jahre nach
+Auslaufen eines Modells. Die abgekündigte AL-2500-Reihe ist bis 2030-12
+versorgt.",AL-2500,faq,,,,,,,,

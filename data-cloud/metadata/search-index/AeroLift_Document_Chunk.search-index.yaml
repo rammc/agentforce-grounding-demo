@@ -1,0 +1,69 @@
+# Vector / Hybrid Search Index auf AeroLift_Document_Chunk__dlm
+#
+# Deklarative Spezifikation des Suchindex. Da Search Indexes in der aktuellen
+# Salesforce-Release nicht via SFDX-Source-Format deploybar sind, ist diese
+# YAML-Datei die Source-of-Truth für die UI-Konfiguration bzw. den späteren
+# Connect-REST-API-Call (siehe DEPLOY.md in Schritt 3.2.2).
+
+apiName: AeroLift_Document_Chunk_Idx
+label: AeroLift Document Chunk – Hybrid Index
+description: |
+  Hybrid Search Index (lexikalisch + semantisch) über das content__c-Feld des
+  DMOs AeroLift_Document_Chunk__dlm. Die lexikalische Komponente ist der
+  zentrale Demo-Hebel: sie disambiguiert ähnliche Modell-IDs (AL-3000-S vs.
+  AL-3000-SX), an denen reines Vektor-Retrieval scheitert.
+
+target:
+  dmo: AeroLift_Document_Chunk__dlm
+  textField: content__c
+
+retrieval:
+  mode: hybrid          # hybrid | vector | lexical – hybrid kombiniert BM25 + Embedding-Cosine
+  embeddingModel: salesforce-managed-default
+  chunking: none        # Quelle ist bereits chunked; Chunker im Index deaktivieren
+
+# Felder, die als Filter (WHERE-Bedingungen) im Retriever-Aufruf verfügbar sind.
+# Diese sind der zweite Demo-Hebel: Multi-Kriterien-Anfragen werden zu strukturierten
+# Filtern, die das Treffer-Set vor dem Embedding-Lookup einschränken.
+filterableFields:
+  - apiName: productIds__c
+    type: Text
+    operators: [equals, contains, in]
+    multiValue: true
+    note: "Semikolon-separierter Multi-Value-String; im Retriever per CONTAINS gefiltert."
+
+  - apiName: docType__c
+    type: Picklist
+    operators: [equals, in]
+
+  - apiName: atexZone__c
+    type: Picklist
+    operators: [equals, in, isNull]
+
+  - apiName: tempMaxC__c
+    type: Number
+    operators: [equals, greaterOrEqual, lessOrEqual, between]
+
+  - apiName: foerderleistungM3h__c
+    type: Number
+    operators: [equals, greaterOrEqual, lessOrEqual, between]
+
+  - apiName: ex_certified__c
+    type: Boolean
+    operators: [equals]
+
+# Felder, die im Retriever-Result als Metadaten zurückgegeben werden (werden
+# später vom Apex-Custom-Retriever in den Citation-Block der Agent-Antwort
+# übernommen).
+returnFields:
+  - recordId__c
+  - sourceFile__c
+  - sourceSection__c
+  - content__c
+  - productIds__c
+  - docType__c
+
+ranking:
+  scoreFusion: rrf      # reciprocal rank fusion zwischen BM25 und Vector-Score
+  rrfK: 60              # Standardwert; ggf. demo-spezifisch tunen
+  topK: 8               # an den Custom Retriever zurückgegebene Treffer

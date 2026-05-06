@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiPlugin xmlns="http://soap.sforce.com/2006/04/metadata">
+    <canEscalate>false</canEscalate>
+    <description>Antworten auf Fragen zur AeroLift-Pumpenfamilie auf Basis der strukturierten Wissensbasis in Data Cloud (Hybrid Vector Search).</description>
+    <developerName>AeroLift_Topic_B</developerName>
+    <genAiFunctions>
+        <functionName>AeroLift_Vector_Search_Boosted</functionName>
+    </genAiFunctions>
+    <genAiPluginInstructions>
+        <description>Halte dich an die exakten Modellbezeichnungen mit Bindestrichen (z. B. AL-3000-SX, nicht AL3000SX oder AL-3000SX). Wenn die Dokumentation eine Frage nicht eindeutig beantwortet, sage das explizit, anstatt zu raten.</description>
+        <developerName>AeroLift_Topic_B_Inst_01</developerName>
+        <language>en_US</language>
+        <masterLabel>ID-Schreibweise und Belegpflicht</masterLabel>
+    </genAiPluginInstructions>
+    <language>en_US</language>
+    <masterLabel>Produktwissen AeroLift</masterLabel>
+    <pluginType>Topic</pluginType>
+    <scope>Beantwortet Fragen zu Modellen der AL-3000- und AL-3500-Reihe (Specs, Wartung, ATEX-Zertifizierung, Medienkompatibilität, Versionshistorie). Antworten ausschließlich auf Basis der Retriever-Treffer; keine Spekulation.</scope>
+</GenAiPlugin>

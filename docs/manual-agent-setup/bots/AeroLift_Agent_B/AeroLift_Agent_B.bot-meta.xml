@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bot xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>AeroLift Agent B (Vector Search)</label>
+    <description>Variante B der Grounding-Demo: Custom Vector Search via Apex Retriever auf Data Cloud Hybrid Search Index.</description>
+    <type>EinsteinServiceAgent</type>
+    <agentType>AiCopilot</agentType>
+    <conversationDefinition>AeroLift_Agent_B</conversationDefinition>
+    <contextVariables>
+        <contextVariableName>UserMessage</contextVariableName>
+        <dataType>Text</dataType>
+        <visibility>Internal</visibility>
+    </contextVariables>
+</Bot>

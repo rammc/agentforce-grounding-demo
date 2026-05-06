@@ -1,0 +1,42 @@
+﻿recordId,sourceFile,sourceSection,chunkType,content,productIds,docType,atexZone,tempMaxC,foerderleistungM3h,werkstoffGehaeuse,ex_certified,wirkungsgradPct,druckMaxBar,antriebsleistungKW
+product-catalog.md::uebersicht-der-produktfamilie::chunk-0,product-catalog.md,Übersicht der Produktfamilie,prose,"Die AeroLift-Kreiselpumpen sind für den Dauerbetrieb in industriellen Prozessen
+ausgelegt. Beide Reihen teilen sich Wellenkonzept, Lagerträger und
+Antriebsschnittstelle. Sie unterscheiden sich primär in Förderleistung,
+zulässiger Medientemperatur, Werkstoff und Explosionsschutz.",,catalog,,,,,,,,
+product-catalog.md::spezifikations-uebersicht::row-1,product-catalog.md,Spezifikations-Übersicht,table-row,Modell: AL-3000 | Bauart: Einstufige Kreiselpumpe | Förderleistung: 80 m³/h | Max. Medientemp.: 120 °C | Max. Druck: 16 bar | Saug-/Druck-DN: DN65 / DN50 | Werkstoff Gehäuse: EN-GJL-250 (Grauguss) | Wirkungsgrad: 72 % | Gewicht: 145 kg | Antriebsleistung: 22 kW | Ex-Schutz: keine,AL-3000,catalog,,120,80,EN-GJL-250 (Grauguss),false,72,16,22
+product-catalog.md::spezifikations-uebersicht::row-2,product-catalog.md,Spezifikations-Übersicht,table-row,Modell: AL-3000-S | Bauart: Einstufige Kreiselpumpe | Förderleistung: 80 m³/h | Max. Medientemp.: 120 °C | Max. Druck: 16 bar | Saug-/Druck-DN: DN65 / DN50 | Werkstoff Gehäuse: EN-GJL-250 (Grauguss) | Wirkungsgrad: 72 % | Gewicht: 158 kg | Antriebsleistung: 22 kW | Ex-Schutz: ATEX Zone 2 (Gas),AL-3000-S,catalog,2,120,80,EN-GJL-250 (Grauguss),true,72,16,22
+product-catalog.md::spezifikations-uebersicht::row-3,product-catalog.md,Spezifikations-Übersicht,table-row,Modell: AL-3000-SX | Bauart: Einstufige Kreiselpumpe | Förderleistung: 80 m³/h | Max. Medientemp.: 150 °C | Max. Druck: 16 bar | Saug-/Druck-DN: DN65 / DN50 | Werkstoff Gehäuse: 1.4408 (Edelstahl) | Wirkungsgrad: 70 % | Gewicht: 172 kg | Antriebsleistung: 22 kW | Ex-Schutz: ATEX Zone 1 (Gas),AL-3000-SX,catalog,1,150,80,1.4408 (Edelstahl),true,70,16,22
+product-catalog.md::spezifikations-uebersicht::row-4,product-catalog.md,Spezifikations-Übersicht,table-row,Modell: AL-3500 | Bauart: Einstufige Kreiselpumpe | Förderleistung: 140 m³/h | Max. Medientemp.: 120 °C | Max. Druck: 16 bar | Saug-/Druck-DN: DN80 / DN65 | Werkstoff Gehäuse: EN-GJL-250 (Grauguss) | Wirkungsgrad: 76 % | Gewicht: 215 kg | Antriebsleistung: 37 kW | Ex-Schutz: keine,AL-3500,catalog,,120,140,EN-GJL-250 (Grauguss),false,76,16,37
+product-catalog.md::spezifikations-uebersicht::row-5,product-catalog.md,Spezifikations-Übersicht,table-row,Modell: AL-3500-HT | Bauart: Einstufige Kreiselpumpe | Förderleistung: 140 m³/h | Max. Medientemp.: 220 °C | Max. Druck: 16 bar | Saug-/Druck-DN: DN80 / DN65 | Werkstoff Gehäuse: 1.4408 (Edelstahl) | Wirkungsgrad: 74 % | Gewicht: 232 kg | Antriebsleistung: 37 kW | Ex-Schutz: keine,AL-3500-HT,catalog,,220,140,1.4408 (Edelstahl),false,74,16,37
+product-catalog.md::spezifikations-uebersicht::row-6,product-catalog.md,Spezifikations-Übersicht,table-row,Modell: AL-3500-HT-X | Bauart: Einstufige Kreiselpumpe | Förderleistung: 140 m³/h | Max. Medientemp.: 220 °C | Max. Druck: 16 bar | Saug-/Druck-DN: DN80 / DN65 | Werkstoff Gehäuse: 1.4408 (Edelstahl) | Wirkungsgrad: 74 % | Gewicht: 248 kg | Antriebsleistung: 37 kW | Ex-Schutz: ATEX Zone 1 (Gas),AL-3500-HT-X,catalog,1,220,140,1.4408 (Edelstahl),true,74,16,37
+product-catalog.md::al-3000::chunk-1,product-catalog.md,AL-3000,prose,"Standard-Kreiselpumpe für allgemeine Industrieanwendungen ohne
+Explosionsschutzanforderung. Graugussgehäuse, Standardlaufrad, Gleitringdichtung
+nach EN 12756. Typische Einsatzfelder: Kühlwasserkreisläufe, Brauchwasser,
+neutrale Medien bis 120 °C.",,catalog,,,,,,,,
+product-catalog.md::al-3000-s::chunk-2,product-catalog.md,AL-3000-S,prose,"Variante mit ATEX-Zertifizierung für Zone 2 (Gas). Mechanisch identisch zur
+AL-3000, jedoch mit zertifizierter Lagerüberwachung, statisch ableitfähiger
+Lackierung und ATEX-konformem Klemmenkasten. Eingesetzt in Bereichen mit
+gelegentlich auftretender explosionsfähiger Atmosphäre, etwa Pufferräumen oder
+Außenbereichen von Anlagen.",AL-3000,catalog,,,,,,,,
+product-catalog.md::al-3000-sx::chunk-3,product-catalog.md,AL-3000-SX,prose,"Erweiterte Sicherheitsvariante für ATEX Zone 1 (Gas) und erhöhte
+Medientemperaturen bis 150 °C. Gehäuse und benetzte Teile in Edelstahl 1.4408,
+zusätzliche Temperaturüberwachung am Lagerträger. Eingesetzt in
+Lebensmittel-, Pharma- und Chemieanwendungen mit dauerhafter
+Ex-Atmosphäre-Anforderung.",,catalog,,,,,,,,
+product-catalog.md::al-3500::chunk-4,product-catalog.md,AL-3500,prose,"Höher fördernde Standard-Kreiselpumpe ohne Explosionsschutzanforderung. Gleiche
+Konstruktionsphilosophie wie AL-3000, jedoch größeres Laufrad (DN80 saugseitig)
+und stärkerer Antrieb. Typisch für Prozesswasser, Heizungsumwälzung in
+Großanlagen, neutrale Medien bis 120 °C.",AL-3000,catalog,,,,,,,,
+product-catalog.md::al-3500-ht::chunk-5,product-catalog.md,AL-3500-HT,prose,"High-Temperature-Variante der AL-3500-Reihe. Edelstahlgehäuse 1.4408 und
+gekühlter Lagerträger erlauben Medientemperaturen bis 220 °C. Keine
+ATEX-Zertifizierung. Typische Anwendungen: Thermalöl-Kreisläufe, Heißwasser,
+nicht-brennbare Hochtemperaturmedien.",AL-3500,catalog,,,,,,,,
+product-catalog.md::al-3500-ht-x::chunk-6,product-catalog.md,AL-3500-HT-X,prose,"Kombiniert High-Temperature-Auslegung (220 °C) mit ATEX Zone 1 (Gas). Die
+einzige AL-3500-Variante mit Ex-Zulassung. Eingesetzt in chemischen
+Anlagen mit Thermalöl- oder Heißmedienkreisläufen in Ex-Bereichen.",AL-3500,catalog,,,,,,,,
+product-catalog.md::lieferumfang-aller-modelle::chunk-7,product-catalog.md,Lieferumfang aller Modelle,prose,"- Pumpenaggregat mit Motor und Grundrahmen
+- Werkskennlinien-Protokoll
+- EU-Konformitätserklärung
+- Bei -S, -SX und -HT-X zusätzlich ATEX-Zertifikat",,catalog,,,,,,,,
+product-catalog.md::bestellinformation::chunk-8,product-catalog.md,Bestellinformation,prose,"Bestell-IDs entsprechen exakt den Modellbezeichnungen. Bindestriche und
+Suffix-Reihenfolge (`-HT-X` statt `-X-HT`) sind verbindlich.",,catalog,,,,,,,,

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- [Inference] GenAiPlannerBundle wurde von Skills als deploybarer Typ
+     bestätigt, ohne konkretes XML-Schema zu liefern.  Siehe Bundle für
+     Agent A für Details und Inference-Begründung. -->
+<GenAiPlannerBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <masterLabel>AeroLift Agent B (Vector Search)</masterLabel>
+    <description>Variante B der Grounding-Demo. Greift via Apex Custom Retriever (ConnectApi.CdpQuery) auf den Data Cloud Hybrid Search Index zu. System-Prompt ist identisch zu Agent A – einziger Unterschied ist die gewählte Action.</description>
+    <plannerType>AiCopilot__ReAct</plannerType>
+    <plannerInstructions>Du beantwortest Fragen zu AeroLift-Pumpen ausschließlich auf Basis der bereitgestellten Produktdokumentation. Wenn du etwas nicht aus der Dokumentation belegen kannst, sage das explizit. Halte dich an die exakten Modellbezeichnungen mit Bindestrichen (z. B. AL-3000-SX).</plannerInstructions>
+    <genAiPlugins>
+        <genAiPluginName>AeroLift_Topic_B</genAiPluginName>
+    </genAiPlugins>
+</GenAiPlannerBundle>

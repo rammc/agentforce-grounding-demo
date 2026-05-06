@@ -1,0 +1,37 @@
+﻿recordId,sourceFile,sourceSection,chunkType,content,productIds,docType,atexZone,tempMaxC,foerderleistungM3h,werkstoffGehaeuse,ex_certified,wirkungsgradPct,druckMaxBar,antriebsleistungKW
+spec-sheet-AL-3000-family.md::hydraulische-kennlinien::chunk-0,spec-sheet-AL-3000-family.md,Hydraulische Kennlinien,prose,"Förderhöhe vs. Durchsatz bei Nenndrehzahl 2950 min⁻¹ (50 Hz, zweipolig).",,spec-sheet,,,,,,,,
+spec-sheet-AL-3000-family.md::al-3000-al-3000-s::row-1,spec-sheet-AL-3000-family.md,AL-3000 / AL-3000-S,table-row,Durchsatz [m³/h]: Förderhöhe [m] | 0: 62 | 20: 60 | 40: 56 | 60: 50 | 80 (BEP): 42 | 95: 32,,spec-sheet,,,,,,,,
+spec-sheet-AL-3000-family.md::al-3000-al-3000-s::row-2,spec-sheet-AL-3000-family.md,AL-3000 / AL-3000-S,table-row,Durchsatz [m³/h]: Wirkungsgrad [%] | 0: 0 | 20: 38 | 40: 58 | 60: 68 | 80 (BEP): 72 | 95: 65,,spec-sheet,,,,,,,,
+spec-sheet-AL-3000-family.md::al-3000-sx::chunk-1,spec-sheet-AL-3000-family.md,AL-3000-SX,prose,"Wegen Edelstahllaufrad mit minimal abweichender Geometrie liegt die Kennlinie
+ca. 2 % flacher.",,spec-sheet,,,,,,,,
+spec-sheet-AL-3000-family.md::al-3000-sx::row-1,spec-sheet-AL-3000-family.md,AL-3000-SX,table-row,Durchsatz [m³/h]: Förderhöhe [m] | 0: 60 | 20: 58 | 40: 54 | 60: 48 | 80 (BEP): 40 | 95: 30,,spec-sheet,,,,,,,,
+spec-sheet-AL-3000-family.md::al-3000-sx::row-2,spec-sheet-AL-3000-family.md,AL-3000-SX,table-row,Durchsatz [m³/h]: Wirkungsgrad [%] | 0: 0 | 20: 36 | 40: 56 | 60: 66 | 80 (BEP): 70 | 95: 63,,spec-sheet,,,,,,,,
+spec-sheet-AL-3000-family.md::al-3000-sx::chunk-2,spec-sheet-AL-3000-family.md,AL-3000-SX,prose,BEP = Best Efficiency Point (bestpunkt-naher Auslegungspunkt).,,spec-sheet,,,,,,,,
+spec-sheet-AL-3000-family.md::anschlussmasse::row-1,spec-sheet-AL-3000-family.md,Anschlussmaße,table-row,Maß: Saugflansch | AL-3000: DN65 PN16 | AL-3000-S: DN65 PN16 | AL-3000-SX: DN65 PN16,AL-3000;AL-3000-S;AL-3000-SX,spec-sheet,,,,,,,,
+spec-sheet-AL-3000-family.md::anschlussmasse::row-2,spec-sheet-AL-3000-family.md,Anschlussmaße,table-row,Maß: Druckflansch | AL-3000: DN50 PN16 | AL-3000-S: DN50 PN16 | AL-3000-SX: DN50 PN16,AL-3000;AL-3000-S;AL-3000-SX,spec-sheet,,,,,,,,
+spec-sheet-AL-3000-family.md::anschlussmasse::row-3,spec-sheet-AL-3000-family.md,Anschlussmaße,table-row,Maß: Wellenende d/l | AL-3000: 32 / 80 mm | AL-3000-S: 32 / 80 mm | AL-3000-SX: 32 / 80 mm,AL-3000;AL-3000-S;AL-3000-SX,spec-sheet,,,,,,,,
+spec-sheet-AL-3000-family.md::anschlussmasse::row-4,spec-sheet-AL-3000-family.md,Anschlussmaße,table-row,Maß: Grundrahmenlänge | AL-3000: 1.080 mm | AL-3000-S: 1.080 mm | AL-3000-SX: 1.080 mm,AL-3000;AL-3000-S;AL-3000-SX,spec-sheet,,,,,,,,
+spec-sheet-AL-3000-family.md::anschlussmasse::row-5,spec-sheet-AL-3000-family.md,Anschlussmaße,table-row,Maß: Grundrahmenbreite | AL-3000: 420 mm | AL-3000-S: 420 mm | AL-3000-SX: 420 mm,AL-3000;AL-3000-S;AL-3000-SX,spec-sheet,,,,,,,,
+spec-sheet-AL-3000-family.md::anschlussmasse::row-6,spec-sheet-AL-3000-family.md,Anschlussmaße,table-row,Maß: Gesamthöhe | AL-3000: 540 mm | AL-3000-S: 555 mm | AL-3000-SX: 580 mm,AL-3000;AL-3000-S;AL-3000-SX,spec-sheet,,,,,,,,
+spec-sheet-AL-3000-family.md::anschlussmasse::chunk-3,spec-sheet-AL-3000-family.md,Anschlussmaße,prose,"Flansche nach EN 1092-1 Form B1. Saug- und Druckflansch sind achsversetzt
+ausgeführt (Saug horizontal, Druck vertikal nach oben).",,spec-sheet,,,,,,,,
+spec-sheet-AL-3000-family.md::werkstoffvarianten::row-1,spec-sheet-AL-3000-family.md,Werkstoffvarianten,table-row,Bauteil: Pumpengehäuse | AL-3000: EN-GJL-250 | AL-3000-S: EN-GJL-250 | AL-3000-SX: 1.4408,AL-3000;AL-3000-S;AL-3000-SX,spec-sheet,,,,,,,,
+spec-sheet-AL-3000-family.md::werkstoffvarianten::row-2,spec-sheet-AL-3000-family.md,Werkstoffvarianten,table-row,Bauteil: Laufrad | AL-3000: EN-GJL-250 | AL-3000-S: EN-GJL-250 | AL-3000-SX: 1.4408,AL-3000;AL-3000-S;AL-3000-SX,spec-sheet,,,,,,,,
+spec-sheet-AL-3000-family.md::werkstoffvarianten::row-3,spec-sheet-AL-3000-family.md,Werkstoffvarianten,table-row,Bauteil: Welle | AL-3000: 1.4021 | AL-3000-S: 1.4021 | AL-3000-SX: 1.4462 (Duplex),AL-3000;AL-3000-S;AL-3000-SX,spec-sheet,,,,,,,,
+spec-sheet-AL-3000-family.md::werkstoffvarianten::row-4,spec-sheet-AL-3000-family.md,Werkstoffvarianten,table-row,Bauteil: Gleitringdichtung | AL-3000: SiC / Kohle / EPDM | AL-3000-S: SiC / Kohle / FKM | AL-3000-SX: SiC / SiC / FFKM,AL-3000;AL-3000-S;AL-3000-SX,spec-sheet,,,,,,,,
+spec-sheet-AL-3000-family.md::werkstoffvarianten::row-5,spec-sheet-AL-3000-family.md,Werkstoffvarianten,table-row,Bauteil: Lagerträger | AL-3000: EN-GJL-250 | AL-3000-S: EN-GJL-250 | AL-3000-SX: EN-GJL-250,AL-3000;AL-3000-S;AL-3000-SX,spec-sheet,,,,,,,,
+spec-sheet-AL-3000-family.md::werkstoffvarianten::chunk-4,spec-sheet-AL-3000-family.md,Werkstoffvarianten,prose,"Bei der AL-3000-SX sind alle medienberührten Teile aus Edelstahl 1.4408
+(entspricht ASTM CF8M, Werkstoff-Nr. 1.4408). Damit sind die Pumpen
+FDA-konform für den Lebensmittelkontakt einsetzbar.",AL-3000-SX,spec-sheet,,,,,,,,
+spec-sheet-AL-3000-family.md::antrieb::row-1,spec-sheet-AL-3000-family.md,Antrieb,table-row,Position: Nennleistung | Wert: 22 kW,,spec-sheet,,,,,,,,
+spec-sheet-AL-3000-family.md::antrieb::row-2,spec-sheet-AL-3000-family.md,Antrieb,table-row,Position: Drehzahl | Wert: 2950 min⁻¹,,spec-sheet,,,,,,,,
+spec-sheet-AL-3000-family.md::antrieb::row-3,spec-sheet-AL-3000-family.md,Antrieb,table-row,Position: Spannung | Wert: 400 V / 50 Hz / 3 Ph,,spec-sheet,,,,,,,,
+spec-sheet-AL-3000-family.md::antrieb::row-4,spec-sheet-AL-3000-family.md,Antrieb,table-row,Position: Schutzart | Wert: IP55,,spec-sheet,,,,,,,,
+spec-sheet-AL-3000-family.md::antrieb::row-5,spec-sheet-AL-3000-family.md,Antrieb,table-row,Position: Wärmeklasse | Wert: F (155 °C),,spec-sheet,,,,,,,,
+spec-sheet-AL-3000-family.md::antrieb::row-6,spec-sheet-AL-3000-family.md,Antrieb,table-row,Position: Wirkungsgrad-Klasse Motor | Wert: IE3,,spec-sheet,,,,,,,,
+spec-sheet-AL-3000-family.md::antrieb::chunk-5,spec-sheet-AL-3000-family.md,Antrieb,prose,"Bei AL-3000-S und AL-3000-SX wird ein ATEX-zertifizierter Motor entsprechender
+Zone (II 3G bzw. II 2G) verwendet. Details siehe `atex-guide.md`.",AL-3000-S;AL-3000-SX,spec-sheet,,,,,,,,
+spec-sheet-AL-3000-family.md::schallemission::chunk-6,spec-sheet-AL-3000-family.md,Schallemission,prose,"Im Auslegungspunkt (BEP, 80 m³/h) gemessen in 1 m Abstand:",,spec-sheet,,,,,,,,
+spec-sheet-AL-3000-family.md::schallemission::row-1,spec-sheet-AL-3000-family.md,Schallemission,table-row,Modell: AL-3000 | Schalldruckpegel L_p [dB(A)]: 74,AL-3000,spec-sheet,,,,,,,74,
+spec-sheet-AL-3000-family.md::schallemission::row-2,spec-sheet-AL-3000-family.md,Schallemission,table-row,Modell: AL-3000-S | Schalldruckpegel L_p [dB(A)]: 74,AL-3000-S,spec-sheet,,,,,,,74,
+spec-sheet-AL-3000-family.md::schallemission::row-3,spec-sheet-AL-3000-family.md,Schallemission,table-row,Modell: AL-3000-SX | Schalldruckpegel L_p [dB(A)]: 76,AL-3000-SX,spec-sheet,,,,,,,76,

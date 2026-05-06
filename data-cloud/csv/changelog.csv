@@ -1,0 +1,19 @@
+﻿recordId,sourceFile,sourceSection,chunkType,content,productIds,docType,atexZone,tempMaxC,foerderleistungM3h,werkstoffGehaeuse,ex_certified,wirkungsgradPct,druckMaxBar,antriebsleistungKW
+changelog.md::al-3000-reihe::row-1,changelog.md,AL-3000-Reihe,table-row,Datum: 2018-03 | Modell: AL-3000 | Version: 1.0 | Änderung: Markteinführung Standard-Kreiselpumpe,AL-3000,changelog,,,,,,,,
+changelog.md::al-3000-reihe::row-2,changelog.md,AL-3000-Reihe,table-row,"Datum: 2019-09 | Modell: AL-3000 | Version: 1.1 | Änderung: Umstellung Lagerträger auf Lithiumkomplex-Fett, GLRD-Standard auf SiC/Kohle/EPDM",AL-3000,changelog,,,,,,,,
+changelog.md::al-3000-reihe::row-3,changelog.md,AL-3000-Reihe,table-row,"Datum: 2021-05 | Modell: AL-3000-S | Version: 1.0 | Änderung: Markteinführung ATEX-Variante Zone 2, Zertifikat BVS 21 ATEX E 042 X",AL-3000-S,changelog,,,,,,,,
+changelog.md::al-3000-reihe::row-4,changelog.md,AL-3000-Reihe,table-row,Datum: 2022-11 | Modell: AL-3000-S | Version: 1.1 | Änderung: Klemmenkasten auf erhöhten Schutzgrad nach EN 60079-15 angepasst,AL-3000-S,changelog,,,,,,,,
+changelog.md::al-3000-reihe::row-5,changelog.md,AL-3000-Reihe,table-row,"Datum: 2023-04 | Modell: AL-3000-SX | Version: 1.0 | Änderung: Markteinführung Edelstahlvariante mit ATEX Zone 1, Medientemperatur bis 150 °C, Zertifikat BVS 23 ATEX E 089 X",AL-3000-SX,changelog,,,,,,,,
+changelog.md::al-3000-reihe::row-6,changelog.md,AL-3000-Reihe,table-row,Datum: 2025-02 | Modell: AL-3000-SX | Version: 1.1 | Änderung: Welle auf Duplex 1.4462 umgestellt zur Verbesserung der Korrosionsbeständigkeit bei chloridhaltigen Medien,AL-3000-SX,changelog,,,,,,,,
+changelog.md::al-3500-reihe::row-1,changelog.md,AL-3500-Reihe,table-row,Datum: 2019-06 | Modell: AL-3500 | Version: 1.0 | Änderung: Markteinführung höher fördernde Standard-Kreiselpumpe (140 m³/h),AL-3500,changelog,,,,,,,,
+changelog.md::al-3500-reihe::row-2,changelog.md,AL-3500-Reihe,table-row,Datum: 2020-10 | Modell: AL-3500 | Version: 1.1 | Änderung: GLRD-Standard auf SiC/Kohle/EPDM vereinheitlicht (analog AL-3000 1.1),AL-3500,changelog,,,,,,,,
+changelog.md::al-3500-reihe::row-3,changelog.md,AL-3500-Reihe,table-row,"Datum: 2022-07 | Modell: AL-3500-HT | Version: 1.0 | Änderung: Markteinführung High-Temperature-Variante mit ölgekühltem Lagerträger, Medientemperatur bis 220 °C",AL-3500-HT,changelog,,,,,,,,
+changelog.md::al-3500-reihe::row-4,changelog.md,AL-3500-Reihe,table-row,Datum: 2023-12 | Modell: AL-3500-HT | Version: 1.1 | Änderung: Optionales Kühlwasser-Mengenmessgerät als Zubehör verfügbar,AL-3500-HT,changelog,,,,,,,,
+changelog.md::al-3500-reihe::row-5,changelog.md,AL-3500-Reihe,table-row,"Datum: 2024-09 | Modell: AL-3500-HT-X | Version: 1.0 | Änderung: Markteinführung HT-Variante mit ATEX Zone 1, Zertifikat BVS 24 ATEX E 117 X",AL-3500-HT-X,changelog,,,,,,,,
+changelog.md::end-of-life-hinweise::chunk-0,changelog.md,End-of-Life-Hinweise,prose,"Aktuell sind keine Modelle der AL-3000- oder AL-3500-Reihe abgekündigt. Die
+ältere AL-2500-Reihe wurde 2020 durch die AL-3500-Reihe abgelöst und wird seit
+2023-12 nicht mehr produziert; Ersatzteilversorgung ist bis 2030-12
+sichergestellt.",AL-3000;AL-3500;AL-2500,changelog,,,,,,,,
+changelog.md::zertifizierungs-meilensteine::chunk-1,changelog.md,Zertifizierungs-Meilensteine,prose,"- **2021-05** – Erste ATEX-Zertifizierung im Portfolio (AL-3000-S, Zone 2)
+- **2023-04** – Erste ATEX-Zone-1-Zertifizierung (AL-3000-SX)
+- **2024-09** – Erste Kombination aus Zone 1 und High-Temperature (AL-3500-HT-X)",AL-3000-S;AL-3000-SX;AL-3500-HT-X,changelog,,,,,,,,

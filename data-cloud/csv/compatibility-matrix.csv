@@ -1,0 +1,43 @@
+﻿recordId,sourceFile,sourceSection,chunkType,content,productIds,docType,atexZone,tempMaxC,foerderleistungM3h,werkstoffGehaeuse,ex_certified,wirkungsgradPct,druckMaxBar,antriebsleistungKW
+compatibility-matrix.md::uebersichtsmatrix::row-1,compatibility-matrix.md,Übersichtsmatrix,table-row,"Medienklasse: Brauchwasser, Kühlwasser, neutral | AL-3000: A | AL-3000-S: A | AL-3000-SX: A | AL-3500: A | AL-3500-HT: A | AL-3500-HT-X: A",AL-3000;AL-3000-S;AL-3000-SX;AL-3500;AL-3500-HT;AL-3500-HT-X,compatibility,,,,,,,,
+compatibility-matrix.md::uebersichtsmatrix::row-2,compatibility-matrix.md,Übersichtsmatrix,table-row,Medienklasse: Schwach saure wässrige Medien (pH 4–6) | AL-3000: B¹ | AL-3000-S: B¹ | AL-3000-SX: A | AL-3500: B¹ | AL-3500-HT: A | AL-3500-HT-X: A,AL-3000;AL-3000-S;AL-3000-SX;AL-3500;AL-3500-HT;AL-3500-HT-X,compatibility,,,,,,,,
+compatibility-matrix.md::uebersichtsmatrix::row-3,compatibility-matrix.md,Übersichtsmatrix,table-row,Medienklasse: Stark saure Medien (pH < 4) | AL-3000: N | AL-3000-S: N | AL-3000-SX: B² | AL-3500: N | AL-3500-HT: B² | AL-3500-HT-X: B²,AL-3000;AL-3000-S;AL-3000-SX;AL-3500;AL-3500-HT;AL-3500-HT-X,compatibility,,,,,,,,
+compatibility-matrix.md::uebersichtsmatrix::row-4,compatibility-matrix.md,Übersichtsmatrix,table-row,Medienklasse: Schwach alkalische Medien (pH 8–10) | AL-3000: A | AL-3000-S: A | AL-3000-SX: A | AL-3500: A | AL-3500-HT: A | AL-3500-HT-X: A,AL-3000;AL-3000-S;AL-3000-SX;AL-3500;AL-3500-HT;AL-3500-HT-X,compatibility,,,,,,,,
+compatibility-matrix.md::uebersichtsmatrix::row-5,compatibility-matrix.md,Übersichtsmatrix,table-row,Medienklasse: Stark alkalische Medien (pH > 12) | AL-3000: B¹ | AL-3000-S: B¹ | AL-3000-SX: A | AL-3500: B¹ | AL-3500-HT: A | AL-3500-HT-X: A,AL-3000;AL-3000-S;AL-3000-SX;AL-3500;AL-3500-HT;AL-3500-HT-X,compatibility,,,,,,,,
+compatibility-matrix.md::uebersichtsmatrix::row-6,compatibility-matrix.md,Übersichtsmatrix,table-row,Medienklasse: Organische Lösungsmittel (nicht halogeniert) | AL-3000: B¹ | AL-3000-S: B¹ | AL-3000-SX: A | AL-3500: B¹ | AL-3500-HT: A | AL-3500-HT-X: A,AL-3000;AL-3000-S;AL-3000-SX;AL-3500;AL-3500-HT;AL-3500-HT-X,compatibility,,,,,,,,
+compatibility-matrix.md::uebersichtsmatrix::row-7,compatibility-matrix.md,Übersichtsmatrix,table-row,Medienklasse: Halogenierte Lösungsmittel | AL-3000: N | AL-3000-S: N | AL-3000-SX: B² | AL-3500: N | AL-3500-HT: B² | AL-3500-HT-X: B²,AL-3000;AL-3000-S;AL-3000-SX;AL-3500;AL-3500-HT;AL-3500-HT-X,compatibility,,,,,,,,
+compatibility-matrix.md::uebersichtsmatrix::row-8,compatibility-matrix.md,Übersichtsmatrix,table-row,Medienklasse: Lebensmittel (FDA-Anforderung) | AL-3000: N | AL-3000-S: N | AL-3000-SX: A | AL-3500: N | AL-3500-HT: A | AL-3500-HT-X: A,AL-3000;AL-3000-S;AL-3000-SX;AL-3500;AL-3500-HT;AL-3500-HT-X,compatibility,,,,,,,,
+compatibility-matrix.md::uebersichtsmatrix::row-9,compatibility-matrix.md,Übersichtsmatrix,table-row,Medienklasse: Thermalöl bis 220 °C | AL-3000: N | AL-3000-S: N | AL-3000-SX: N | AL-3500: N | AL-3500-HT: A | AL-3500-HT-X: A,AL-3000;AL-3000-S;AL-3000-SX;AL-3500;AL-3500-HT;AL-3500-HT-X,compatibility,,,,,,,,
+compatibility-matrix.md::uebersichtsmatrix::row-10,compatibility-matrix.md,Übersichtsmatrix,table-row,Medienklasse: Heißwasser bis 150 °C | AL-3000: N | AL-3000-S: N | AL-3000-SX: A | AL-3500: N | AL-3500-HT: A | AL-3500-HT-X: A,AL-3000;AL-3000-S;AL-3000-SX;AL-3500;AL-3500-HT;AL-3500-HT-X,compatibility,,,,,,,,
+compatibility-matrix.md::uebersichtsmatrix::row-11,compatibility-matrix.md,Übersichtsmatrix,table-row,Medienklasse: Heißwasser bis 220 °C | AL-3000: N | AL-3000-S: N | AL-3000-SX: N | AL-3500: N | AL-3500-HT: A | AL-3500-HT-X: A,AL-3000;AL-3000-S;AL-3000-SX;AL-3500;AL-3500-HT;AL-3500-HT-X,compatibility,,,,,,,,
+compatibility-matrix.md::uebersichtsmatrix::row-12,compatibility-matrix.md,Übersichtsmatrix,table-row,Medienklasse: Brennbare Medien in Ex-Zone 2 | AL-3000: N | AL-3000-S: A | AL-3000-SX: A | AL-3500: N | AL-3500-HT: N | AL-3500-HT-X: A,AL-3000;AL-3000-S;AL-3000-SX;AL-3500;AL-3500-HT;AL-3500-HT-X,compatibility,,,,,,,,
+compatibility-matrix.md::uebersichtsmatrix::row-13,compatibility-matrix.md,Übersichtsmatrix,table-row,Medienklasse: Brennbare Medien in Ex-Zone 1 | AL-3000: N | AL-3000-S: N | AL-3000-SX: A | AL-3500: N | AL-3500-HT: N | AL-3500-HT-X: A,AL-3000;AL-3000-S;AL-3000-SX;AL-3500;AL-3500-HT;AL-3500-HT-X,compatibility,,,,,,,,
+compatibility-matrix.md::hinweise::chunk-0,compatibility-matrix.md,Hinweise,prose,"¹ Graugussgehäuse hat eingeschränkte Korrosionsbeständigkeit. Für Dauerbetrieb
+unter pH 6 oder bei stark alkalischen Medien (NaOH > 10 %) muss in regelmäßigen
+Abständen die Wandstärkenmessung erfolgen, oder es ist auf eine Edelstahl-
+variante (-SX, -HT, -HT-X) auszuweichen.
+
+² Bei stark sauren oder halogenierten Medien ist die Dichtungswahl projekt-
+spezifisch (FFKM oder Kalrez). Eignung wird im Einzelfall durch das
+AeroLift-Anwendungsteam freigegeben.",,compatibility,,,,,,,,
+compatibility-matrix.md::lebensmittelanwendungen::chunk-1,compatibility-matrix.md,Lebensmittelanwendungen,prose,"Nur die Modelle mit vollständigem Edelstahl-Mediumkontakt
+(AL-3000-SX, AL-3500-HT, AL-3500-HT-X) erfüllen die Anforderungen aus FDA
+21 CFR 177 und EG 1935/2004 und sind damit für den Lebensmittelkontakt
+freigegeben. Die Eignung umfasst:
+
+- Trinkwasser
+- Saftkonzentrate (pH > 4)
+- Milch und Milcherzeugnisse
+- Pflanzenöle (kalt bis 80 °C)
+
+CIP-Reinigungsmittel auf Basis von NaOH (max. 5 %) und HNO₃ (max. 3 %) sind
+zugelassen.",AL-3000-SX;AL-3500-HT;AL-3500-HT-X,compatibility,,,,,,,,
+compatibility-matrix.md::ex-zonen-eignung-im-ueberblick::row-1,compatibility-matrix.md,Ex-Zonen-Eignung im Überblick,table-row,Modell: AL-3000 | Zone 0: nein | Zone 1: nein | Zone 2: nein,AL-3000,compatibility,,,,,,,,
+compatibility-matrix.md::ex-zonen-eignung-im-ueberblick::row-2,compatibility-matrix.md,Ex-Zonen-Eignung im Überblick,table-row,Modell: AL-3000-S | Zone 0: nein | Zone 1: nein | Zone 2: ja,AL-3000-S,compatibility,,,,,,,,
+compatibility-matrix.md::ex-zonen-eignung-im-ueberblick::row-3,compatibility-matrix.md,Ex-Zonen-Eignung im Überblick,table-row,Modell: AL-3000-SX | Zone 0: nein | Zone 1: ja | Zone 2: ja,AL-3000-SX,compatibility,,,,,,,,
+compatibility-matrix.md::ex-zonen-eignung-im-ueberblick::row-4,compatibility-matrix.md,Ex-Zonen-Eignung im Überblick,table-row,Modell: AL-3500 | Zone 0: nein | Zone 1: nein | Zone 2: nein,AL-3500,compatibility,,,,,,,,
+compatibility-matrix.md::ex-zonen-eignung-im-ueberblick::row-5,compatibility-matrix.md,Ex-Zonen-Eignung im Überblick,table-row,Modell: AL-3500-HT | Zone 0: nein | Zone 1: nein | Zone 2: nein,AL-3500-HT,compatibility,,,,,,,,
+compatibility-matrix.md::ex-zonen-eignung-im-ueberblick::row-6,compatibility-matrix.md,Ex-Zonen-Eignung im Überblick,table-row,Modell: AL-3500-HT-X | Zone 0: nein | Zone 1: ja | Zone 2: ja,AL-3500-HT-X,compatibility,,,,,,,,
+compatibility-matrix.md::ex-zonen-eignung-im-ueberblick::chunk-2,compatibility-matrix.md,Ex-Zonen-Eignung im Überblick,prose,"Eine Pumpe für Zone 1 darf in Zone 2 betrieben werden, jedoch nicht umgekehrt.
+Zone 0 (dauerhaft Ex-Atmosphäre) wird von keinem Modell der AL-3000- und
+AL-3500-Reihe abgedeckt.",AL-3000;AL-3500,compatibility,,,,,,,,

@@ -1,0 +1,38 @@
+﻿recordId,sourceFile,sourceSection,chunkType,content,productIds,docType,atexZone,tempMaxC,foerderleistungM3h,werkstoffGehaeuse,ex_certified,wirkungsgradPct,druckMaxBar,antriebsleistungKW
+spec-sheet-AL-3500-family.md::hydraulische-kennlinien::chunk-0,spec-sheet-AL-3500-family.md,Hydraulische Kennlinien,prose,"Förderhöhe vs. Durchsatz bei Nenndrehzahl 2950 min⁻¹ (50 Hz, zweipolig).",,spec-sheet,,,,,,,,
+spec-sheet-AL-3500-family.md::al-3500::row-1,spec-sheet-AL-3500-family.md,AL-3500,table-row,Durchsatz [m³/h]: Förderhöhe [m] | 0: 78 | 40: 75 | 80: 70 | 110: 64 | 140 (BEP): 56 | 165: 44,,spec-sheet,,,,,,,,
+spec-sheet-AL-3500-family.md::al-3500::row-2,spec-sheet-AL-3500-family.md,AL-3500,table-row,Durchsatz [m³/h]: Wirkungsgrad [%] | 0: 0 | 40: 42 | 80: 62 | 110: 72 | 140 (BEP): 76 | 165: 68,,spec-sheet,,,,,,,,
+spec-sheet-AL-3500-family.md::al-3500-ht-al-3500-ht-x::chunk-1,spec-sheet-AL-3500-family.md,AL-3500-HT / AL-3500-HT-X,prose,"Identische Hydraulik. Bei Heißmedien fällt der Wirkungsgrad effektiv um
+ca. 2 Prozentpunkte gegenüber kaltem Wasser, da Lagerträgerkühlung Energie
+abführt.",,spec-sheet,,,,,,,,
+spec-sheet-AL-3500-family.md::al-3500-ht-al-3500-ht-x::row-1,spec-sheet-AL-3500-family.md,AL-3500-HT / AL-3500-HT-X,table-row,Durchsatz [m³/h]: Förderhöhe [m] | 0: 76 | 40: 73 | 80: 68 | 110: 62 | 140 (BEP): 54 | 165: 42,,spec-sheet,,,,,,,,
+spec-sheet-AL-3500-family.md::al-3500-ht-al-3500-ht-x::row-2,spec-sheet-AL-3500-family.md,AL-3500-HT / AL-3500-HT-X,table-row,Durchsatz [m³/h]: Wirkungsgrad [%] | 0: 0 | 40: 40 | 80: 60 | 110: 70 | 140 (BEP): 74 | 165: 66,,spec-sheet,,,,,,,,
+spec-sheet-AL-3500-family.md::anschlussmasse::row-1,spec-sheet-AL-3500-family.md,Anschlussmaße,table-row,Maß: Saugflansch | AL-3500: DN80 PN16 | AL-3500-HT: DN80 PN25 | AL-3500-HT-X: DN80 PN25,AL-3500;AL-3500-HT;AL-3500-HT-X,spec-sheet,,,,,,,,
+spec-sheet-AL-3500-family.md::anschlussmasse::row-2,spec-sheet-AL-3500-family.md,Anschlussmaße,table-row,Maß: Druckflansch | AL-3500: DN65 PN16 | AL-3500-HT: DN65 PN25 | AL-3500-HT-X: DN65 PN25,AL-3500;AL-3500-HT;AL-3500-HT-X,spec-sheet,,,,,,,,
+spec-sheet-AL-3500-family.md::anschlussmasse::row-3,spec-sheet-AL-3500-family.md,Anschlussmaße,table-row,Maß: Wellenende d/l | AL-3500: 42 / 110 mm | AL-3500-HT: 42 / 110 mm | AL-3500-HT-X: 42 / 110 mm,AL-3500;AL-3500-HT;AL-3500-HT-X,spec-sheet,,,,,,,,
+spec-sheet-AL-3500-family.md::anschlussmasse::row-4,spec-sheet-AL-3500-family.md,Anschlussmaße,table-row,Maß: Grundrahmenlänge | AL-3500: 1.260 mm | AL-3500-HT: 1.260 mm | AL-3500-HT-X: 1.260 mm,AL-3500;AL-3500-HT;AL-3500-HT-X,spec-sheet,,,,,,,,
+spec-sheet-AL-3500-family.md::anschlussmasse::row-5,spec-sheet-AL-3500-family.md,Anschlussmaße,table-row,Maß: Grundrahmenbreite | AL-3500: 480 mm | AL-3500-HT: 480 mm | AL-3500-HT-X: 480 mm,AL-3500;AL-3500-HT;AL-3500-HT-X,spec-sheet,,,,,,,,
+spec-sheet-AL-3500-family.md::anschlussmasse::row-6,spec-sheet-AL-3500-family.md,Anschlussmaße,table-row,Maß: Gesamthöhe | AL-3500: 620 mm | AL-3500-HT: 660 mm | AL-3500-HT-X: 680 mm,AL-3500;AL-3500-HT;AL-3500-HT-X,spec-sheet,,,,,,,,
+spec-sheet-AL-3500-family.md::anschlussmasse::chunk-2,spec-sheet-AL-3500-family.md,Anschlussmaße,prose,"Flansche nach EN 1092-1 Form B1. Bei den HT-Varianten werden PN25-Flansche
+eingesetzt, um die thermische Ausdehnung der Dichtflächen aufzunehmen.",,spec-sheet,,,,,,,,
+spec-sheet-AL-3500-family.md::werkstoffvarianten::row-1,spec-sheet-AL-3500-family.md,Werkstoffvarianten,table-row,Bauteil: Pumpengehäuse | AL-3500: EN-GJL-250 | AL-3500-HT: 1.4408 | AL-3500-HT-X: 1.4408,AL-3500;AL-3500-HT;AL-3500-HT-X,spec-sheet,,,,,,,,
+spec-sheet-AL-3500-family.md::werkstoffvarianten::row-2,spec-sheet-AL-3500-family.md,Werkstoffvarianten,table-row,Bauteil: Laufrad | AL-3500: EN-GJL-250 | AL-3500-HT: 1.4408 | AL-3500-HT-X: 1.4408,AL-3500;AL-3500-HT;AL-3500-HT-X,spec-sheet,,,,,,,,
+spec-sheet-AL-3500-family.md::werkstoffvarianten::row-3,spec-sheet-AL-3500-family.md,Werkstoffvarianten,table-row,Bauteil: Welle | AL-3500: 1.4021 | AL-3500-HT: 1.4462 (Duplex) | AL-3500-HT-X: 1.4462 (Duplex),AL-3500;AL-3500-HT;AL-3500-HT-X,spec-sheet,,,,,,,,
+spec-sheet-AL-3500-family.md::werkstoffvarianten::row-4,spec-sheet-AL-3500-family.md,Werkstoffvarianten,table-row,Bauteil: Gleitringdichtung | AL-3500: SiC / Kohle / EPDM | AL-3500-HT: SiC / SiC / FFKM | AL-3500-HT-X: SiC / SiC / FFKM,AL-3500;AL-3500-HT;AL-3500-HT-X,spec-sheet,,,,,,,,
+spec-sheet-AL-3500-family.md::werkstoffvarianten::row-5,spec-sheet-AL-3500-family.md,Werkstoffvarianten,table-row,"Bauteil: Lagerträger (gekühlt) | AL-3500: nein | AL-3500-HT: ja, ölgekühlt | AL-3500-HT-X: ja, ölgekühlt",AL-3500;AL-3500-HT;AL-3500-HT-X,spec-sheet,,,,,,,,
+spec-sheet-AL-3500-family.md::antrieb::row-1,spec-sheet-AL-3500-family.md,Antrieb,table-row,Position: Nennleistung | Wert: 37 kW,,spec-sheet,,,,,,,,
+spec-sheet-AL-3500-family.md::antrieb::row-2,spec-sheet-AL-3500-family.md,Antrieb,table-row,Position: Drehzahl | Wert: 2950 min⁻¹,,spec-sheet,,,,,,,,
+spec-sheet-AL-3500-family.md::antrieb::row-3,spec-sheet-AL-3500-family.md,Antrieb,table-row,Position: Spannung | Wert: 400 V / 50 Hz / 3 Ph,,spec-sheet,,,,,,,,
+spec-sheet-AL-3500-family.md::antrieb::row-4,spec-sheet-AL-3500-family.md,Antrieb,table-row,Position: Schutzart | Wert: IP55,,spec-sheet,,,,,,,,
+spec-sheet-AL-3500-family.md::antrieb::row-5,spec-sheet-AL-3500-family.md,Antrieb,table-row,Position: Wärmeklasse | Wert: F (155 °C),,spec-sheet,,,,,,,,
+spec-sheet-AL-3500-family.md::antrieb::row-6,spec-sheet-AL-3500-family.md,Antrieb,table-row,Position: Wirkungsgrad-Klasse Motor | Wert: IE3,,spec-sheet,,,,,,,,
+spec-sheet-AL-3500-family.md::antrieb::chunk-3,spec-sheet-AL-3500-family.md,Antrieb,prose,"Bei AL-3500-HT-X wird ein ATEX-zertifizierter Motor (II 2G) eingesetzt.
+Details siehe `atex-guide.md`.",AL-3500-HT-X,spec-sheet,,,,,,,,
+spec-sheet-AL-3500-family.md::lagertraegerkuehlung-ht-varianten::chunk-4,spec-sheet-AL-3500-family.md,Lagerträgerkühlung (HT-Varianten),prose,"AL-3500-HT und AL-3500-HT-X verwenden einen ölgekühlten Lagerträger mit
+externem Wärmetauscher. Empfohlener Kühlwasservolumenstrom: 0,3 m³/h bei max.
+30 °C Vorlauftemperatur. Ohne ausreichende Lagerträgerkühlung darf die
+Medientemperatur 180 °C nicht überschreiten.",AL-3500-HT;AL-3500-HT-X,spec-sheet,,,,,,,,
+spec-sheet-AL-3500-family.md::schallemission::chunk-5,spec-sheet-AL-3500-family.md,Schallemission,prose,"Im Auslegungspunkt (BEP, 140 m³/h) gemessen in 1 m Abstand:",,spec-sheet,,,,,,,,
+spec-sheet-AL-3500-family.md::schallemission::row-1,spec-sheet-AL-3500-family.md,Schallemission,table-row,Modell: AL-3500 | Schalldruckpegel L_p [dB(A)]: 78,AL-3500,spec-sheet,,,,,,,78,
+spec-sheet-AL-3500-family.md::schallemission::row-2,spec-sheet-AL-3500-family.md,Schallemission,table-row,Modell: AL-3500-HT | Schalldruckpegel L_p [dB(A)]: 80,AL-3500-HT,spec-sheet,,,,,,,80,
+spec-sheet-AL-3500-family.md::schallemission::row-3,spec-sheet-AL-3500-family.md,Schallemission,table-row,Modell: AL-3500-HT-X | Schalldruckpegel L_p [dB(A)]: 80,AL-3500-HT-X,spec-sheet,,,,,,,80,

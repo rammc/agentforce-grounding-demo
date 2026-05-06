@@ -1,0 +1,44 @@
+﻿recordId,sourceFile,sourceSection,chunkType,content,productIds,docType,atexZone,tempMaxC,foerderleistungM3h,werkstoffGehaeuse,ex_certified,wirkungsgradPct,druckMaxBar,antriebsleistungKW
+atex-guide.md::rechtlicher-rahmen::chunk-0,atex-guide.md,Rechtlicher Rahmen,prose,"Die Auslegung folgt der EU-Richtlinie 2014/34/EU (ATEX-Produktrichtlinie). Der
+Betrieb explosionsgeschützter Geräte ist zusätzlich durch die Richtlinie
+1999/92/EG (ATEX-Betriebsrichtlinie) geregelt, in Deutschland umgesetzt über
+die Betriebssicherheitsverordnung (BetrSichV).",,atex,,,,,,,,
+atex-guide.md::zonenkonzept-gas::row-1,atex-guide.md,Zonenkonzept (Gas),table-row,"Zone: Zone 0 | Häufigkeit explosionsfähiger Atmosphäre: dauerhaft, langzeitig oder häufig | Gerätekategorie: Kategorie 1G",,atex,,,,,,,,
+atex-guide.md::zonenkonzept-gas::row-2,atex-guide.md,Zonenkonzept (Gas),table-row,Zone: Zone 1 | Häufigkeit explosionsfähiger Atmosphäre: gelegentlich im Normalbetrieb | Gerätekategorie: Kategorie 2G,,atex,,,,,,,,
+atex-guide.md::zonenkonzept-gas::row-3,atex-guide.md,Zonenkonzept (Gas),table-row,"Zone: Zone 2 | Häufigkeit explosionsfähiger Atmosphäre: nicht im Normalbetrieb, nur kurzzeitig | Gerätekategorie: Kategorie 3G",,atex,,,,,,,,
+atex-guide.md::zonenkonzept-gas::chunk-1,atex-guide.md,Zonenkonzept (Gas),prose,"Eine Pumpe der höheren Kategorie (z. B. 2G) darf in einer Zone niedrigerer
+Anforderung (Zone 2) betrieben werden, umgekehrt nicht.",,atex,,,,,,,,
+atex-guide.md::zertifizierte-modelle-der-aerolift-reihe::row-1,atex-guide.md,Zertifizierte Modelle der AeroLift-Reihe,table-row,Modell: AL-3000-S | ATEX-Zone: Zone 2 (Gas) | Gerätekennzeichnung: II 3G Ex h IIB T4 Gc | Zertifikatsnummer: BVS 21 ATEX E 042 X | Erstzertifizierung: 2021,AL-3000-S,atex,,,,,,,,
+atex-guide.md::zertifizierte-modelle-der-aerolift-reihe::row-2,atex-guide.md,Zertifizierte Modelle der AeroLift-Reihe,table-row,Modell: AL-3000-SX | ATEX-Zone: Zone 1 (Gas) | Gerätekennzeichnung: II 2G Ex h IIB T3 Gb | Zertifikatsnummer: BVS 23 ATEX E 089 X | Erstzertifizierung: 2023,AL-3000-SX,atex,,,,,,,,
+atex-guide.md::zertifizierte-modelle-der-aerolift-reihe::row-3,atex-guide.md,Zertifizierte Modelle der AeroLift-Reihe,table-row,Modell: AL-3500-HT-X | ATEX-Zone: Zone 1 (Gas) | Gerätekennzeichnung: II 2G Ex h IIB T3 Gb | Zertifikatsnummer: BVS 24 ATEX E 117 X | Erstzertifizierung: 2024,AL-3500-HT-X,atex,,,,,,,,
+atex-guide.md::zertifizierte-modelle-der-aerolift-reihe::chunk-2,atex-guide.md,Zertifizierte Modelle der AeroLift-Reihe,prose,"Zertifizierungsstelle: DEKRA EXAM GmbH, Bochum (notifizierte Stelle 0158).
+
+Die mit ""X"" am Ende der Zertifikatsnummer versehenen Zertifikate enthalten
+besondere Bedingungen für den sicheren Einsatz – diese sind in Abschnitt 17
+des jeweiligen EU-Baumusterprüfbescheinigungs-Dokuments aufgeführt und müssen
+vom Betreiber eingehalten werden.",,atex,,,,,,,,
+atex-guide.md::temperaturklassen::chunk-3,atex-guide.md,Temperaturklassen,prose,"Die Temperaturklassen geben die maximal zulässige Oberflächentemperatur an. Bei
+unseren ATEX-Pumpen relevant:",,atex,,,,,,,,
+atex-guide.md::temperaturklassen::row-1,atex-guide.md,Temperaturklassen,table-row,Temperaturklasse: T4 | Max. Oberflächentemperatur: 135 °C | Modelle: AL-3000-S,AL-3000-S,atex,,135,,,,,,
+atex-guide.md::temperaturklassen::row-2,atex-guide.md,Temperaturklassen,table-row,"Temperaturklasse: T3 | Max. Oberflächentemperatur: 200 °C | Modelle: AL-3000-SX, AL-3500-HT-X",AL-3000-SX;AL-3500-HT-X,atex,,200,,,,,,
+atex-guide.md::temperaturklassen::chunk-4,atex-guide.md,Temperaturklassen,prose,"Die Temperaturklasse berücksichtigt sowohl Medientemperatur als auch
+Reibungswärme aus Lagern und Dichtung.",,atex,,,,,,,,
+atex-guide.md::nicht-atex-zertifizierte-modelle::chunk-5,atex-guide.md,Nicht ATEX-zertifizierte Modelle,prose,"Folgende Modelle besitzen **keine** ATEX-Zertifizierung und dürfen in
+explosionsgefährdeten Bereichen nicht eingesetzt werden:
+
+- AL-3000
+- AL-3500
+- AL-3500-HT (auch nicht in Zone 2!)
+
+Die AL-3500-HT verfügt zwar über High-Temperature-Auslegung bis 220 °C,
+ist jedoch ausdrücklich nicht für Ex-Bereiche zugelassen. Für den Einsatz mit
+Heißmedien in Ex-Zone 1 ist die Variante AL-3500-HT-X erforderlich.",AL-3000;AL-3500;AL-3500-HT;AL-3500-HT-X,atex,,,,,,,,
+atex-guide.md::pflichten-des-betreibers::chunk-6,atex-guide.md,Pflichten des Betreibers,prose,"- Erstellung eines Explosionsschutzdokuments nach §6 BetrSichV
+- Einbindung der Pumpe in den Potentialausgleich
+- Wiederkehrende Prüfung durch befähigte Person, mindestens alle 3 Jahre
+- Bei Reparaturen ausschließlich Original-Ersatzteile mit ATEX-Konformität
+  verwenden – siehe `maintenance-manual.md`",,atex,,,,,,,,
+atex-guide.md::zubehoer-anforderungen::chunk-7,atex-guide.md,Zubehör-Anforderungen,prose,"Saug- und druckseitig montiertes Zubehör (Rückschlagventile, Filter) muss in
+Ex-Bereichen ebenfalls zertifiziert sein. AeroLift bietet zertifizierte
+Zubehörpakete unter den Bestellnummern 30-ATEX-100 (für AL-3000-Reihe Zone 1/2)
+und 35-ATEX-100 (für AL-3500-HT-X) an.",AL-3000;AL-3500-HT-X,atex,,,,,,,,

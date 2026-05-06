@@ -1,0 +1,20 @@
+{
+    "required": ["query"],
+    "properties": {
+        "query": {
+            "title": "Query",
+            "description": "Die Frage des Users in natürlicher Sprache. Wenn die Frage eine Modell-ID (z.B. AL-3000-SX) enthält, wird diese als Filter genutzt.",
+            "lightning:type": "lightning__textType",
+            "lightning:isPII": false,
+            "copilotAction:isUserInput": true
+        },
+        "topK": {
+            "title": "Top K",
+            "description": "Anzahl der zurückzugebenden Treffer (Default 5).",
+            "lightning:type": "lightning__numberType",
+            "lightning:isPII": false,
+            "copilotAction:isUserInput": false
+        }
+    },
+    "lightning:type": "lightning__objectType"
+}

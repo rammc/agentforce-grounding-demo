@@ -1,0 +1,42 @@
+# Data Model Object (DMO) – AeroLift_Document_Chunk__dlm
+#
+# Deklarative Spezifikation des DMOs, das auf das DLO
+# AeroLift_Document_Chunk__dll mappt. 1:1-Mapping (Identity-Mapping); keine
+# Harmonisation/Identity-Resolution erforderlich, weil die Source bereits
+# atomar und deduplliziert ist.
+#
+# Hinweis: DMO-Anlage erfolgt – analog zum DLO – nicht über klassisches
+# SFDX-Source-Format, sondern über Data Cloud UI / Datakit / Connect-REST-API.
+# Die Demo betreibt das DMO als reinen Data-Cloud-Layer ohne CRM-Sync.
+
+apiName: AeroLift_Document_Chunk__dlm
+label: AeroLift Document Chunk
+category: Engagement
+description: |
+  Konsolidiertes DMO über atomar zerlegte Dokument-Chunks. Quelle für den
+  Vector/Hybrid Search Index.
+
+primaryKey: recordId__c
+
+mappings:
+  - sourceDlo: AeroLift_Document_Chunk__dll
+    fieldMappings:
+      - source: recordId__c          ; target: recordId__c
+      - source: sourceFile__c        ; target: sourceFile__c
+      - source: sourceSection__c     ; target: sourceSection__c
+      - source: chunkType__c         ; target: chunkType__c
+      - source: content__c           ; target: content__c
+      - source: productIds__c        ; target: productIds__c
+      - source: docType__c           ; target: docType__c
+      - source: atexZone__c          ; target: atexZone__c
+      - source: tempMaxC__c          ; target: tempMaxC__c
+      - source: foerderleistungM3h__c; target: foerderleistungM3h__c
+      - source: werkstoffGehaeuse__c ; target: werkstoffGehaeuse__c
+      - source: ex_certified__c      ; target: ex_certified__c
+      - source: wirkungsgradPct__c   ; target: wirkungsgradPct__c
+      - source: druckMaxBar__c       ; target: druckMaxBar__c
+      - source: antriebsleistungKW__c; target: antriebsleistungKW__c
+
+# Felddefinitionen sind eine 1:1-Kopie der DLO-Felder (siehe dlo/AeroLift_Document_Chunk.dlo.yaml).
+# Wird hier nicht dupliziert, um Drift zu vermeiden – das DMO erbt das Schema
+# vollständig vom DLO durch das Identity-Mapping.

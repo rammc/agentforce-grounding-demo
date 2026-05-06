@@ -1,0 +1,138 @@
+# Frageset für die Grounding-Demo (Variante A: Data Library / Variante B: Custom Vector Search).
+# Verteilung: 5 factual-precise, 4 multi-criteria, 4 multi-hop, 2 id-disambiguation.
+# Mindestens drei Fragen sind für Variante A "fair winnable" (markiert mit fair_winnable_a: true).
+
+- id: Q01
+  category: factual-precise
+  question: "Was ist die maximal zulässige Medientemperatur der AL-3000-SX?"
+  ground_truth: "150 °C"
+  expected_source: "product-catalog.md"
+  expected_failure_mode_a: "Data Library liefert 120 °C (Standardwert der AL-3000 / AL-3000-S), weil die ähnlich eingebetteten ID-Varianten beim Retrieval kollabieren und der falsche Tabellen-Chunk gewählt wird."
+  fair_winnable_a: false
+  rationale: "Klassische ID-Disambiguierung: AL-3000, AL-3000-S, AL-3000-SX sind semantisch fast identisch eingebettet. Nur Hybrid-Search (Lexikal + Vektor) trennt zuverlässig."
+
+- id: Q02
+  category: factual-precise
+  question: "Welche Förderleistung hat die AL-3500?"
+  ground_truth: "140 m³/h"
+  expected_source: "product-catalog.md"
+  expected_failure_mode_a: null
+  fair_winnable_a: true
+  rationale: "Eindeutiger Wert für ein Basismodell mit unverwechselbarer ID. Das sollte auch die Data Library zuverlässig finden – nimmt der Demo den Strohmann-Charakter."
+
+- id: Q03
+  category: factual-precise
+  question: "In welchem Intervall ist die Großinspektion bei der AL-3500-HT-X durchzuführen?"
+  ground_truth: "2.000 Bh oder 6 Monate (zuerst erreichter Wert)"
+  expected_source: "maintenance-manual.md"
+  expected_failure_mode_a: "Data Library zerlegt die Wartungsintervall-Tabelle so, dass entweder eine Zeile ohne Header zurückgegeben wird oder die Werte einer benachbarten Zeile (AL-3500-HT mit 2.500 Bh) verwechselt werden."
+  fair_winnable_a: false
+  rationale: "Tabellen-Risiko: Eine sechszeilige Tabelle pro Modell ist anfällig für Default-Chunking. B mit Tabellenstruktur-Erhalt + ID-Filter wird hier deutlich treffen."
+
+- id: Q04
+  category: factual-precise
+  question: "Welche Antriebsleistung hat die AL-3000?"
+  ground_truth: "22 kW"
+  expected_source: "product-catalog.md"
+  expected_failure_mode_a: null
+  fair_winnable_a: true
+  rationale: "Wert steht textuell in mindestens drei Dokumenten (Katalog, Datenblatt, FAQ). Auch ein naives Retrieval sollte das treffen."
+
+- id: Q05
+  category: factual-precise
+  question: "Welchen Wirkungsgrad erreicht die AL-3500?"
+  ground_truth: "76 %"
+  expected_source: "product-catalog.md"
+  expected_failure_mode_a: null
+  fair_winnable_a: true
+  rationale: "Klare, mehrfach belegte Aussage. Diese Frage soll demonstrieren, dass die Data Library nicht prinzipiell schlechter ist."
+
+- id: Q06
+  category: multi-criteria
+  question: "Welche AeroLift-Pumpe ist sowohl für ATEX Zone 1 zertifiziert als auch für eine Förderleistung von mindestens 120 m³/h ausgelegt?"
+  ground_truth: "AL-3500-HT-X"
+  expected_source: "product-catalog.md, atex-guide.md"
+  expected_failure_mode_a: "Data Library findet AL-3000-SX (Zone 1, aber nur 80 m³/h) oder AL-3500 (140 m³/h, aber keine ATEX) und gibt eine falsche oder unvollständige Antwort. Es fehlt die Möglichkeit, beide Kriterien als Metadatenfilter zu kombinieren."
+  fair_winnable_a: false
+  rationale: "Klassischer Fall für strukturierte Metadaten-Filter (atex_zone, foerderleistung_max) bei Variante B. Bei Variante A muss das Modell die Konjunktion in unstrukturiertem Text rekonstruieren."
+
+- id: Q07
+  category: multi-criteria
+  question: "Welche Modelle haben ein Edelstahlgehäuse, sind ATEX-Zone-1-zertifiziert und vertragen eine Medientemperatur von mindestens 140 °C?"
+  ground_truth: "AL-3000-SX und AL-3500-HT-X"
+  expected_source: "product-catalog.md"
+  expected_failure_mode_a: "Data Library liefert nur eines der beiden Modelle (typischerweise AL-3000-SX, weil es zuerst im Katalog steht) oder zieht AL-3500-HT fälschlich mit, weil Edelstahl + 220 °C im Vordergrund stehen und die fehlende ATEX-Zulassung übersehen wird."
+  fair_winnable_a: false
+  rationale: "Drei UND-Bedingungen. Variante B kann pro Kriterium filtern und so die exakt zwei Treffer liefern."
+
+- id: Q08
+  category: multi-hop
+  question: "Welche Antriebsleistung hat das einzige Modell der AL-3000-Reihe ohne ATEX-Zulassung und welchen Wirkungsgrad erreicht es?"
+  ground_truth: "AL-3000, 22 kW Antriebsleistung, 72 % Wirkungsgrad"
+  expected_source: "atex-guide.md, product-catalog.md"
+  expected_failure_mode_a: "Data Library identifiziert das Zielmodell nicht zuverlässig: 'AL-3000-Reihe' triggert alle drei Varianten, und die Bedingung 'ohne ATEX-Zulassung' muss aus dem ATEX-Leitfaden negativ erschlossen werden. Häufig wird AL-3000-S oder AL-3000-SX zurückgegeben und damit ein falscher Wirkungsgrad (70 %) oder ein falscher Werkstoff-Kontext genannt."
+  fair_winnable_a: false
+  rationale: "Zwei Hops: erst Modellidentifikation über Ausschluss aus atex-guide.md, dann Spec-Lookup (Antriebsleistung, Wirkungsgrad) in product-catalog.md. Variante B kann das Ausschluss-Kriterium über strukturiertes Metadatenfeld atex_zone abbilden und anschließend per Modell-ID die Specs joinen."
+
+- id: Q09
+  category: multi-criteria
+  question: "Welche Pumpe der AL-3000-Reihe verträgt eine Medientemperatur über 120 °C?"
+  ground_truth: "AL-3000-SX"
+  expected_source: "product-catalog.md"
+  expected_failure_mode_a: "Data Library trifft den Bereich der AL-3000-Reihe, gibt jedoch ohne korrekt erhaltene Tabellenstruktur die Standardtemperatur 120 °C aller Modelle zurück und übersieht den abweichenden SX-Wert."
+  fair_winnable_a: false
+  rationale: "Reihen-Filter (AL-3000-*) plus Temperatur-Vergleich. Variante B kann beides als Filter umsetzen."
+
+- id: Q10
+  category: multi-criteria
+  question: "Welche Pumpen mit 140 m³/h Förderleistung haben ein Großinspektionsintervall von höchstens 2.500 Betriebsstunden?"
+  ground_truth: "AL-3500-HT (2.500 Bh) und AL-3500-HT-X (2.000 Bh)"
+  expected_source: "product-catalog.md, maintenance-manual.md"
+  expected_failure_mode_a: "Data Library findet entweder die Förderleistungs-Tabelle ODER die Wartungsintervall-Tabelle, kann beide aber selten korrekt joinen. Häufig fehlt AL-3500-HT-X in der Antwort."
+  fair_winnable_a: false
+  rationale: "Datensatz-übergreifender Vergleich. Variante B verknüpft beide Felder über strukturierte Metadaten."
+
+- id: Q11
+  category: multi-hop
+  question: "Welches Großinspektionsintervall hat die einzige ATEX-Zone-1-zertifizierte Pumpe der AL-3500-Reihe?"
+  ground_truth: "AL-3500-HT-X, 2.000 Bh oder 6 Monate"
+  expected_source: "atex-guide.md, maintenance-manual.md"
+  expected_failure_mode_a: "Data Library identifiziert AL-3500-HT-X korrekt aus dem ATEX-Leitfaden, springt dann jedoch nicht zuverlässig in die Wartungstabelle. Häufig wird das Intervall der AL-3500-HT (2.500 Bh) oder ein generischer Wert genannt."
+  fair_winnable_a: false
+  rationale: "Zwei Hops: erst Modell identifizieren, dann Wartungswert lookup. Variante B kann über Modell-ID als Schlüssel beide Quellen zusammenführen."
+
+- id: Q12
+  category: multi-hop
+  question: "Wann wurde die erste ATEX-Zone-1-zertifizierte Pumpe von AeroLift eingeführt und welche Förderleistung hat dieses Modell?"
+  ground_truth: "AL-3000-SX, eingeführt 2023-04, 80 m³/h"
+  expected_source: "changelog.md, product-catalog.md"
+  expected_failure_mode_a: "Data Library nennt 2024-09 (AL-3500-HT-X – erste Kombination Zone 1 + HT, aber nicht erste Zone 1 überhaupt) oder 2021-05 (AL-3000-S – Zone 2, nicht Zone 1)."
+  fair_winnable_a: false
+  rationale: "Erfordert chronologische Sortierung über Modelle hinweg + Förderleistungs-Lookup. Klassischer Multi-Hop-Use-Case."
+
+- id: Q13
+  category: multi-hop
+  question: "Welches Modell der AL-3000-Reihe ist für den Lebensmittelkontakt freigegeben und welche Zertifikatsnummer trägt seine ATEX-Zulassung?"
+  ground_truth: "AL-3000-SX, Zertifikatsnummer BVS 23 ATEX E 089 X"
+  expected_source: "compatibility-matrix.md, atex-guide.md"
+  expected_failure_mode_a: "Data Library kann AL-3000-SX als FDA-konform identifizieren, verfehlt aber die korrekte Zertifikatsnummer und vermischt BVS 21 ATEX E 042 X (AL-3000-S) mit BVS 23 ATEX E 089 X."
+  fair_winnable_a: false
+  rationale: "Zwei Hops mit hohem Verwechslungsrisiko bei den Zertifikatsnummern. Variante B nutzt die Modell-ID als Bindeglied."
+
+- id: Q14
+  category: id-disambiguation
+  question: "Für welche ATEX-Zone ist die AL-3000-S zertifiziert?"
+  ground_truth: "Zone 2 (Gas)"
+  expected_source: "atex-guide.md, product-catalog.md"
+  expected_failure_mode_a: "Data Library verwechselt AL-3000-S mit AL-3000-SX und nennt Zone 1, weil die Embeddings von '-S' und '-SX' im Default-Vektorraum sehr nah beieinanderliegen."
+  fair_winnable_a: false
+  rationale: "Zentrale ID-Disambiguierung für die Demo: Hybrid-Search (Lexikal-Token '-S' vs. '-SX') liefert hier eindeutig den Mehrwert von Variante B."
+
+- id: Q15
+  category: id-disambiguation
+  question: "Aus welchem Werkstoff besteht das Pumpengehäuse der AL-3000-SX?"
+  ground_truth: "1.4408 (Edelstahl)"
+  expected_source: "product-catalog.md, spec-sheet-AL-3000-family.md"
+  expected_failure_mode_a: "Data Library liefert EN-GJL-250 (Grauguss), weil das Embedding der AL-3000-SX nahe am Standardmodell AL-3000 liegt und der Standard-Werkstoff dominiert."
+  fair_winnable_a: false
+  rationale: "Zweite ID-Disambiguierung mit eindeutiger, prüfbarer Antwort. Werkstoffwechsel ist die Schlüsseldifferenz zwischen S und SX."

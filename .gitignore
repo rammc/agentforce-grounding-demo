@@ -1,0 +1,29 @@
+# Secrets
+.env
+.env.local
+
+# Node
+node_modules/
+
+# Eval results (regenerated per run; not source of truth)
+eval/results/run-*.json
+eval/results/run-*.md
+eval/results/.judge-cache.json
+
+# Build artifacts
+content/pdf/*.pdf
+scripts/templates/eisvogel.latex
+
+# Salesforce CLI scratch
+.sf/
+.sfdx/
+.tmp-retrieve/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editors
+.vscode/
+.idea/
+*.swp

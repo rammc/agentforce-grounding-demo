@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<BotVersion xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>v1</fullName>
+    <label>v1</label>
+    <!-- [Inference] Verknüpfung zum GenAiPlannerBundle. Tag-Name kann je nach
+         Release variieren (genAiPlannerName, plannerBundleName, ...).  Bei
+         Deploy-Fehler im UI nachsehen, welcher Tag-Name erwartet wird. -->
+    <genAiPlannerName>AeroLift_Agent_A</genAiPlannerName>
+    <responseDelay>0</responseDelay>
+    <conversationDefinitionPlanners>
+        <genAiPlannerName>AeroLift_Agent_A</genAiPlannerName>
+    </conversationDefinitionPlanners>
+</BotVersion>

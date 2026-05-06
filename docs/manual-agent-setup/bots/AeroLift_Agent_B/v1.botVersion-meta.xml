@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<BotVersion xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>v1</fullName>
+    <label>v1</label>
+    <genAiPlannerName>AeroLift_Agent_B</genAiPlannerName>
+    <responseDelay>0</responseDelay>
+    <conversationDefinitionPlanners>
+        <genAiPlannerName>AeroLift_Agent_B</genAiPlannerName>
+    </conversationDefinitionPlanners>
+</BotVersion>

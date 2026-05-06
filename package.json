@@ -1,0 +1,17 @@
+{
+  "name": "agentforce-grounding-demo",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "preprocess": "node scripts/preprocess.ts",
+    "eval": "node scripts/eval/run-eval.ts",
+    "eval:smoke": "node scripts/eval/run-eval.ts --skip-judge --only Q01,Q02"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.40.0",
+    "dotenv": "^17.0.0",
+    "js-yaml": "^4.1.0",
+    "marked": "^16.0.0"
+  }
+}

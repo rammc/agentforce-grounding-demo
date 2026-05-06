@@ -1,0 +1,297 @@
+﻿recordId,sourceFile,sourceSection,chunkType,content,productIds,docType,atexZone,tempMaxC,foerderleistungM3h,werkstoffGehaeuse,ex_certified,wirkungsgradPct,druckMaxBar,antriebsleistungKW
+atex-guide.md::rechtlicher-rahmen::chunk-0,atex-guide.md,Rechtlicher Rahmen,prose,"Die Auslegung folgt der EU-Richtlinie 2014/34/EU (ATEX-Produktrichtlinie). Der
+Betrieb explosionsgeschützter Geräte ist zusätzlich durch die Richtlinie
+1999/92/EG (ATEX-Betriebsrichtlinie) geregelt, in Deutschland umgesetzt über
+die Betriebssicherheitsverordnung (BetrSichV).",,atex,,,,,,,,
+atex-guide.md::zonenkonzept-gas::row-1,atex-guide.md,Zonenkonzept (Gas),table-row,"Zone: Zone 0 | Häufigkeit explosionsfähiger Atmosphäre: dauerhaft, langzeitig oder häufig | Gerätekategorie: Kategorie 1G",,atex,,,,,,,,
+atex-guide.md::zonenkonzept-gas::row-2,atex-guide.md,Zonenkonzept (Gas),table-row,Zone: Zone 1 | Häufigkeit explosionsfähiger Atmosphäre: gelegentlich im Normalbetrieb | Gerätekategorie: Kategorie 2G,,atex,,,,,,,,
+atex-guide.md::zonenkonzept-gas::row-3,atex-guide.md,Zonenkonzept (Gas),table-row,"Zone: Zone 2 | Häufigkeit explosionsfähiger Atmosphäre: nicht im Normalbetrieb, nur kurzzeitig | Gerätekategorie: Kategorie 3G",,atex,,,,,,,,
+atex-guide.md::zonenkonzept-gas::chunk-1,atex-guide.md,Zonenkonzept (Gas),prose,"Eine Pumpe der höheren Kategorie (z. B. 2G) darf in einer Zone niedrigerer
+Anforderung (Zone 2) betrieben werden, umgekehrt nicht.",,atex,,,,,,,,
+atex-guide.md::zertifizierte-modelle-der-aerolift-reihe::row-1,atex-guide.md,Zertifizierte Modelle der AeroLift-Reihe,table-row,Modell: AL-3000-S | ATEX-Zone: Zone 2 (Gas) | Gerätekennzeichnung: II 3G Ex h IIB T4 Gc | Zertifikatsnummer: BVS 21 ATEX E 042 X | Erstzertifizierung: 2021,AL-3000-S,atex,,,,,,,,
+atex-guide.md::zertifizierte-modelle-der-aerolift-reihe::row-2,atex-guide.md,Zertifizierte Modelle der AeroLift-Reihe,table-row,Modell: AL-3000-SX | ATEX-Zone: Zone 1 (Gas) | Gerätekennzeichnung: II 2G Ex h IIB T3 Gb | Zertifikatsnummer: BVS 23 ATEX E 089 X | Erstzertifizierung: 2023,AL-3000-SX,atex,,,,,,,,
+atex-guide.md::zertifizierte-modelle-der-aerolift-reihe::row-3,atex-guide.md,Zertifizierte Modelle der AeroLift-Reihe,table-row,Modell: AL-3500-HT-X | ATEX-Zone: Zone 1 (Gas) | Gerätekennzeichnung: II 2G Ex h IIB T3 Gb | Zertifikatsnummer: BVS 24 ATEX E 117 X | Erstzertifizierung: 2024,AL-3500-HT-X,atex,,,,,,,,
+atex-guide.md::zertifizierte-modelle-der-aerolift-reihe::chunk-2,atex-guide.md,Zertifizierte Modelle der AeroLift-Reihe,prose,"Zertifizierungsstelle: DEKRA EXAM GmbH, Bochum (notifizierte Stelle 0158).
+
+Die mit ""X"" am Ende der Zertifikatsnummer versehenen Zertifikate enthalten
+besondere Bedingungen für den sicheren Einsatz – diese sind in Abschnitt 17
+des jeweiligen EU-Baumusterprüfbescheinigungs-Dokuments aufgeführt und müssen
+vom Betreiber eingehalten werden.",,atex,,,,,,,,
+atex-guide.md::temperaturklassen::chunk-3,atex-guide.md,Temperaturklassen,prose,"Die Temperaturklassen geben die maximal zulässige Oberflächentemperatur an. Bei
+unseren ATEX-Pumpen relevant:",,atex,,,,,,,,
+atex-guide.md::temperaturklassen::row-1,atex-guide.md,Temperaturklassen,table-row,Temperaturklasse: T4 | Max. Oberflächentemperatur: 135 °C | Modelle: AL-3000-S,AL-3000-S,atex,,135,,,,,,
+atex-guide.md::temperaturklassen::row-2,atex-guide.md,Temperaturklassen,table-row,"Temperaturklasse: T3 | Max. Oberflächentemperatur: 200 °C | Modelle: AL-3000-SX, AL-3500-HT-X",AL-3000-SX;AL-3500-HT-X,atex,,200,,,,,,
+atex-guide.md::temperaturklassen::chunk-4,atex-guide.md,Temperaturklassen,prose,"Die Temperaturklasse berücksichtigt sowohl Medientemperatur als auch
+Reibungswärme aus Lagern und Dichtung.",,atex,,,,,,,,
+atex-guide.md::nicht-atex-zertifizierte-modelle::chunk-5,atex-guide.md,Nicht ATEX-zertifizierte Modelle,prose,"Folgende Modelle besitzen **keine** ATEX-Zertifizierung und dürfen in
+explosionsgefährdeten Bereichen nicht eingesetzt werden:
+
+- AL-3000
+- AL-3500
+- AL-3500-HT (auch nicht in Zone 2!)
+
+Die AL-3500-HT verfügt zwar über High-Temperature-Auslegung bis 220 °C,
+ist jedoch ausdrücklich nicht für Ex-Bereiche zugelassen. Für den Einsatz mit
+Heißmedien in Ex-Zone 1 ist die Variante AL-3500-HT-X erforderlich.",AL-3000;AL-3500;AL-3500-HT;AL-3500-HT-X,atex,,,,,,,,
+atex-guide.md::pflichten-des-betreibers::chunk-6,atex-guide.md,Pflichten des Betreibers,prose,"- Erstellung eines Explosionsschutzdokuments nach §6 BetrSichV
+- Einbindung der Pumpe in den Potentialausgleich
+- Wiederkehrende Prüfung durch befähigte Person, mindestens alle 3 Jahre
+- Bei Reparaturen ausschließlich Original-Ersatzteile mit ATEX-Konformität
+  verwenden – siehe `maintenance-manual.md`",,atex,,,,,,,,
+atex-guide.md::zubehoer-anforderungen::chunk-7,atex-guide.md,Zubehör-Anforderungen,prose,"Saug- und druckseitig montiertes Zubehör (Rückschlagventile, Filter) muss in
+Ex-Bereichen ebenfalls zertifiziert sein. AeroLift bietet zertifizierte
+Zubehörpakete unter den Bestellnummern 30-ATEX-100 (für AL-3000-Reihe Zone 1/2)
+und 35-ATEX-100 (für AL-3500-HT-X) an.",AL-3000;AL-3500-HT-X,atex,,,,,,,,
+changelog.md::al-3000-reihe::row-1,changelog.md,AL-3000-Reihe,table-row,Datum: 2018-03 | Modell: AL-3000 | Version: 1.0 | Änderung: Markteinführung Standard-Kreiselpumpe,AL-3000,changelog,,,,,,,,
+changelog.md::al-3000-reihe::row-2,changelog.md,AL-3000-Reihe,table-row,"Datum: 2019-09 | Modell: AL-3000 | Version: 1.1 | Änderung: Umstellung Lagerträger auf Lithiumkomplex-Fett, GLRD-Standard auf SiC/Kohle/EPDM",AL-3000,changelog,,,,,,,,
+changelog.md::al-3000-reihe::row-3,changelog.md,AL-3000-Reihe,table-row,"Datum: 2021-05 | Modell: AL-3000-S | Version: 1.0 | Änderung: Markteinführung ATEX-Variante Zone 2, Zertifikat BVS 21 ATEX E 042 X",AL-3000-S,changelog,,,,,,,,
+changelog.md::al-3000-reihe::row-4,changelog.md,AL-3000-Reihe,table-row,Datum: 2022-11 | Modell: AL-3000-S | Version: 1.1 | Änderung: Klemmenkasten auf erhöhten Schutzgrad nach EN 60079-15 angepasst,AL-3000-S,changelog,,,,,,,,
+changelog.md::al-3000-reihe::row-5,changelog.md,AL-3000-Reihe,table-row,"Datum: 2023-04 | Modell: AL-3000-SX | Version: 1.0 | Änderung: Markteinführung Edelstahlvariante mit ATEX Zone 1, Medientemperatur bis 150 °C, Zertifikat BVS 23 ATEX E 089 X",AL-3000-SX,changelog,,,,,,,,
+changelog.md::al-3000-reihe::row-6,changelog.md,AL-3000-Reihe,table-row,Datum: 2025-02 | Modell: AL-3000-SX | Version: 1.1 | Änderung: Welle auf Duplex 1.4462 umgestellt zur Verbesserung der Korrosionsbeständigkeit bei chloridhaltigen Medien,AL-3000-SX,changelog,,,,,,,,
+changelog.md::al-3500-reihe::row-1,changelog.md,AL-3500-Reihe,table-row,Datum: 2019-06 | Modell: AL-3500 | Version: 1.0 | Änderung: Markteinführung höher fördernde Standard-Kreiselpumpe (140 m³/h),AL-3500,changelog,,,,,,,,
+changelog.md::al-3500-reihe::row-2,changelog.md,AL-3500-Reihe,table-row,Datum: 2020-10 | Modell: AL-3500 | Version: 1.1 | Änderung: GLRD-Standard auf SiC/Kohle/EPDM vereinheitlicht (analog AL-3000 1.1),AL-3500,changelog,,,,,,,,
+changelog.md::al-3500-reihe::row-3,changelog.md,AL-3500-Reihe,table-row,"Datum: 2022-07 | Modell: AL-3500-HT | Version: 1.0 | Änderung: Markteinführung High-Temperature-Variante mit ölgekühltem Lagerträger, Medientemperatur bis 220 °C",AL-3500-HT,changelog,,,,,,,,
+changelog.md::al-3500-reihe::row-4,changelog.md,AL-3500-Reihe,table-row,Datum: 2023-12 | Modell: AL-3500-HT | Version: 1.1 | Änderung: Optionales Kühlwasser-Mengenmessgerät als Zubehör verfügbar,AL-3500-HT,changelog,,,,,,,,
+changelog.md::al-3500-reihe::row-5,changelog.md,AL-3500-Reihe,table-row,"Datum: 2024-09 | Modell: AL-3500-HT-X | Version: 1.0 | Änderung: Markteinführung HT-Variante mit ATEX Zone 1, Zertifikat BVS 24 ATEX E 117 X",AL-3500-HT-X,changelog,,,,,,,,
+changelog.md::end-of-life-hinweise::chunk-0,changelog.md,End-of-Life-Hinweise,prose,"Aktuell sind keine Modelle der AL-3000- oder AL-3500-Reihe abgekündigt. Die
+ältere AL-2500-Reihe wurde 2020 durch die AL-3500-Reihe abgelöst und wird seit
+2023-12 nicht mehr produziert; Ersatzteilversorgung ist bis 2030-12
+sichergestellt.",AL-3000;AL-3500;AL-2500,changelog,,,,,,,,
+changelog.md::zertifizierungs-meilensteine::chunk-1,changelog.md,Zertifizierungs-Meilensteine,prose,"- **2021-05** – Erste ATEX-Zertifizierung im Portfolio (AL-3000-S, Zone 2)
+- **2023-04** – Erste ATEX-Zone-1-Zertifizierung (AL-3000-SX)
+- **2024-09** – Erste Kombination aus Zone 1 und High-Temperature (AL-3500-HT-X)",AL-3000-S;AL-3000-SX;AL-3500-HT-X,changelog,,,,,,,,
+compatibility-matrix.md::uebersichtsmatrix::row-1,compatibility-matrix.md,Übersichtsmatrix,table-row,"Medienklasse: Brauchwasser, Kühlwasser, neutral | AL-3000: A | AL-3000-S: A | AL-3000-SX: A | AL-3500: A | AL-3500-HT: A | AL-3500-HT-X: A",AL-3000;AL-3000-S;AL-3000-SX;AL-3500;AL-3500-HT;AL-3500-HT-X,compatibility,,,,,,,,
+compatibility-matrix.md::uebersichtsmatrix::row-2,compatibility-matrix.md,Übersichtsmatrix,table-row,Medienklasse: Schwach saure wässrige Medien (pH 4–6) | AL-3000: B¹ | AL-3000-S: B¹ | AL-3000-SX: A | AL-3500: B¹ | AL-3500-HT: A | AL-3500-HT-X: A,AL-3000;AL-3000-S;AL-3000-SX;AL-3500;AL-3500-HT;AL-3500-HT-X,compatibility,,,,,,,,
+compatibility-matrix.md::uebersichtsmatrix::row-3,compatibility-matrix.md,Übersichtsmatrix,table-row,Medienklasse: Stark saure Medien (pH < 4) | AL-3000: N | AL-3000-S: N | AL-3000-SX: B² | AL-3500: N | AL-3500-HT: B² | AL-3500-HT-X: B²,AL-3000;AL-3000-S;AL-3000-SX;AL-3500;AL-3500-HT;AL-3500-HT-X,compatibility,,,,,,,,
+compatibility-matrix.md::uebersichtsmatrix::row-4,compatibility-matrix.md,Übersichtsmatrix,table-row,Medienklasse: Schwach alkalische Medien (pH 8–10) | AL-3000: A | AL-3000-S: A | AL-3000-SX: A | AL-3500: A | AL-3500-HT: A | AL-3500-HT-X: A,AL-3000;AL-3000-S;AL-3000-SX;AL-3500;AL-3500-HT;AL-3500-HT-X,compatibility,,,,,,,,
+compatibility-matrix.md::uebersichtsmatrix::row-5,compatibility-matrix.md,Übersichtsmatrix,table-row,Medienklasse: Stark alkalische Medien (pH > 12) | AL-3000: B¹ | AL-3000-S: B¹ | AL-3000-SX: A | AL-3500: B¹ | AL-3500-HT: A | AL-3500-HT-X: A,AL-3000;AL-3000-S;AL-3000-SX;AL-3500;AL-3500-HT;AL-3500-HT-X,compatibility,,,,,,,,
+compatibility-matrix.md::uebersichtsmatrix::row-6,compatibility-matrix.md,Übersichtsmatrix,table-row,Medienklasse: Organische Lösungsmittel (nicht halogeniert) | AL-3000: B¹ | AL-3000-S: B¹ | AL-3000-SX: A | AL-3500: B¹ | AL-3500-HT: A | AL-3500-HT-X: A,AL-3000;AL-3000-S;AL-3000-SX;AL-3500;AL-3500-HT;AL-3500-HT-X,compatibility,,,,,,,,
+compatibility-matrix.md::uebersichtsmatrix::row-7,compatibility-matrix.md,Übersichtsmatrix,table-row,Medienklasse: Halogenierte Lösungsmittel | AL-3000: N | AL-3000-S: N | AL-3000-SX: B² | AL-3500: N | AL-3500-HT: B² | AL-3500-HT-X: B²,AL-3000;AL-3000-S;AL-3000-SX;AL-3500;AL-3500-HT;AL-3500-HT-X,compatibility,,,,,,,,
+compatibility-matrix.md::uebersichtsmatrix::row-8,compatibility-matrix.md,Übersichtsmatrix,table-row,Medienklasse: Lebensmittel (FDA-Anforderung) | AL-3000: N | AL-3000-S: N | AL-3000-SX: A | AL-3500: N | AL-3500-HT: A | AL-3500-HT-X: A,AL-3000;AL-3000-S;AL-3000-SX;AL-3500;AL-3500-HT;AL-3500-HT-X,compatibility,,,,,,,,
+compatibility-matrix.md::uebersichtsmatrix::row-9,compatibility-matrix.md,Übersichtsmatrix,table-row,Medienklasse: Thermalöl bis 220 °C | AL-3000: N | AL-3000-S: N | AL-3000-SX: N | AL-3500: N | AL-3500-HT: A | AL-3500-HT-X: A,AL-3000;AL-3000-S;AL-3000-SX;AL-3500;AL-3500-HT;AL-3500-HT-X,compatibility,,,,,,,,
+compatibility-matrix.md::uebersichtsmatrix::row-10,compatibility-matrix.md,Übersichtsmatrix,table-row,Medienklasse: Heißwasser bis 150 °C | AL-3000: N | AL-3000-S: N | AL-3000-SX: A | AL-3500: N | AL-3500-HT: A | AL-3500-HT-X: A,AL-3000;AL-3000-S;AL-3000-SX;AL-3500;AL-3500-HT;AL-3500-HT-X,compatibility,,,,,,,,
+compatibility-matrix.md::uebersichtsmatrix::row-11,compatibility-matrix.md,Übersichtsmatrix,table-row,Medienklasse: Heißwasser bis 220 °C | AL-3000: N | AL-3000-S: N | AL-3000-SX: N | AL-3500: N | AL-3500-HT: A | AL-3500-HT-X: A,AL-3000;AL-3000-S;AL-3000-SX;AL-3500;AL-3500-HT;AL-3500-HT-X,compatibility,,,,,,,,
+compatibility-matrix.md::uebersichtsmatrix::row-12,compatibility-matrix.md,Übersichtsmatrix,table-row,Medienklasse: Brennbare Medien in Ex-Zone 2 | AL-3000: N | AL-3000-S: A | AL-3000-SX: A | AL-3500: N | AL-3500-HT: N | AL-3500-HT-X: A,AL-3000;AL-3000-S;AL-3000-SX;AL-3500;AL-3500-HT;AL-3500-HT-X,compatibility,,,,,,,,
+compatibility-matrix.md::uebersichtsmatrix::row-13,compatibility-matrix.md,Übersichtsmatrix,table-row,Medienklasse: Brennbare Medien in Ex-Zone 1 | AL-3000: N | AL-3000-S: N | AL-3000-SX: A | AL-3500: N | AL-3500-HT: N | AL-3500-HT-X: A,AL-3000;AL-3000-S;AL-3000-SX;AL-3500;AL-3500-HT;AL-3500-HT-X,compatibility,,,,,,,,
+compatibility-matrix.md::hinweise::chunk-0,compatibility-matrix.md,Hinweise,prose,"¹ Graugussgehäuse hat eingeschränkte Korrosionsbeständigkeit. Für Dauerbetrieb
+unter pH 6 oder bei stark alkalischen Medien (NaOH > 10 %) muss in regelmäßigen
+Abständen die Wandstärkenmessung erfolgen, oder es ist auf eine Edelstahl-
+variante (-SX, -HT, -HT-X) auszuweichen.
+
+² Bei stark sauren oder halogenierten Medien ist die Dichtungswahl projekt-
+spezifisch (FFKM oder Kalrez). Eignung wird im Einzelfall durch das
+AeroLift-Anwendungsteam freigegeben.",,compatibility,,,,,,,,
+compatibility-matrix.md::lebensmittelanwendungen::chunk-1,compatibility-matrix.md,Lebensmittelanwendungen,prose,"Nur die Modelle mit vollständigem Edelstahl-Mediumkontakt
+(AL-3000-SX, AL-3500-HT, AL-3500-HT-X) erfüllen die Anforderungen aus FDA
+21 CFR 177 und EG 1935/2004 und sind damit für den Lebensmittelkontakt
+freigegeben. Die Eignung umfasst:
+
+- Trinkwasser
+- Saftkonzentrate (pH > 4)
+- Milch und Milcherzeugnisse
+- Pflanzenöle (kalt bis 80 °C)
+
+CIP-Reinigungsmittel auf Basis von NaOH (max. 5 %) und HNO₃ (max. 3 %) sind
+zugelassen.",AL-3000-SX;AL-3500-HT;AL-3500-HT-X,compatibility,,,,,,,,
+compatibility-matrix.md::ex-zonen-eignung-im-ueberblick::row-1,compatibility-matrix.md,Ex-Zonen-Eignung im Überblick,table-row,Modell: AL-3000 | Zone 0: nein | Zone 1: nein | Zone 2: nein,AL-3000,compatibility,,,,,,,,
+compatibility-matrix.md::ex-zonen-eignung-im-ueberblick::row-2,compatibility-matrix.md,Ex-Zonen-Eignung im Überblick,table-row,Modell: AL-3000-S | Zone 0: nein | Zone 1: nein | Zone 2: ja,AL-3000-S,compatibility,,,,,,,,
+compatibility-matrix.md::ex-zonen-eignung-im-ueberblick::row-3,compatibility-matrix.md,Ex-Zonen-Eignung im Überblick,table-row,Modell: AL-3000-SX | Zone 0: nein | Zone 1: ja | Zone 2: ja,AL-3000-SX,compatibility,,,,,,,,
+compatibility-matrix.md::ex-zonen-eignung-im-ueberblick::row-4,compatibility-matrix.md,Ex-Zonen-Eignung im Überblick,table-row,Modell: AL-3500 | Zone 0: nein | Zone 1: nein | Zone 2: nein,AL-3500,compatibility,,,,,,,,
+compatibility-matrix.md::ex-zonen-eignung-im-ueberblick::row-5,compatibility-matrix.md,Ex-Zonen-Eignung im Überblick,table-row,Modell: AL-3500-HT | Zone 0: nein | Zone 1: nein | Zone 2: nein,AL-3500-HT,compatibility,,,,,,,,
+compatibility-matrix.md::ex-zonen-eignung-im-ueberblick::row-6,compatibility-matrix.md,Ex-Zonen-Eignung im Überblick,table-row,Modell: AL-3500-HT-X | Zone 0: nein | Zone 1: ja | Zone 2: ja,AL-3500-HT-X,compatibility,,,,,,,,
+compatibility-matrix.md::ex-zonen-eignung-im-ueberblick::chunk-2,compatibility-matrix.md,Ex-Zonen-Eignung im Überblick,prose,"Eine Pumpe für Zone 1 darf in Zone 2 betrieben werden, jedoch nicht umgekehrt.
+Zone 0 (dauerhaft Ex-Atmosphäre) wird von keinem Modell der AL-3000- und
+AL-3500-Reihe abgedeckt.",AL-3000;AL-3500,compatibility,,,,,,,,
+faq.md::welche-pumpen-eignen-sich-fuer-den-einsatz-in-der-lebensmittelindustrie::chunk-0,faq.md,Welche Pumpen eignen sich für den Einsatz in der Lebensmittelindustrie?,prose,"Für den direkten Lebensmittelkontakt müssen alle medienberührten Teile aus
+Edelstahl bestehen. Diese Anforderung erfüllen die Modelle **AL-3000-SX**,
+**AL-3500-HT** und **AL-3500-HT-X**. Die Graugussvarianten (AL-3000, AL-3000-S,
+AL-3500) sind dafür nicht geeignet.",AL-3000-SX;AL-3500-HT;AL-3500-HT-X;AL-3000;AL-3000-S;AL-3500,faq,,,,,,,,
+faq.md::welche-pumpe-brauche-ich-fuer-140-m-h-foerderleistung-in-einer-ex-zone-1-umgebung::chunk-1,faq.md,Welche Pumpe brauche ich für 140 m³/h Förderleistung in einer Ex-Zone-1-Umgebung?,prose,"Die einzige Pumpe der Familie, die diese Kombination abdeckt, ist die
+**AL-3500-HT-X**. Die normale AL-3500 liefert zwar 140 m³/h, hat aber keine
+ATEX-Zertifizierung.",AL-3500-HT-X;AL-3500,faq,,,,,,,,
+faq.md::was-ist-der-unterschied-zwischen-al-3000-s-und-al-3000-sx::chunk-2,faq.md,Was ist der Unterschied zwischen AL-3000-S und AL-3000-SX?,prose,"Die AL-3000-S ist eine ATEX-Zone-2-Variante mit Graugussgehäuse und max.
+Medientemperatur 120 °C. Die AL-3000-SX ist eine ATEX-Zone-1-Variante mit
+Edelstahlgehäuse (1.4408) und Medientemperatur bis 150 °C. Die SX ist nicht
+einfach eine ""höher zertifizierte S"" – sie unterscheidet sich auch im
+Werkstoff und Temperaturbereich.",AL-3000-S;AL-3000-SX,faq,,,,,,,,
+faq.md::darf-ich-eine-al-3500-ht-in-einer-ex-zone-betreiben::chunk-3,faq.md,Darf ich eine AL-3500-HT in einer Ex-Zone betreiben?,prose,"Nein. Die AL-3500-HT besitzt keine ATEX-Zertifizierung, auch nicht für Zone 2.
+Für Heißmedien in Ex-Bereichen ist ausschließlich die AL-3500-HT-X freigegeben.",AL-3500-HT;AL-3500-HT-X,faq,,,,,,,,
+faq.md::wir-haben-ph-3-saeure-zu-foerdern-welches-modell-empfehlt-ihr::chunk-4,faq.md,Wir haben pH 3-Säure zu fördern. Welches Modell empfehlt ihr?,prose,"Stark saure Medien (pH < 4) sind in der Standardausführung kein Auslegungsfall.
+Mit Edelstahl 1.4408 und FFKM-Dichtung sind AL-3000-SX, AL-3500-HT und
+AL-3500-HT-X bedingt geeignet – die finale Freigabe macht das
+AeroLift-Anwendungsteam projektspezifisch.",AL-3000-SX;AL-3500-HT;AL-3500-HT-X,faq,,,,,,,,
+faq.md::welche-antriebsleistung-haben-die-pumpen::chunk-5,faq.md,Welche Antriebsleistung haben die Pumpen?,prose,"Die gesamte AL-3000-Reihe hat 22 kW Antriebsleistung, die gesamte AL-3500-Reihe
+37 kW. Die Antriebsleistung ist innerhalb einer Reihe identisch, unabhängig
+von ATEX- oder HT-Variante.",AL-3000;AL-3500,faq,,,,,,,,
+faq.md::wie-hoch-ist-der-wirkungsgrad::chunk-6,faq.md,Wie hoch ist der Wirkungsgrad?,prose,"Im Auslegungspunkt: AL-3000 / AL-3000-S 72 %, AL-3000-SX 70 %, AL-3500 76 %,
+AL-3500-HT / AL-3500-HT-X 74 %.",AL-3000;AL-3000-S;AL-3000-SX;AL-3500;AL-3500-HT;AL-3500-HT-X,faq,,,,,,,,
+faq.md::welche-anschlussgroessen-haben-die-pumpen::chunk-7,faq.md,Welche Anschlussgrößen haben die Pumpen?,prose,"AL-3000-Reihe: Saug DN65, Druck DN50. AL-3500-Reihe: Saug DN80, Druck DN65.
+Bei den HT-Varianten sind die Flansche in PN25 ausgeführt, sonst PN16.",AL-3000;AL-3500,faq,,,,,,,,
+faq.md::wie-oft-muss-eine-grossinspektion-durchgefuehrt-werden::chunk-8,faq.md,Wie oft muss eine Großinspektion durchgeführt werden?,prose,"Standardmodelle (AL-3000, AL-3500): 4.000 Bh oder 12 Monate. ATEX-Modelle der
+AL-3000-Reihe: 3.500 Bh (S) bzw. 3.000 Bh (SX). HT-Modelle: 2.500 Bh / 6 Monate
+(HT) bzw. 2.000 Bh / 6 Monate (HT-X). Maßgeblich ist der zuerst erreichte
+Wert.",AL-3000;AL-3500,faq,,,,,,,,
+faq.md::welche-schmierstoffe-sind-freigegeben::chunk-9,faq.md,Welche Schmierstoffe sind freigegeben?,prose,"Lagerfett: Klüberplex BEM 41-132 oder SKF LGHP 2. Lagerträgeröl (nur HT):
+Klüberoil GEM 1-150 N oder Mobil SHC 629. Andere Produkte nur nach Freigabe.",,faq,,,,,,,,
+faq.md::wer-hat-die-atex-zertifikate-ausgestellt::chunk-10,faq.md,Wer hat die ATEX-Zertifikate ausgestellt?,prose,"Alle ATEX-Zertifikate stammen von der DEKRA EXAM GmbH (notifizierte Stelle
+0158). Die aktuellen Zertifikatsnummern stehen im `atex-guide.md`.",,faq,,,,,,,,
+faq.md::sind-die-pumpen-nach-fda-zugelassen::chunk-11,faq.md,Sind die Pumpen nach FDA zugelassen?,prose,"Die Edelstahlvarianten (AL-3000-SX, AL-3500-HT, AL-3500-HT-X) erfüllen die
+Anforderungen aus FDA 21 CFR 177 und EG 1935/2004. Eine separate FDA-Zulassung
+gibt es nicht – relevant ist die Konformität der Werkstoffe.",AL-3000-SX;AL-3500-HT;AL-3500-HT-X,faq,,,,,,,,
+faq.md::wie-lange-ist-die-ersatzteilversorgung-garantiert::chunk-12,faq.md,Wie lange ist die Ersatzteilversorgung garantiert?,prose,"AeroLift garantiert die Ersatzteilversorgung mindestens 10 Jahre nach
+Auslaufen eines Modells. Die abgekündigte AL-2500-Reihe ist bis 2030-12
+versorgt.",AL-2500,faq,,,,,,,,
+maintenance-manual.md::wartungsintervalle::chunk-0,maintenance-manual.md,Wartungsintervalle,prose,"Die Intervalle werden in Betriebsstunden (Bh) bzw. Kalenderzeit angegeben –
+maßgeblich ist der zuerst erreichte Wert.",,maintenance,,,,,,,,
+maintenance-manual.md::wartungsintervalle::row-1,maintenance-manual.md,Wartungsintervalle,table-row,Modell: AL-3000 | Großinspektion: 4.000 Bh / 12 Monate | Lagerwechsel: 16.000 Bh | Ölwechsel Lagerträger: – (fettgeschmiert) | GLRD-Wechsel (geplant): 8.000 Bh,AL-3000,maintenance,,,,,,,,
+maintenance-manual.md::wartungsintervalle::row-2,maintenance-manual.md,Wartungsintervalle,table-row,Modell: AL-3000-S | Großinspektion: 3.500 Bh / 12 Monate | Lagerwechsel: 14.000 Bh | Ölwechsel Lagerträger: – (fettgeschmiert) | GLRD-Wechsel (geplant): 7.000 Bh,AL-3000-S,maintenance,,,,,,,,
+maintenance-manual.md::wartungsintervalle::row-3,maintenance-manual.md,Wartungsintervalle,table-row,Modell: AL-3000-SX | Großinspektion: 3.000 Bh / 12 Monate | Lagerwechsel: 12.000 Bh | Ölwechsel Lagerträger: – (fettgeschmiert) | GLRD-Wechsel (geplant): 6.000 Bh,AL-3000-SX,maintenance,,,,,,,,
+maintenance-manual.md::wartungsintervalle::row-4,maintenance-manual.md,Wartungsintervalle,table-row,Modell: AL-3500 | Großinspektion: 4.000 Bh / 12 Monate | Lagerwechsel: 16.000 Bh | Ölwechsel Lagerträger: – (fettgeschmiert) | GLRD-Wechsel (geplant): 8.000 Bh,AL-3500,maintenance,,,,,,,,
+maintenance-manual.md::wartungsintervalle::row-5,maintenance-manual.md,Wartungsintervalle,table-row,Modell: AL-3500-HT | Großinspektion: 2.500 Bh / 6 Monate | Lagerwechsel: 10.000 Bh | Ölwechsel Lagerträger: 2.500 Bh / 6 Monate | GLRD-Wechsel (geplant): 5.000 Bh,AL-3500-HT,maintenance,,,,,,,,
+maintenance-manual.md::wartungsintervalle::row-6,maintenance-manual.md,Wartungsintervalle,table-row,Modell: AL-3500-HT-X | Großinspektion: 2.000 Bh / 6 Monate | Lagerwechsel: 8.000 Bh | Ölwechsel Lagerträger: 2.000 Bh / 6 Monate | GLRD-Wechsel (geplant): 4.000 Bh,AL-3500-HT-X,maintenance,,,,,,,,
+maintenance-manual.md::wartungsintervalle::chunk-1,maintenance-manual.md,Wartungsintervalle,prose,"ATEX-zertifizierte Pumpen (-S, -SX, -HT-X) haben kürzere Großinspektions-
+intervalle, weil zusätzliche Prüfungen an Temperaturüberwachung und
+Erdungsverbindungen vorgeschrieben sind.
+
+Die HT-Modelle haben deutlich kürzere Intervalle, weil die thermische Belastung
+der Lager und Dichtungen höher ist und die Lagerträgerkühlung halbjährlich
+geprüft werden muss.",,maintenance,,,,,,,,
+maintenance-manual.md::routine-inspektion-alle-500-bh::chunk-2,maintenance-manual.md,Routine-Inspektion (alle 500 Bh),prose,"Unabhängig vom Modell:
+
+- Sichtkontrolle auf Leckage an GLRD und Flanschdichtungen
+- Vibrationsmessung am Lagergehäuse, Grenzwert 4,5 mm/s RMS (DIN ISO 10816-3)
+- Sauberkeit der Lüfterhaube prüfen
+- Bei ATEX-Pumpen: Erdungsklemme auf festen Sitz prüfen",,maintenance,,,,,,,,
+maintenance-manual.md::ersatzteilliste-standard::chunk-3,maintenance-manual.md,Ersatzteilliste (Standard),prose,Pro Großinspektion mindestens vorzuhalten:,,maintenance,,,,,,,,
+maintenance-manual.md::ersatzteilliste-standard::row-1,maintenance-manual.md,Ersatzteilliste (Standard),table-row,Position: Gleitringdichtung Set | AL-3000 / AL-3000-S: 30-100-001 | AL-3000-SX: 30-100-005 | AL-3500 / AL-3500-HT(-X): 35-100-001,AL-3000;AL-3000-S;AL-3000-SX;AL-3500;AL-3500-HT,maintenance,,,,,,,,
+maintenance-manual.md::ersatzteilliste-standard::row-2,maintenance-manual.md,Ersatzteilliste (Standard),table-row,Position: Spaltring Saug | AL-3000 / AL-3000-S: 30-200-010 | AL-3000-SX: 30-200-015 | AL-3500 / AL-3500-HT(-X): 35-200-010,AL-3000;AL-3000-S;AL-3000-SX;AL-3500;AL-3500-HT,maintenance,,,,,,,,
+maintenance-manual.md::ersatzteilliste-standard::row-3,maintenance-manual.md,Ersatzteilliste (Standard),table-row,Position: Spaltring Druck | AL-3000 / AL-3000-S: 30-200-011 | AL-3000-SX: 30-200-016 | AL-3500 / AL-3500-HT(-X): 35-200-011,AL-3000;AL-3000-S;AL-3000-SX;AL-3500;AL-3500-HT,maintenance,,,,,,,,
+maintenance-manual.md::ersatzteilliste-standard::row-4,maintenance-manual.md,Ersatzteilliste (Standard),table-row,Position: Lagerset Antriebsseite | AL-3000 / AL-3000-S: 30-300-100 | AL-3000-SX: 30-300-100 | AL-3500 / AL-3500-HT(-X): 35-300-100,AL-3000;AL-3000-S;AL-3000-SX;AL-3500;AL-3500-HT,maintenance,,,,,,,,
+maintenance-manual.md::ersatzteilliste-standard::row-5,maintenance-manual.md,Ersatzteilliste (Standard),table-row,Position: Lagerset Pumpenseite | AL-3000 / AL-3000-S: 30-300-101 | AL-3000-SX: 30-300-101 | AL-3500 / AL-3500-HT(-X): 35-300-101,AL-3000;AL-3000-S;AL-3000-SX;AL-3500;AL-3500-HT,maintenance,,,,,,,,
+maintenance-manual.md::ersatzteilliste-standard::row-6,maintenance-manual.md,Ersatzteilliste (Standard),table-row,Position: Dichtungssatz Gehäuse | AL-3000 / AL-3000-S: 30-400-200 | AL-3000-SX: 30-400-205 | AL-3500 / AL-3500-HT(-X): 35-400-200,AL-3000;AL-3000-S;AL-3000-SX;AL-3500;AL-3500-HT,maintenance,,,,,,,,
+maintenance-manual.md::ersatzteilliste-standard::chunk-4,maintenance-manual.md,Ersatzteilliste (Standard),prose,"Für AL-3000-SX und AL-3500-HT-X gilt: Ersatzteile mit Mediumkontakt sind
+ausschließlich in der zertifizierten Ausführung zu verwenden, andernfalls
+erlischt die ATEX-Zulassung.",AL-3000-SX;AL-3500-HT-X,maintenance,,,,,,,,
+maintenance-manual.md::lagerfett-al-3000-reihe-und-al-3500::row-1,maintenance-manual.md,Lagerfett (AL-3000-Reihe und AL-3500),table-row,"Hersteller: Klüber | Produkt: Klüberplex BEM 41-132 | Eigenschaften: Lithiumkomplex, NLGI 2, –30 bis +130 °C",,maintenance,,,,,,,,
+maintenance-manual.md::lagerfett-al-3000-reihe-und-al-3500::row-2,maintenance-manual.md,Lagerfett (AL-3000-Reihe und AL-3500),table-row,"Hersteller: SKF | Produkt: LGHP 2 | Eigenschaften: Polyharnstoff, NLGI 2/3, –40 bis +150 °C",,maintenance,,,,,,,,
+maintenance-manual.md::lagerfett-al-3000-reihe-und-al-3500::chunk-5,maintenance-manual.md,Lagerfett (AL-3000-Reihe und AL-3500),prose,"Befüllmenge je Lager: 25 g (AL-3000-Reihe), 40 g (AL-3500).",AL-3000;AL-3500,maintenance,,,,,,,,
+maintenance-manual.md::lagertraegeroel-al-3500-ht-al-3500-ht-x::row-1,maintenance-manual.md,"Lagerträgeröl (AL-3500-HT, AL-3500-HT-X)",table-row,"Hersteller: Klüber | Produkt: Klüberoil GEM 1-150 N | Eigenschaften: Mineralöl, ISO VG 150",,maintenance,,,,,,,,
+maintenance-manual.md::lagertraegeroel-al-3500-ht-al-3500-ht-x::row-2,maintenance-manual.md,"Lagerträgeröl (AL-3500-HT, AL-3500-HT-X)",table-row,"Hersteller: Mobil | Produkt: SHC 629 | Eigenschaften: Synthetiköl, ISO VG 150",,maintenance,,,,,,,,
+maintenance-manual.md::lagertraegeroel-al-3500-ht-al-3500-ht-x::chunk-6,maintenance-manual.md,"Lagerträgeröl (AL-3500-HT, AL-3500-HT-X)",prose,"Füllvolumen Lagerträger: 1,8 Liter. Ölstand am Schauglas mittig halten.",,maintenance,,,,,,,,
+maintenance-manual.md::stillstand-und-lagerung::chunk-7,maintenance-manual.md,Stillstand und Lagerung,prose,"Bei Stillstand >2 Wochen muss die Welle wöchentlich von Hand mind. eine halbe
+Umdrehung gedreht werden, um Standabdrücke an den Lagern zu vermeiden. Bei
+ATEX-Pumpen darf das nur nach Freischalten und ggf. Inertisierung erfolgen.",,maintenance,,,,,,,,
+product-catalog.md::uebersicht-der-produktfamilie::chunk-0,product-catalog.md,Übersicht der Produktfamilie,prose,"Die AeroLift-Kreiselpumpen sind für den Dauerbetrieb in industriellen Prozessen
+ausgelegt. Beide Reihen teilen sich Wellenkonzept, Lagerträger und
+Antriebsschnittstelle. Sie unterscheiden sich primär in Förderleistung,
+zulässiger Medientemperatur, Werkstoff und Explosionsschutz.",,catalog,,,,,,,,
+product-catalog.md::spezifikations-uebersicht::row-1,product-catalog.md,Spezifikations-Übersicht,table-row,Modell: AL-3000 | Bauart: Einstufige Kreiselpumpe | Förderleistung: 80 m³/h | Max. Medientemp.: 120 °C | Max. Druck: 16 bar | Saug-/Druck-DN: DN65 / DN50 | Werkstoff Gehäuse: EN-GJL-250 (Grauguss) | Wirkungsgrad: 72 % | Gewicht: 145 kg | Antriebsleistung: 22 kW | Ex-Schutz: keine,AL-3000,catalog,,120,80,EN-GJL-250 (Grauguss),false,72,16,22
+product-catalog.md::spezifikations-uebersicht::row-2,product-catalog.md,Spezifikations-Übersicht,table-row,Modell: AL-3000-S | Bauart: Einstufige Kreiselpumpe | Förderleistung: 80 m³/h | Max. Medientemp.: 120 °C | Max. Druck: 16 bar | Saug-/Druck-DN: DN65 / DN50 | Werkstoff Gehäuse: EN-GJL-250 (Grauguss) | Wirkungsgrad: 72 % | Gewicht: 158 kg | Antriebsleistung: 22 kW | Ex-Schutz: ATEX Zone 2 (Gas),AL-3000-S,catalog,2,120,80,EN-GJL-250 (Grauguss),true,72,16,22
+product-catalog.md::spezifikations-uebersicht::row-3,product-catalog.md,Spezifikations-Übersicht,table-row,Modell: AL-3000-SX | Bauart: Einstufige Kreiselpumpe | Förderleistung: 80 m³/h | Max. Medientemp.: 150 °C | Max. Druck: 16 bar | Saug-/Druck-DN: DN65 / DN50 | Werkstoff Gehäuse: 1.4408 (Edelstahl) | Wirkungsgrad: 70 % | Gewicht: 172 kg | Antriebsleistung: 22 kW | Ex-Schutz: ATEX Zone 1 (Gas),AL-3000-SX,catalog,1,150,80,1.4408 (Edelstahl),true,70,16,22
+product-catalog.md::spezifikations-uebersicht::row-4,product-catalog.md,Spezifikations-Übersicht,table-row,Modell: AL-3500 | Bauart: Einstufige Kreiselpumpe | Förderleistung: 140 m³/h | Max. Medientemp.: 120 °C | Max. Druck: 16 bar | Saug-/Druck-DN: DN80 / DN65 | Werkstoff Gehäuse: EN-GJL-250 (Grauguss) | Wirkungsgrad: 76 % | Gewicht: 215 kg | Antriebsleistung: 37 kW | Ex-Schutz: keine,AL-3500,catalog,,120,140,EN-GJL-250 (Grauguss),false,76,16,37
+product-catalog.md::spezifikations-uebersicht::row-5,product-catalog.md,Spezifikations-Übersicht,table-row,Modell: AL-3500-HT | Bauart: Einstufige Kreiselpumpe | Förderleistung: 140 m³/h | Max. Medientemp.: 220 °C | Max. Druck: 16 bar | Saug-/Druck-DN: DN80 / DN65 | Werkstoff Gehäuse: 1.4408 (Edelstahl) | Wirkungsgrad: 74 % | Gewicht: 232 kg | Antriebsleistung: 37 kW | Ex-Schutz: keine,AL-3500-HT,catalog,,220,140,1.4408 (Edelstahl),false,74,16,37
+product-catalog.md::spezifikations-uebersicht::row-6,product-catalog.md,Spezifikations-Übersicht,table-row,Modell: AL-3500-HT-X | Bauart: Einstufige Kreiselpumpe | Förderleistung: 140 m³/h | Max. Medientemp.: 220 °C | Max. Druck: 16 bar | Saug-/Druck-DN: DN80 / DN65 | Werkstoff Gehäuse: 1.4408 (Edelstahl) | Wirkungsgrad: 74 % | Gewicht: 248 kg | Antriebsleistung: 37 kW | Ex-Schutz: ATEX Zone 1 (Gas),AL-3500-HT-X,catalog,1,220,140,1.4408 (Edelstahl),true,74,16,37
+product-catalog.md::al-3000::chunk-1,product-catalog.md,AL-3000,prose,"Standard-Kreiselpumpe für allgemeine Industrieanwendungen ohne
+Explosionsschutzanforderung. Graugussgehäuse, Standardlaufrad, Gleitringdichtung
+nach EN 12756. Typische Einsatzfelder: Kühlwasserkreisläufe, Brauchwasser,
+neutrale Medien bis 120 °C.",,catalog,,,,,,,,
+product-catalog.md::al-3000-s::chunk-2,product-catalog.md,AL-3000-S,prose,"Variante mit ATEX-Zertifizierung für Zone 2 (Gas). Mechanisch identisch zur
+AL-3000, jedoch mit zertifizierter Lagerüberwachung, statisch ableitfähiger
+Lackierung und ATEX-konformem Klemmenkasten. Eingesetzt in Bereichen mit
+gelegentlich auftretender explosionsfähiger Atmosphäre, etwa Pufferräumen oder
+Außenbereichen von Anlagen.",AL-3000,catalog,,,,,,,,
+product-catalog.md::al-3000-sx::chunk-3,product-catalog.md,AL-3000-SX,prose,"Erweiterte Sicherheitsvariante für ATEX Zone 1 (Gas) und erhöhte
+Medientemperaturen bis 150 °C. Gehäuse und benetzte Teile in Edelstahl 1.4408,
+zusätzliche Temperaturüberwachung am Lagerträger. Eingesetzt in
+Lebensmittel-, Pharma- und Chemieanwendungen mit dauerhafter
+Ex-Atmosphäre-Anforderung.",,catalog,,,,,,,,
+product-catalog.md::al-3500::chunk-4,product-catalog.md,AL-3500,prose,"Höher fördernde Standard-Kreiselpumpe ohne Explosionsschutzanforderung. Gleiche
+Konstruktionsphilosophie wie AL-3000, jedoch größeres Laufrad (DN80 saugseitig)
+und stärkerer Antrieb. Typisch für Prozesswasser, Heizungsumwälzung in
+Großanlagen, neutrale Medien bis 120 °C.",AL-3000,catalog,,,,,,,,
+product-catalog.md::al-3500-ht::chunk-5,product-catalog.md,AL-3500-HT,prose,"High-Temperature-Variante der AL-3500-Reihe. Edelstahlgehäuse 1.4408 und
+gekühlter Lagerträger erlauben Medientemperaturen bis 220 °C. Keine
+ATEX-Zertifizierung. Typische Anwendungen: Thermalöl-Kreisläufe, Heißwasser,
+nicht-brennbare Hochtemperaturmedien.",AL-3500,catalog,,,,,,,,
+product-catalog.md::al-3500-ht-x::chunk-6,product-catalog.md,AL-3500-HT-X,prose,"Kombiniert High-Temperature-Auslegung (220 °C) mit ATEX Zone 1 (Gas). Die
+einzige AL-3500-Variante mit Ex-Zulassung. Eingesetzt in chemischen
+Anlagen mit Thermalöl- oder Heißmedienkreisläufen in Ex-Bereichen.",AL-3500,catalog,,,,,,,,
+product-catalog.md::lieferumfang-aller-modelle::chunk-7,product-catalog.md,Lieferumfang aller Modelle,prose,"- Pumpenaggregat mit Motor und Grundrahmen
+- Werkskennlinien-Protokoll
+- EU-Konformitätserklärung
+- Bei -S, -SX und -HT-X zusätzlich ATEX-Zertifikat",,catalog,,,,,,,,
+product-catalog.md::bestellinformation::chunk-8,product-catalog.md,Bestellinformation,prose,"Bestell-IDs entsprechen exakt den Modellbezeichnungen. Bindestriche und
+Suffix-Reihenfolge (`-HT-X` statt `-X-HT`) sind verbindlich.",,catalog,,,,,,,,
+spec-sheet-AL-3000-family.md::hydraulische-kennlinien::chunk-0,spec-sheet-AL-3000-family.md,Hydraulische Kennlinien,prose,"Förderhöhe vs. Durchsatz bei Nenndrehzahl 2950 min⁻¹ (50 Hz, zweipolig).",,spec-sheet,,,,,,,,
+spec-sheet-AL-3000-family.md::al-3000-al-3000-s::row-1,spec-sheet-AL-3000-family.md,AL-3000 / AL-3000-S,table-row,Durchsatz [m³/h]: Förderhöhe [m] | 0: 62 | 20: 60 | 40: 56 | 60: 50 | 80 (BEP): 42 | 95: 32,,spec-sheet,,,,,,,,
+spec-sheet-AL-3000-family.md::al-3000-al-3000-s::row-2,spec-sheet-AL-3000-family.md,AL-3000 / AL-3000-S,table-row,Durchsatz [m³/h]: Wirkungsgrad [%] | 0: 0 | 20: 38 | 40: 58 | 60: 68 | 80 (BEP): 72 | 95: 65,,spec-sheet,,,,,,,,
+spec-sheet-AL-3000-family.md::al-3000-sx::chunk-1,spec-sheet-AL-3000-family.md,AL-3000-SX,prose,"Wegen Edelstahllaufrad mit minimal abweichender Geometrie liegt die Kennlinie
+ca. 2 % flacher.",,spec-sheet,,,,,,,,
+spec-sheet-AL-3000-family.md::al-3000-sx::row-1,spec-sheet-AL-3000-family.md,AL-3000-SX,table-row,Durchsatz [m³/h]: Förderhöhe [m] | 0: 60 | 20: 58 | 40: 54 | 60: 48 | 80 (BEP): 40 | 95: 30,,spec-sheet,,,,,,,,
+spec-sheet-AL-3000-family.md::al-3000-sx::row-2,spec-sheet-AL-3000-family.md,AL-3000-SX,table-row,Durchsatz [m³/h]: Wirkungsgrad [%] | 0: 0 | 20: 36 | 40: 56 | 60: 66 | 80 (BEP): 70 | 95: 63,,spec-sheet,,,,,,,,
+spec-sheet-AL-3000-family.md::al-3000-sx::chunk-2,spec-sheet-AL-3000-family.md,AL-3000-SX,prose,BEP = Best Efficiency Point (bestpunkt-naher Auslegungspunkt).,,spec-sheet,,,,,,,,
+spec-sheet-AL-3000-family.md::anschlussmasse::row-1,spec-sheet-AL-3000-family.md,Anschlussmaße,table-row,Maß: Saugflansch | AL-3000: DN65 PN16 | AL-3000-S: DN65 PN16 | AL-3000-SX: DN65 PN16,AL-3000;AL-3000-S;AL-3000-SX,spec-sheet,,,,,,,,
+spec-sheet-AL-3000-family.md::anschlussmasse::row-2,spec-sheet-AL-3000-family.md,Anschlussmaße,table-row,Maß: Druckflansch | AL-3000: DN50 PN16 | AL-3000-S: DN50 PN16 | AL-3000-SX: DN50 PN16,AL-3000;AL-3000-S;AL-3000-SX,spec-sheet,,,,,,,,
+spec-sheet-AL-3000-family.md::anschlussmasse::row-3,spec-sheet-AL-3000-family.md,Anschlussmaße,table-row,Maß: Wellenende d/l | AL-3000: 32 / 80 mm | AL-3000-S: 32 / 80 mm | AL-3000-SX: 32 / 80 mm,AL-3000;AL-3000-S;AL-3000-SX,spec-sheet,,,,,,,,
+spec-sheet-AL-3000-family.md::anschlussmasse::row-4,spec-sheet-AL-3000-family.md,Anschlussmaße,table-row,Maß: Grundrahmenlänge | AL-3000: 1.080 mm | AL-3000-S: 1.080 mm | AL-3000-SX: 1.080 mm,AL-3000;AL-3000-S;AL-3000-SX,spec-sheet,,,,,,,,
+spec-sheet-AL-3000-family.md::anschlussmasse::row-5,spec-sheet-AL-3000-family.md,Anschlussmaße,table-row,Maß: Grundrahmenbreite | AL-3000: 420 mm | AL-3000-S: 420 mm | AL-3000-SX: 420 mm,AL-3000;AL-3000-S;AL-3000-SX,spec-sheet,,,,,,,,
+spec-sheet-AL-3000-family.md::anschlussmasse::row-6,spec-sheet-AL-3000-family.md,Anschlussmaße,table-row,Maß: Gesamthöhe | AL-3000: 540 mm | AL-3000-S: 555 mm | AL-3000-SX: 580 mm,AL-3000;AL-3000-S;AL-3000-SX,spec-sheet,,,,,,,,
+spec-sheet-AL-3000-family.md::anschlussmasse::chunk-3,spec-sheet-AL-3000-family.md,Anschlussmaße,prose,"Flansche nach EN 1092-1 Form B1. Saug- und Druckflansch sind achsversetzt
+ausgeführt (Saug horizontal, Druck vertikal nach oben).",,spec-sheet,,,,,,,,
+spec-sheet-AL-3000-family.md::werkstoffvarianten::row-1,spec-sheet-AL-3000-family.md,Werkstoffvarianten,table-row,Bauteil: Pumpengehäuse | AL-3000: EN-GJL-250 | AL-3000-S: EN-GJL-250 | AL-3000-SX: 1.4408,AL-3000;AL-3000-S;AL-3000-SX,spec-sheet,,,,,,,,
+spec-sheet-AL-3000-family.md::werkstoffvarianten::row-2,spec-sheet-AL-3000-family.md,Werkstoffvarianten,table-row,Bauteil: Laufrad | AL-3000: EN-GJL-250 | AL-3000-S: EN-GJL-250 | AL-3000-SX: 1.4408,AL-3000;AL-3000-S;AL-3000-SX,spec-sheet,,,,,,,,
+spec-sheet-AL-3000-family.md::werkstoffvarianten::row-3,spec-sheet-AL-3000-family.md,Werkstoffvarianten,table-row,Bauteil: Welle | AL-3000: 1.4021 | AL-3000-S: 1.4021 | AL-3000-SX: 1.4462 (Duplex),AL-3000;AL-3000-S;AL-3000-SX,spec-sheet,,,,,,,,
+spec-sheet-AL-3000-family.md::werkstoffvarianten::row-4,spec-sheet-AL-3000-family.md,Werkstoffvarianten,table-row,Bauteil: Gleitringdichtung | AL-3000: SiC / Kohle / EPDM | AL-3000-S: SiC / Kohle / FKM | AL-3000-SX: SiC / SiC / FFKM,AL-3000;AL-3000-S;AL-3000-SX,spec-sheet,,,,,,,,
+spec-sheet-AL-3000-family.md::werkstoffvarianten::row-5,spec-sheet-AL-3000-family.md,Werkstoffvarianten,table-row,Bauteil: Lagerträger | AL-3000: EN-GJL-250 | AL-3000-S: EN-GJL-250 | AL-3000-SX: EN-GJL-250,AL-3000;AL-3000-S;AL-3000-SX,spec-sheet,,,,,,,,
+spec-sheet-AL-3000-family.md::werkstoffvarianten::chunk-4,spec-sheet-AL-3000-family.md,Werkstoffvarianten,prose,"Bei der AL-3000-SX sind alle medienberührten Teile aus Edelstahl 1.4408
+(entspricht ASTM CF8M, Werkstoff-Nr. 1.4408). Damit sind die Pumpen
+FDA-konform für den Lebensmittelkontakt einsetzbar.",AL-3000-SX,spec-sheet,,,,,,,,
+spec-sheet-AL-3000-family.md::antrieb::row-1,spec-sheet-AL-3000-family.md,Antrieb,table-row,Position: Nennleistung | Wert: 22 kW,,spec-sheet,,,,,,,,
+spec-sheet-AL-3000-family.md::antrieb::row-2,spec-sheet-AL-3000-family.md,Antrieb,table-row,Position: Drehzahl | Wert: 2950 min⁻¹,,spec-sheet,,,,,,,,
+spec-sheet-AL-3000-family.md::antrieb::row-3,spec-sheet-AL-3000-family.md,Antrieb,table-row,Position: Spannung | Wert: 400 V / 50 Hz / 3 Ph,,spec-sheet,,,,,,,,
+spec-sheet-AL-3000-family.md::antrieb::row-4,spec-sheet-AL-3000-family.md,Antrieb,table-row,Position: Schutzart | Wert: IP55,,spec-sheet,,,,,,,,
+spec-sheet-AL-3000-family.md::antrieb::row-5,spec-sheet-AL-3000-family.md,Antrieb,table-row,Position: Wärmeklasse | Wert: F (155 °C),,spec-sheet,,,,,,,,
+spec-sheet-AL-3000-family.md::antrieb::row-6,spec-sheet-AL-3000-family.md,Antrieb,table-row,Position: Wirkungsgrad-Klasse Motor | Wert: IE3,,spec-sheet,,,,,,,,
+spec-sheet-AL-3000-family.md::antrieb::chunk-5,spec-sheet-AL-3000-family.md,Antrieb,prose,"Bei AL-3000-S und AL-3000-SX wird ein ATEX-zertifizierter Motor entsprechender
+Zone (II 3G bzw. II 2G) verwendet. Details siehe `atex-guide.md`.",AL-3000-S;AL-3000-SX,spec-sheet,,,,,,,,
+spec-sheet-AL-3000-family.md::schallemission::chunk-6,spec-sheet-AL-3000-family.md,Schallemission,prose,"Im Auslegungspunkt (BEP, 80 m³/h) gemessen in 1 m Abstand:",,spec-sheet,,,,,,,,
+spec-sheet-AL-3000-family.md::schallemission::row-1,spec-sheet-AL-3000-family.md,Schallemission,table-row,Modell: AL-3000 | Schalldruckpegel L_p [dB(A)]: 74,AL-3000,spec-sheet,,,,,,,74,
+spec-sheet-AL-3000-family.md::schallemission::row-2,spec-sheet-AL-3000-family.md,Schallemission,table-row,Modell: AL-3000-S | Schalldruckpegel L_p [dB(A)]: 74,AL-3000-S,spec-sheet,,,,,,,74,
+spec-sheet-AL-3000-family.md::schallemission::row-3,spec-sheet-AL-3000-family.md,Schallemission,table-row,Modell: AL-3000-SX | Schalldruckpegel L_p [dB(A)]: 76,AL-3000-SX,spec-sheet,,,,,,,76,
+spec-sheet-AL-3500-family.md::hydraulische-kennlinien::chunk-0,spec-sheet-AL-3500-family.md,Hydraulische Kennlinien,prose,"Förderhöhe vs. Durchsatz bei Nenndrehzahl 2950 min⁻¹ (50 Hz, zweipolig).",,spec-sheet,,,,,,,,
+spec-sheet-AL-3500-family.md::al-3500::row-1,spec-sheet-AL-3500-family.md,AL-3500,table-row,Durchsatz [m³/h]: Förderhöhe [m] | 0: 78 | 40: 75 | 80: 70 | 110: 64 | 140 (BEP): 56 | 165: 44,,spec-sheet,,,,,,,,
+spec-sheet-AL-3500-family.md::al-3500::row-2,spec-sheet-AL-3500-family.md,AL-3500,table-row,Durchsatz [m³/h]: Wirkungsgrad [%] | 0: 0 | 40: 42 | 80: 62 | 110: 72 | 140 (BEP): 76 | 165: 68,,spec-sheet,,,,,,,,
+spec-sheet-AL-3500-family.md::al-3500-ht-al-3500-ht-x::chunk-1,spec-sheet-AL-3500-family.md,AL-3500-HT / AL-3500-HT-X,prose,"Identische Hydraulik. Bei Heißmedien fällt der Wirkungsgrad effektiv um
+ca. 2 Prozentpunkte gegenüber kaltem Wasser, da Lagerträgerkühlung Energie
+abführt.",,spec-sheet,,,,,,,,
+spec-sheet-AL-3500-family.md::al-3500-ht-al-3500-ht-x::row-1,spec-sheet-AL-3500-family.md,AL-3500-HT / AL-3500-HT-X,table-row,Durchsatz [m³/h]: Förderhöhe [m] | 0: 76 | 40: 73 | 80: 68 | 110: 62 | 140 (BEP): 54 | 165: 42,,spec-sheet,,,,,,,,
+spec-sheet-AL-3500-family.md::al-3500-ht-al-3500-ht-x::row-2,spec-sheet-AL-3500-family.md,AL-3500-HT / AL-3500-HT-X,table-row,Durchsatz [m³/h]: Wirkungsgrad [%] | 0: 0 | 40: 40 | 80: 60 | 110: 70 | 140 (BEP): 74 | 165: 66,,spec-sheet,,,,,,,,
+spec-sheet-AL-3500-family.md::anschlussmasse::row-1,spec-sheet-AL-3500-family.md,Anschlussmaße,table-row,Maß: Saugflansch | AL-3500: DN80 PN16 | AL-3500-HT: DN80 PN25 | AL-3500-HT-X: DN80 PN25,AL-3500;AL-3500-HT;AL-3500-HT-X,spec-sheet,,,,,,,,
+spec-sheet-AL-3500-family.md::anschlussmasse::row-2,spec-sheet-AL-3500-family.md,Anschlussmaße,table-row,Maß: Druckflansch | AL-3500: DN65 PN16 | AL-3500-HT: DN65 PN25 | AL-3500-HT-X: DN65 PN25,AL-3500;AL-3500-HT;AL-3500-HT-X,spec-sheet,,,,,,,,
+spec-sheet-AL-3500-family.md::anschlussmasse::row-3,spec-sheet-AL-3500-family.md,Anschlussmaße,table-row,Maß: Wellenende d/l | AL-3500: 42 / 110 mm | AL-3500-HT: 42 / 110 mm | AL-3500-HT-X: 42 / 110 mm,AL-3500;AL-3500-HT;AL-3500-HT-X,spec-sheet,,,,,,,,
+spec-sheet-AL-3500-family.md::anschlussmasse::row-4,spec-sheet-AL-3500-family.md,Anschlussmaße,table-row,Maß: Grundrahmenlänge | AL-3500: 1.260 mm | AL-3500-HT: 1.260 mm | AL-3500-HT-X: 1.260 mm,AL-3500;AL-3500-HT;AL-3500-HT-X,spec-sheet,,,,,,,,
+spec-sheet-AL-3500-family.md::anschlussmasse::row-5,spec-sheet-AL-3500-family.md,Anschlussmaße,table-row,Maß: Grundrahmenbreite | AL-3500: 480 mm | AL-3500-HT: 480 mm | AL-3500-HT-X: 480 mm,AL-3500;AL-3500-HT;AL-3500-HT-X,spec-sheet,,,,,,,,
+spec-sheet-AL-3500-family.md::anschlussmasse::row-6,spec-sheet-AL-3500-family.md,Anschlussmaße,table-row,Maß: Gesamthöhe | AL-3500: 620 mm | AL-3500-HT: 660 mm | AL-3500-HT-X: 680 mm,AL-3500;AL-3500-HT;AL-3500-HT-X,spec-sheet,,,,,,,,
+spec-sheet-AL-3500-family.md::anschlussmasse::chunk-2,spec-sheet-AL-3500-family.md,Anschlussmaße,prose,"Flansche nach EN 1092-1 Form B1. Bei den HT-Varianten werden PN25-Flansche
+eingesetzt, um die thermische Ausdehnung der Dichtflächen aufzunehmen.",,spec-sheet,,,,,,,,
+spec-sheet-AL-3500-family.md::werkstoffvarianten::row-1,spec-sheet-AL-3500-family.md,Werkstoffvarianten,table-row,Bauteil: Pumpengehäuse | AL-3500: EN-GJL-250 | AL-3500-HT: 1.4408 | AL-3500-HT-X: 1.4408,AL-3500;AL-3500-HT;AL-3500-HT-X,spec-sheet,,,,,,,,
+spec-sheet-AL-3500-family.md::werkstoffvarianten::row-2,spec-sheet-AL-3500-family.md,Werkstoffvarianten,table-row,Bauteil: Laufrad | AL-3500: EN-GJL-250 | AL-3500-HT: 1.4408 | AL-3500-HT-X: 1.4408,AL-3500;AL-3500-HT;AL-3500-HT-X,spec-sheet,,,,,,,,
+spec-sheet-AL-3500-family.md::werkstoffvarianten::row-3,spec-sheet-AL-3500-family.md,Werkstoffvarianten,table-row,Bauteil: Welle | AL-3500: 1.4021 | AL-3500-HT: 1.4462 (Duplex) | AL-3500-HT-X: 1.4462 (Duplex),AL-3500;AL-3500-HT;AL-3500-HT-X,spec-sheet,,,,,,,,
+spec-sheet-AL-3500-family.md::werkstoffvarianten::row-4,spec-sheet-AL-3500-family.md,Werkstoffvarianten,table-row,Bauteil: Gleitringdichtung | AL-3500: SiC / Kohle / EPDM | AL-3500-HT: SiC / SiC / FFKM | AL-3500-HT-X: SiC / SiC / FFKM,AL-3500;AL-3500-HT;AL-3500-HT-X,spec-sheet,,,,,,,,
+spec-sheet-AL-3500-family.md::werkstoffvarianten::row-5,spec-sheet-AL-3500-family.md,Werkstoffvarianten,table-row,"Bauteil: Lagerträger (gekühlt) | AL-3500: nein | AL-3500-HT: ja, ölgekühlt | AL-3500-HT-X: ja, ölgekühlt",AL-3500;AL-3500-HT;AL-3500-HT-X,spec-sheet,,,,,,,,
+spec-sheet-AL-3500-family.md::antrieb::row-1,spec-sheet-AL-3500-family.md,Antrieb,table-row,Position: Nennleistung | Wert: 37 kW,,spec-sheet,,,,,,,,
+spec-sheet-AL-3500-family.md::antrieb::row-2,spec-sheet-AL-3500-family.md,Antrieb,table-row,Position: Drehzahl | Wert: 2950 min⁻¹,,spec-sheet,,,,,,,,
+spec-sheet-AL-3500-family.md::antrieb::row-3,spec-sheet-AL-3500-family.md,Antrieb,table-row,Position: Spannung | Wert: 400 V / 50 Hz / 3 Ph,,spec-sheet,,,,,,,,
+spec-sheet-AL-3500-family.md::antrieb::row-4,spec-sheet-AL-3500-family.md,Antrieb,table-row,Position: Schutzart | Wert: IP55,,spec-sheet,,,,,,,,
+spec-sheet-AL-3500-family.md::antrieb::row-5,spec-sheet-AL-3500-family.md,Antrieb,table-row,Position: Wärmeklasse | Wert: F (155 °C),,spec-sheet,,,,,,,,
+spec-sheet-AL-3500-family.md::antrieb::row-6,spec-sheet-AL-3500-family.md,Antrieb,table-row,Position: Wirkungsgrad-Klasse Motor | Wert: IE3,,spec-sheet,,,,,,,,
+spec-sheet-AL-3500-family.md::antrieb::chunk-3,spec-sheet-AL-3500-family.md,Antrieb,prose,"Bei AL-3500-HT-X wird ein ATEX-zertifizierter Motor (II 2G) eingesetzt.
+Details siehe `atex-guide.md`.",AL-3500-HT-X,spec-sheet,,,,,,,,
+spec-sheet-AL-3500-family.md::lagertraegerkuehlung-ht-varianten::chunk-4,spec-sheet-AL-3500-family.md,Lagerträgerkühlung (HT-Varianten),prose,"AL-3500-HT und AL-3500-HT-X verwenden einen ölgekühlten Lagerträger mit
+externem Wärmetauscher. Empfohlener Kühlwasservolumenstrom: 0,3 m³/h bei max.
+30 °C Vorlauftemperatur. Ohne ausreichende Lagerträgerkühlung darf die
+Medientemperatur 180 °C nicht überschreiten.",AL-3500-HT;AL-3500-HT-X,spec-sheet,,,,,,,,
+spec-sheet-AL-3500-family.md::schallemission::chunk-5,spec-sheet-AL-3500-family.md,Schallemission,prose,"Im Auslegungspunkt (BEP, 140 m³/h) gemessen in 1 m Abstand:",,spec-sheet,,,,,,,,
+spec-sheet-AL-3500-family.md::schallemission::row-1,spec-sheet-AL-3500-family.md,Schallemission,table-row,Modell: AL-3500 | Schalldruckpegel L_p [dB(A)]: 78,AL-3500,spec-sheet,,,,,,,78,
+spec-sheet-AL-3500-family.md::schallemission::row-2,spec-sheet-AL-3500-family.md,Schallemission,table-row,Modell: AL-3500-HT | Schalldruckpegel L_p [dB(A)]: 80,AL-3500-HT,spec-sheet,,,,,,,80,
+spec-sheet-AL-3500-family.md::schallemission::row-3,spec-sheet-AL-3500-family.md,Schallemission,table-row,Modell: AL-3500-HT-X | Schalldruckpegel L_p [dB(A)]: 80,AL-3500-HT-X,spec-sheet,,,,,,,80,
