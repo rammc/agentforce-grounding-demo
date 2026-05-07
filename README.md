@@ -28,19 +28,21 @@ prompt:
   chunker indexes them; a standard retriever serves the agent. This is the
   out-of-the-box path.
 
-- **Variant B — Custom Hybrid Vector Search**
+- **Variant B — Hybrid Search Index + ID Pre-Filter**
   The Markdown sources are pre-processed into atomic, structured records (one
   record per table row, one per prose section), enriched with first-class
   metadata fields (`productIds`, `atexZone`, `tempMaxC`, `foerderleistungM3h`,
   …), ingested into a Data Cloud DMO, and exposed via a Hybrid Search Index
   (BM25 + embedding). An Apex `@InvocableMethod` retriever wraps that index and
-  applies a lexical boost on detected product IDs before retrieval.
+  passes a pre-filter on detected product IDs into the `hybrid_search()` call.
 
 Variant B comes in two sub-flavours that the harness measures separately:
 
-- **B-naive** — hybrid search without the product-ID boost (isolates the value
-  of the pre-processing alone)
-- **B-boosted** — hybrid search with the lexical boost (the full Variant B)
+- **B-naive** — hybrid search without the product-ID pre-filter (isolates the
+  value of the pre-processing alone)
+- **B-boosted** — hybrid search with the ID pre-filter (the full Variant B);
+  "boosted" is the colloquial demo label, the technical mechanism is a
+  Salesforce pre-filter expression on `productIds__c`
 
 That three-way split — A, B-naive, B-boosted — is what makes the contribution of
 the boost itself observable, instead of bundling everything into a single
@@ -62,7 +64,7 @@ designed deliberately to expose three of them:
 2. **Closely related model IDs embed almost identically.**
    `AL-3000`, `AL-3000-S`, and `AL-3000-SX` share most of their characters and
    most of their semantic context. Pure semantic retrieval routinely picks the
-   wrong one. A hybrid index with a lexical boost on the exact ID solves this
+   wrong one. A hybrid index with a pre-filter on the exact ID solves this
    cleanly.
 
 3. **Multi-criteria questions need structured filters, not similarity.**

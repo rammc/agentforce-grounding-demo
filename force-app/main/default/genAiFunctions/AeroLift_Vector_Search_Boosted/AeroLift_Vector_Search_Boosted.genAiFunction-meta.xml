@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <GenAiFunction xmlns="http://soap.sforce.com/2006/04/metadata">
     <masterLabel>AeroLift Vector Search (Boosted)</masterLabel>
-    <description>Durchsucht die strukturierte Produktwissensbasis mit Hybrid Search und Lexikal-Boost auf Modell-IDs. Verwende diese Action für jede Frage zu Pumpen-Specs, Wartung, ATEX, Kompatibilität oder Versionshistorie.</description>
+    <description>Durchsucht die strukturierte Produktwissensbasis mit Hybrid Search und einem ID-Pre-Filter auf erkannte Modell-IDs. Verwende diese Action für jede Frage zu Pumpen-Specs, Wartung, ATEX, Kompatibilität oder Versionshistorie.</description>
     <invocationTarget>ProductIndexRetriever</invocationTarget>
     <invocationTargetType>apex</invocationTargetType>
     <isConfirmationRequired>false</isConfirmationRequired>

@@ -18,8 +18,8 @@
 
 - **Slide 1: Kontext**  AeroLift Industries, fiktiver Pumpenhersteller, AL-3000- und AL-3500-Reihe mit eng verwandten Varianten. Domäne ist bewusst so gewählt, dass Standard-Chunking-Strategien Schwierigkeiten haben (Tabellen, ähnliche IDs, Multi-Kriterien).
 - **Slide 2: Disclaimer**  Modellnummern, Spec-Werte, Zertifikate sind erfunden. ATEX-Zertifikatsnummern folgen dem Schema der DEKRA EXAM, sind aber fiktiv.
-- **Slide 3: Architektur**  Mermaid-Diagramm aus `README.md` zeigen. Drei Pfade: Variante A (Data Library), B-naive (Hybrid Search ohne Boost), B-boosted (mit Lexikal-Boost auf Modell-IDs).
-- **Aussage**: „Wir testen, was Pre-Processing + Hybrid-Boost wirklich beitragen. Drei Bedingungen, gleicher System-Prompt, gleiche Quelldaten."
+- **Slide 3: Architektur**  Mermaid-Diagramm aus `README.md` zeigen. Drei Pfade: Variante A (Data Library), B-naive (Hybrid Search ohne Pre-Filter), B-boosted (Hybrid Search + ID-Pre-Filter auf Modell-IDs).
+- **Aussage**: „Wir testen, was Pre-Processing + Hybrid Search + ID-Pre-Filter wirklich beitragen. Drei Bedingungen, gleicher System-Prompt, gleiche Quelldaten."
 
 ---
 
@@ -62,8 +62,8 @@ Pro Frage:
 4. Architektur-Erklärung mit dem Diagramm zurückbinden:
    - Pre-Processing zerlegt Tabellen in atomare Records mit Metadaten-Feldern.
    - Hybrid Search kombiniert BM25 (lexikalisch) und Embedding (semantisch).
-   - Lexikal-Boost: erkannte Modell-IDs werden als `productIds__c` Filter
-     vorgeschaltet, **bevor** das Embedding-Lookup läuft.
+   - ID-Pre-Filter: erkannte Modell-IDs werden als `productIds__c` Pre-Filter
+     in den `hybrid_search()`-Aufruf gegeben, **bevor** das Fusion-Ranking läuft.
 
 ---
 
@@ -72,7 +72,7 @@ Pro Frage:
 - **Eval-Übersichtstabelle** aus `eval/results/run-*.md` zeigen.
 - Drei Kernaussagen:
   1. **A vs. B-boosted (Antwort)**: B liefert in der Mehrheit der Fragen die korrekte Antwort, wo A scheitert.
-  2. **B-naive vs. B-boosted (Retrieval)**: der Boost trägt messbar bei – isolierter Effekt der Lexikal-Komponente.
+  2. **B-naive vs. B-boosted (Retrieval)**: der ID-Pre-Filter trägt messbar bei – isolierter Effekt der lexikalischen Komponente.
   3. **Latenz-Trade-off**: B ist nicht schneller. Vorteil ist Antwort-Qualität, nicht Speed. Bei Frage-Komplexität ist die Latenz-Differenz sekundär.
 - **Ehrliche Grenze**: Bei den fair-winnable Fragen (Q02, Q04, Q05) liefert A genauso gute Antworten. Demo ist kein Strohmann.
 
@@ -86,7 +86,7 @@ Pro Frage:
 |---|---|
 | Reine FAQ / Wissens-Artikel, wenig Tabellen | Data Library reicht |
 | Spec-Sheets, technische Tabellen | Custom Vector Search lohnt |
-| Eng verwandte IDs / SKUs / Modellnummern | Lexikal-Boost ist Pflicht |
+| Eng verwandte IDs / SKUs / Modellnummern | Hybrid + ID-Pre-Filter ist Pflicht |
 | Multi-Kriterien-Anfragen mit strukturierten Filtern | Custom + Metadaten-Felder |
 | Hohe Latenz-Anforderung (< 2s) | Library, weniger Hops |
 
@@ -101,7 +101,7 @@ Pro Frage:
 | "Aber B ist langsamer" | Ja, ~5s vs. 4.5s. Bei Frage-Komplexität nicht entscheidend. Wenn Latenz Priorität hat, andere Architektur-Wahl. |
 | "Aber das ist viel mehr Code" | Korrekt: ~250 Zeilen Apex + Pre-Processing-Skript. Trade-off bewusst, nicht für jeden Use-Case sinnvoll. |
 | "Hat das nicht ein Hyperscaler-Pendant?" | Ja, jeder Vector-DB-Anbieter. Salesforce-Wert ist Same-Org-Setup ohne externen Callout, native CRM-Integration. |
-| "Embedding-Modell ist anders" | Nein, Embedding ist identisch. Unterschied ist Pre-Processing + Hybrid-Filter. |
+| "Embedding-Modell ist anders" | Nein, Embedding ist identisch. Unterschied ist Pre-Processing + Hybrid-Search + ID-Pre-Filter. |
 | "Funktioniert das mit englischen Dokumenten?" | Pre-Processing-Logik ist sprach-agnostisch (AST-Tabellen-Parser). Embedding-Modell handled DE/EN. |
 
 ---

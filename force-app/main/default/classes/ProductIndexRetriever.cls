@@ -6,9 +6,12 @@
  * Credential, kein External Credential erforderlich – das ist der idiomatische
  * Same-Org-Pfad seit Spring '26.
  *
- * Exponiert zwei InvocableMethods:
- *  - searchBoosted: Hybrid Search mit Lexikal-Boost auf Modell-IDs (Demo-B-Pfad).
- *  - searchNaive:   Hybrid Search ohne Boost-Logik (Eval-Baseline für Schritt 4).
+ * Exponiert zwei Methoden:
+ *  - searchBoosted: Hybrid Search + ID-Pre-Filter auf erkannte Modell-IDs.
+ *                   "Boosted" ist die colloquiale Demo-Bezeichnung; technisch
+ *                   ist der Mechanismus ein Salesforce Pre-Filter
+ *                   (productIds__c-Klausel im hybrid_search()-Call).
+ *  - searchNaive:   Hybrid Search ohne Pre-Filter (Eval-Baseline für Schritt 4).
  */
 global with sharing class ProductIndexRetriever {
     // Erkennt AeroLift-Modell-IDs (AL-3000, AL-3000-S, AL-3000-SX, AL-3500, AL-3500-HT, AL-3500-HT-X).
@@ -32,7 +35,7 @@ global with sharing class ProductIndexRetriever {
 
     @InvocableMethod(
         label='AeroLift Product Search (Boosted)'
-        description='Hybrid search with lexical boost on product IDs'
+        description='Hybrid search over the AeroLift knowledge base with an ID pre-filter on detected product IDs (productIds__c)'
         category='Agentforce'
     )
     global static List<Response> searchBoosted(List<Request> requests) {
@@ -42,7 +45,7 @@ global with sharing class ProductIndexRetriever {
     // [Hinweis] Apex erlaubt nur eine @InvocableMethod pro Klasse, daher ist
     // searchNaive eine reguläre statische Methode.  Sie wird nicht von einem
     // Agent aufgerufen, sondern ausschließlich vom Eval-Harness via REST
-    // (RetrieverRestEndpoint mit URL-Pfad /naive).
+    // (RetrieverRestEndpoint mit URL-Pfad /naive) als Baseline ohne ID-Pre-Filter.
     global static List<Response> searchNaive(List<Request> requests) {
         return execute(requests, false);
     }
