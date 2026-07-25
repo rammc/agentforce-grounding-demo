@@ -18,7 +18,7 @@
 
 - **Slide 1: Kontext**  AeroLift Industries, fiktiver Pumpenhersteller, AL-3000- und AL-3500-Reihe mit eng verwandten Varianten. Domäne ist bewusst so gewählt, dass Standard-Chunking-Strategien Schwierigkeiten haben (Tabellen, ähnliche IDs, Multi-Kriterien).
 - **Slide 2: Disclaimer**  Modellnummern, Spec-Werte, Zertifikate sind erfunden. ATEX-Zertifikatsnummern folgen dem Schema der DEKRA EXAM, sind aber fiktiv.
-- **Slide 3: Architektur**  Mermaid-Diagramm aus `README.md` zeigen. Drei Pfade: Variante A (Data Library), B-naive (Hybrid Search ohne Pre-Filter), B-boosted (Hybrid Search + ID-Pre-Filter auf Modell-IDs).
+- **Slide 3: Architektur**  Architektur-Diagramm aus `eval/results/comparison-en.html` zeigen. Drei Pfade: Variante A (Data Library), B-naive (Hybrid Search ohne Pre-Filter), B-boosted (Hybrid Search + ID-Pre-Filter auf Modell-IDs).
 - **Aussage**: „Wir testen, was Pre-Processing + Hybrid Search + ID-Pre-Filter wirklich beitragen. Drei Bedingungen, gleicher System-Prompt, gleiche Quelldaten."
 
 ---
@@ -119,6 +119,6 @@ Pro Frage:
 - [ ] Beide Agents in Builder-UI offen, Status `Active`
 - [ ] Drei Frage-IDs aus letztem Eval-Lauf in Akt 2/3 eingetragen
 - [ ] Eval-Markdown unter `eval/results/run-*.md` aktuell und im Browser-Tab geöffnet
-- [ ] Architektur-Mermaid in einem zweiten Browser-Tab gerendert
+- [ ] Architektur-Diagramm (`eval/results/comparison-en.html`) in einem zweiten Browser-Tab gerendert
 - [ ] Audio + Bildschirm-Sharing getestet
 - [ ] Backup-MP4 lokal verfügbar
