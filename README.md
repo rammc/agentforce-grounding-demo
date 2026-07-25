@@ -110,7 +110,8 @@ data-cloud/
   metadata/       Declarative specs for DLO, DMO, Search Index
 eval/
   questions.yaml  15 questions with ground truth + expected failure-mode-A
-  results/        Eval-run output (gitignored; regenerate per run)
+  results/        Eval-run output: run-*.json/.md gitignored (regenerate per
+                  run); comparison*.html are committed demo artifacts
 force-app/main/default/
   classes/        ProductIndexRetriever, RetrieverRestEndpoint (+ tests)
   genAiFunctions/ Bundle for the Vector Search action
