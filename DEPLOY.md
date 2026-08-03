@@ -260,7 +260,7 @@ System.debug(JSON.serializePretty(resps));
 ```
 
 Erwartete Debug-Ausgabe:
-- `diagnosticInfo`: `Boost applied: filter on product IDs [AL-3000-SX] | rowCount=5`
+- `diagnosticInfo`: `Boost applied: filter on product IDs (AL-3000-SX) | rowCount=5`
 - Mindestens ein `results`-Eintrag mit `productIds = "AL-3000-SX"`
 - `formattedContent` enthält `150 °C`
 

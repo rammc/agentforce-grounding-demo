@@ -58,7 +58,7 @@ Pro Frage:
 2. Antwort vorlesen, mit A vergleichen.
 3. Bei mindestens einer Frage: das `diagnosticInfo`-Feld aus dem Apex-Retriever zeigen
    (im Agent-Builder unter dem Action-Tab oder via Anonymous Apex).
-   Beispiel: `Boost applied: filter on product IDs [AL-3000-SX]`.
+   Beispiel: `Boost applied: filter on product IDs (AL-3000-SX)`.
 4. Architektur-Erklärung mit dem Diagramm zurückbinden:
    - Pre-Processing zerlegt Tabellen in atomare Records mit Metadaten-Feldern.
    - Hybrid Search kombiniert BM25 (lexikalisch) und Embedding (semantisch).
